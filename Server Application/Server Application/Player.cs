@@ -9,19 +9,19 @@ namespace Server_Application
 {
     internal class Player
     {
-        TcpClient client;
-        string name;
+        public TcpClient Client { set; get; }
+        public string Name { set; get; }
         PlayerState state;
         public Player(TcpClient client, string name)
         {
-            this.client = client;
-            this.name = name;
+            this.Client = client;
+            this.Name = name;
         }
 
         public TcpClient getClient()
-        { return client; }
+        { return Client; }
         public string getName()
-        { return name; }
+        { return Name; }
         public PlayerState getState()
         { return state; }
         public void setState(PlayerState state)
