@@ -8,6 +8,7 @@ namespace Server_Application
 {
     internal class Room
     {
+        int Id { get; set; }
         Player Owner { get; set; }
         Player Guest { get; set; }
         Game Game { get; set; }

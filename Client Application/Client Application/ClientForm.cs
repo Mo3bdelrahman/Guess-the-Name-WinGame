@@ -1,4 +1,5 @@
 using Client_Application;
+using System.Collections.Generic;
 using System.Drawing.Drawing2D;
 using System.Net.Sockets;
 using System.Text;
@@ -22,13 +23,7 @@ namespace Client_Application
         {
             try
             {
-                client = new TcpClient("127.0.0.1", 8080);
-                PlayerName = UserNameTextBox.Text;
-
-                // ( Mohamed Abdelrahman ) -> Stream Code
-
-                // Send Login Data To The Server
-
+                client = new TcpClient("127.0.0.1", 12345);
                 receiveThread = new Thread(new ThreadStart(ReceiveData));
                 receiveThread.Start();
 
@@ -72,13 +67,13 @@ namespace Client_Application
             }
             else
             {
-                //bool IsConnected = ClientController.Connect(UserNameTextBox.Text);
+                bool IsConnected = Connect();
 
-                //if (IsConnected)
-                //{
-                //    panelList[++index].BringToFront();
-                //    panelList[index].Visible = true;
-                //}
+                if (IsConnected)
+                {
+                    panelList[++index].BringToFront();
+                    panelList[index].Visible = true;
+                }
             }
         }
 
