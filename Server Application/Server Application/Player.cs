@@ -17,11 +17,6 @@ namespace Server_Application
             this.Client = client;
             this.Name = name;
         }
-
-        public TcpClient getClient()
-        { return Client; }
-        public string getName()
-        { return Name; }
         public PlayerState getState()
         { return state; }
         public void setState(PlayerState state)

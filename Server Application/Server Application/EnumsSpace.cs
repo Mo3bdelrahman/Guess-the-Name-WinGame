@@ -18,7 +18,7 @@ namespace Server_Application
         Waiting,
         Running
     }
-    enum Requests
+    enum Request
     {
         CreateRoom,
         JoinRoom

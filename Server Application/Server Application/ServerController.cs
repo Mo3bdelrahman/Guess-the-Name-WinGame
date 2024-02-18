@@ -6,6 +6,7 @@ namespace Server_Application
     internal static class ServerController
     {
         static List<Player> Players = new List<Player>();
+        static List<Room> Rooms = new List<Room>();
         static TcpListener server;
 
         private static void ServerThread()
