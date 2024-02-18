@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Server_Application
 {
-  enum PlayerState
+    enum PlayerState
     {
         Available,
         Player1,
@@ -16,7 +16,7 @@ namespace Server_Application
     enum RoomState
     {
         Waiting,
-        Running   
+        Running
     }
     enum Requests
     {
@@ -24,4 +24,15 @@ namespace Server_Application
         JoinRoom
     }
 
+    enum WordState
+    {
+        Missing,
+        Completed
+    }
+
+    enum TurnState
+    {
+        Player1,
+        Player2
+    }
 }
