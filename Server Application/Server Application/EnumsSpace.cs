@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace Server_Application
 {
-  enum PlayerState
+    internal enum PlayerState
     {
         Available,
         Player1,
         Player2,
         Watcher
     }
-    enum RoomState
+    internal enum RoomState
     {
         Waiting,
         Running   
     }
-    enum Requests
+    internal enum Request
     {
         CreateRoom,
         JoinRoom
