@@ -47,28 +47,31 @@
             tabsData.Controls.Add(tabPlayers);
             tabsData.Controls.Add(tabRooms);
             tabsData.Controls.Add(tabResults);
-            tabsData.Location = new Point(31, 24);
+            tabsData.Location = new Point(27, 18);
+            tabsData.Margin = new Padding(3, 2, 3, 2);
             tabsData.Name = "tabsData";
             tabsData.SelectedIndex = 0;
-            tabsData.Size = new Size(738, 379);
+            tabsData.Size = new Size(646, 284);
             tabsData.TabIndex = 0;
             // 
             // tabPlayers
             // 
             tabPlayers.Controls.Add(listPlayers);
-            tabPlayers.Location = new Point(4, 29);
+            tabPlayers.Location = new Point(4, 24);
+            tabPlayers.Margin = new Padding(3, 2, 3, 2);
             tabPlayers.Name = "tabPlayers";
-            tabPlayers.Padding = new Padding(3);
-            tabPlayers.Size = new Size(730, 346);
+            tabPlayers.Padding = new Padding(3, 2, 3, 2);
+            tabPlayers.Size = new Size(638, 256);
             tabPlayers.TabIndex = 0;
             tabPlayers.Text = "Active Players";
             tabPlayers.UseVisualStyleBackColor = true;
             // 
             // listPlayers
             // 
-            listPlayers.Location = new Point(6, 6);
+            listPlayers.Location = new Point(5, 4);
+            listPlayers.Margin = new Padding(3, 2, 3, 2);
             listPlayers.Name = "listPlayers";
-            listPlayers.Size = new Size(718, 334);
+            listPlayers.Size = new Size(629, 252);
             listPlayers.TabIndex = 0;
             listPlayers.UseCompatibleStateImageBehavior = false;
             listPlayers.View = View.List;
@@ -76,20 +79,22 @@
             // tabRooms
             // 
             tabRooms.Controls.Add(listRooms);
-            tabRooms.Location = new Point(4, 29);
+            tabRooms.Location = new Point(4, 24);
+            tabRooms.Margin = new Padding(3, 2, 3, 2);
             tabRooms.Name = "tabRooms";
-            tabRooms.Padding = new Padding(3);
+            tabRooms.Padding = new Padding(3, 2, 3, 2);
             tabRooms.RightToLeft = RightToLeft.Yes;
-            tabRooms.Size = new Size(730, 346);
+            tabRooms.Size = new Size(638, 256);
             tabRooms.TabIndex = 1;
             tabRooms.Text = "All Rooms";
             tabRooms.UseVisualStyleBackColor = true;
             // 
             // listRooms
             // 
-            listRooms.Location = new Point(6, 6);
+            listRooms.Location = new Point(5, 4);
+            listRooms.Margin = new Padding(3, 2, 3, 2);
             listRooms.Name = "listRooms";
-            listRooms.Size = new Size(718, 334);
+            listRooms.Size = new Size(629, 252);
             listRooms.TabIndex = 0;
             listRooms.UseCompatibleStateImageBehavior = false;
             listRooms.View = View.List;
@@ -97,41 +102,45 @@
             // tabResults
             // 
             tabResults.Controls.Add(listResults);
-            tabResults.Location = new Point(4, 29);
+            tabResults.Location = new Point(4, 24);
+            tabResults.Margin = new Padding(3, 2, 3, 2);
             tabResults.Name = "tabResults";
-            tabResults.Padding = new Padding(3);
-            tabResults.Size = new Size(730, 346);
+            tabResults.Padding = new Padding(3, 2, 3, 2);
+            tabResults.Size = new Size(638, 256);
             tabResults.TabIndex = 2;
             tabResults.Text = "Game Results";
             tabResults.UseVisualStyleBackColor = true;
             // 
             // listResults
             // 
-            listResults.Location = new Point(6, 6);
+            listResults.Location = new Point(5, 4);
+            listResults.Margin = new Padding(3, 2, 3, 2);
             listResults.Name = "listResults";
-            listResults.Size = new Size(718, 334);
+            listResults.Size = new Size(629, 252);
             listResults.TabIndex = 0;
             listResults.UseCompatibleStateImageBehavior = false;
             listResults.View = View.List;
             // 
             // btnStart
             // 
-            btnStart.Location = new Point(327, 409);
+            btnStart.Location = new Point(286, 307);
+            btnStart.Margin = new Padding(3, 2, 3, 2);
             btnStart.Name = "btnStart";
-            btnStart.Size = new Size(147, 29);
+            btnStart.Size = new Size(129, 22);
             btnStart.TabIndex = 1;
             btnStart.Text = "Start The Server";
             btnStart.UseVisualStyleBackColor = true;
             btnStart.Click += btnStart_Click;
             // 
-            // Server
+            // ServerForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(700, 338);
             Controls.Add(btnStart);
             Controls.Add(tabsData);
-            Name = "Server";
+            Margin = new Padding(3, 2, 3, 2);
+            Name = "ServerForm";
             Text = "Server";
             tabsData.ResumeLayout(false);
             tabPlayers.ResumeLayout(false);
