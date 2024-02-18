@@ -24,13 +24,11 @@ namespace Server_Application
         CreateRoom,
         JoinRoom
     }
-
     enum WordState
     {
         Missing,
         Completed
     }
-
     enum TurnState
     {
         Player1,
