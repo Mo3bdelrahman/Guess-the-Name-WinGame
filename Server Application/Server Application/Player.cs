@@ -8,5 +8,20 @@ using System.Threading.Tasks;
 
 namespace Server_Application
 {
+    internal class Player
+    {
+        public TcpClient Client { set; get; }
+        public string Name { set; get; }
+        PlayerState state;
+        public Player(TcpClient client, string name)
+        {
+            this.Client = client;
+            this.Name = name;
+        }
+        public PlayerState getState()
+        { return state; }
+        public void setState(PlayerState state)
+        { this.state = state; }
 
+    }
 }

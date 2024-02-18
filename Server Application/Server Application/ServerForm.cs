@@ -6,5 +6,9 @@ namespace Server_Application
         {
             InitializeComponent();
         }
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            ServerController.StartServer(btnStart);
+        }
     }
 }
