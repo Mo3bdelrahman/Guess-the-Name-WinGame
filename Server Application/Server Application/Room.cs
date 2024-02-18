@@ -2,17 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Server_Application
 {
     internal class Room
     {
-        Player Owner { get; set; }
-        Player Guest { get; set; }
-        Game Game { get; set; }
-        RoomState state;
-        bool playAgain;
+        public Player? Owner { get; set; }
+        public Player? Guest { get; set; }
+        [JsonIgnore]
+        public Game? Game { get; set; }
+        public RoomState state;
+        [JsonIgnore]
+        public bool playAgain;
+        public List<Player>? Watchers {  get; set; } 
         public Room(Player owner)
         {
             this.Owner = owner;
@@ -21,7 +25,7 @@ namespace Server_Application
 
         private void CreateGame()
         {
-            Game = new Game(Owner, Guest);
+            Game = new Game(Owner!, Guest!);
             state = RoomState.Running;
         }
         private void guestHasJoined(Player guest)
