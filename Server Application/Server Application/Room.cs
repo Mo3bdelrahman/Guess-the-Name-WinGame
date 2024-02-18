@@ -8,25 +8,25 @@ namespace Server_Application
 {
     internal class Room
     {
-        Player owner;
-        Player guest;
-        Game game;
+        Player Owner { get; set; }
+        Player Guest { get; set; }
+        Game Game { get; set; }
         RoomState state;
         bool playAgain;
         public Room(Player owner)
         {
-            this.owner = owner;
+            this.Owner = owner;
             state = RoomState.Waiting;
         }
 
         private void CreateGame()
         {
-            game = new Game(owner, guest);
+            Game = new Game(Owner, Guest);
             state = RoomState.Running;
         }
         private void guestHasJoined(Player guest)
         {
-            this.guest = guest;
+            this.Guest = guest;
             CreateGame();
         }
         private void PlayAgain()

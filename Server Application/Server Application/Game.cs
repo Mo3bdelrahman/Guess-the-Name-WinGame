@@ -31,13 +31,13 @@ namespace Server_Application
             {
                 if (turnState == TurnState.Player1)
                 {
-                    result = $"{player1.getName()} wins";
+                    result = $"{player1.Name} wins";
 
 
                 }
                 else
                 {
-                    result = $"{player2.getName()} wins";
+                    result = $"{player2.Name} wins";
                 }
                 return true;
             }
