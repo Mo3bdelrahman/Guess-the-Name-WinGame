@@ -138,7 +138,6 @@ namespace Server_Application
             }
             catch (Exception ex) { MessageBox.Show("From ResponseHandeller " + ex.Message); }     
         }
-        
         private void Distributer(NetworkStream stream, Request req, List<string> para)
         {
             switch(req)

@@ -27,7 +27,7 @@ namespace Client_Application
                 stream = player.TcpClient.GetStream();
                 receiveThread = new Thread(new ThreadStart(ReceiveData));
                 receiveThread.Start();
-                
+
 
                 return true;
             }
@@ -72,7 +72,7 @@ namespace Client_Application
                 if (IsConnected)
                 {
                     RequestHandeller<string>(stream, Request.ClientToServerLogin, UserNameTextBox.Text);
-                    
+
                 }
             }
         }
@@ -120,6 +120,14 @@ namespace Client_Application
             panelList.Add(GamePanel);
             panelList[++index].BringToFront();
             panelList[index].Visible = true;
+        }
+
+        private void ClientForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            stream.Close();
+            Application.ExitThread();
+            Environment.Exit(Environment.ExitCode);
+
         }
     }
 }

@@ -43,7 +43,7 @@ namespace Server_Application
             TcpClient Client = (TcpClient)client;
             Player player = new Player(Client);
             try
-            { 
+            {
                 Players.Add(player);
                 NetworkStream stream = player.Client.GetStream();
 
@@ -81,6 +81,12 @@ namespace Server_Application
             RequestHandeller<string>(Players.ToArray(), Request.ServerToClientLogin, "hamada");
         }
 
-       
+        private void ServerForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+           
+            Application.ExitThread();
+            Environment.Exit(Environment.ExitCode);
+
+        }
     }
 }
