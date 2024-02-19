@@ -134,6 +134,8 @@ namespace Server_Application
                 string strPara = binaryReader.ReadString();
                 Request request = JsonSerializer.Deserialize<Request>(strReq);
                 List<string>? para = JsonSerializer.Deserialize<List<string>>(strPara);
+                MessageBox.Show($"Request from client to server is {request}");
+
             }
             catch (Exception ex) { MessageBox.Show("From ResponseHandeller " + ex.Message); }     
         }

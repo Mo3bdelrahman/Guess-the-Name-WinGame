@@ -50,12 +50,15 @@ namespace Client_Application
 
         private void ReceiveData()
         {
+            stream = client.GetStream();
             // ( Mohamed Abdelrahman ) -> Stream Code
             // Recieve Data From Server
 
             // Temporary Code To Keep The Client Listening
             while (true)
-            { }
+            {
+                ClientController.ResponseHandeller(stream);
+            }
         }
 
         private void LoginButton_Click(object sender, EventArgs e)
@@ -71,6 +74,8 @@ namespace Client_Application
 
                 if (IsConnected)
                 {
+                    stream = client.GetStream();
+                    ClientController.RequestHandeller(stream, Request.CreateRoom);
                     panelList[++index].BringToFront();
                     panelList[index].Visible = true;
                 }
