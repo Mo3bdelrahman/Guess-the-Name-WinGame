@@ -10,6 +10,19 @@ namespace Client_Application
 {
     internal class ClientController
     {
+        public static void RequestHandeller(NetworkStream networkStream, Request request)
+        {
+            try
+            {
+                BinaryWriter binaryWriter = new BinaryWriter(networkStream);
+                string jsonRequest = JsonSerializer.Serialize<Request>(request);
+                List<string> jsonParams = new List<string>();
+                binaryWriter.Write(jsonRequest);
+                binaryWriter.Write(JsonSerializer.Serialize<List<string>>(jsonParams));
+            }
+            catch (Exception ex) { MessageBox.Show("From RequestHandeller " + ex.Message); }
+
+        }
         public static void RequestHandeller<T1>(NetworkStream networkStream, Request request, T1 param1)
         {
             try
