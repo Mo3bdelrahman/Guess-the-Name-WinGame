@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Client_Application
 {
-    internal struct Player
+    internal class Player
     {
         TcpClient? tcpClient;
         string? name;
@@ -20,7 +20,7 @@ namespace Client_Application
             state = PlayerState.Available;
         }
     }
-    internal struct Room
+    internal class Room
     {
         Player? owner;
         Player? guest;
@@ -28,7 +28,7 @@ namespace Client_Application
         int watchersCount;
         public Room() { watchersCount = 0; }
     }
-    internal struct Game
+    internal class Game
     {
         string? CurrentWord;
         TurnState turnState;
