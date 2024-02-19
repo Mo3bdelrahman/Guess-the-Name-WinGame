@@ -17,7 +17,7 @@ namespace Server_Application
 
         private void ServerThread()
         {
-            server = new TcpListener(IPAddress.Any, 8080);
+            server = new TcpListener(new IPAddress(new byte[] {127,0,0,1}), 12345);
             server.Start();
 
             MessageBox.Show("Server Started");
