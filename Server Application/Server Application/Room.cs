@@ -16,6 +16,7 @@ namespace Server_Application
         public RoomState state;
         [JsonIgnore]
         public bool playAgain;
+        [JsonIgnore]
         public List<Player>? Watchers {  get; set; } 
         public Room(Player owner)
         {
