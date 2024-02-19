@@ -8,8 +8,7 @@ namespace Client_Application
 {
     partial class ClientForm : Form
     {
-        TcpClient client;
-        string PlayerName;
+        Player player;
         NetworkStream stream;
         Thread receiveThread;
         List<Panel> panelList = new List<Panel>();
@@ -17,15 +16,18 @@ namespace Client_Application
         public ClientForm()
         {
             InitializeComponent();
+            player = new Player();
         }
 
         public bool Connect()
         {
             try
             {
-                client = new TcpClient("127.0.0.1", 12345);
+                player.TcpClient = new TcpClient("127.0.0.1", 12345);
+                stream = player.TcpClient.GetStream();
                 receiveThread = new Thread(new ThreadStart(ReceiveData));
                 receiveThread.Start();
+                
 
                 return true;
             }
@@ -50,14 +52,9 @@ namespace Client_Application
 
         private void ReceiveData()
         {
-            stream = client.GetStream();
-            // ( Mohamed Abdelrahman ) -> Stream Code
-            // Recieve Data From Server
-
-            // Temporary Code To Keep The Client Listening
             while (true)
             {
-                ClientController.ResponseHandeller(stream);
+                ResponseHandeller(stream);
             }
         }
 
@@ -74,10 +71,8 @@ namespace Client_Application
 
                 if (IsConnected)
                 {
-                    stream = client.GetStream();
-                    ClientController.RequestHandeller(stream, Request.CreateRoom);
-                    panelList[++index].BringToFront();
-                    panelList[index].Visible = true;
+                    RequestHandeller<string>(stream, Request.ClientToServerLogin, UserNameTextBox.Text);
+                    
                 }
             }
         }
