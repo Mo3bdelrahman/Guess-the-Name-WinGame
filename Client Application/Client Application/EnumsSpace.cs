@@ -22,8 +22,32 @@ namespace Client_Application
     enum Request
 
     {
-        CreateRoom,
-        JoinRoom
+        ClientToServerLogin,// start button 
+        ServerToClientLogin,
+
+        ClientToServerLoadLobby, //on lobby load
+        ServerToClientLoadLobby,
+
+        ClientToServerCreateRoom,
+        ServerToClientCreateRoom,//on creating confrimed
+
+        ClientToServerAskToJoin,//on asking to join
+        ServerToClientAskToJoin,
+
+        ClientToServerResponseToJoin,
+        ServerToClientResponseToJoin,
+
+        ClientToServerWatch,//on watching
+        ServerToClientWatch,
+
+        ClientToServerLeaveRoomLobby,//with player only
+        ServerToClientLeaveRoomLobby,
+
+        ClientToServerLeaveGame,// with watcher and player
+        ServerToClientLeaveGame,
+
+        StartGameC,
+        SendCharC,
     }
 
     enum WordState

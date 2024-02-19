@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Client_Application
 {
-    internal class ClientController
+    public partial class ClientForm
     {
-        public static void RequestHandeller(NetworkStream networkStream, Request request)
+        private void RequestHandeller(NetworkStream networkStream, Request request)
         {
             try
             {
@@ -23,7 +23,7 @@ namespace Client_Application
             catch (Exception ex) { MessageBox.Show("From RequestHandeller " + ex.Message); }
 
         }
-        public static void RequestHandeller<T1>(NetworkStream networkStream, Request request, T1 param1)
+        private void RequestHandeller<T1>(NetworkStream networkStream, Request request, T1 param1)
         {
             try
             {
@@ -37,7 +37,7 @@ namespace Client_Application
             catch (Exception ex) { MessageBox.Show("From RequestHandeller " + ex.Message); }
 
         }
-        public static void RequestHandeller<T1, T2>(NetworkStream networkStream, Request request, T1 param1, T2 param2)
+        private void RequestHandeller<T1, T2>(NetworkStream networkStream, Request request, T1 param1, T2 param2)
         {
             try
             {
@@ -52,7 +52,7 @@ namespace Client_Application
             catch (Exception ex) { MessageBox.Show("From RequestHandeller " + ex.Message); }
 
         }
-        public static void RequestHandeller<T1, T2, T3>(NetworkStream networkStream, Request request, T1 param1, T2 param2, T3 param3)
+        private void RequestHandeller<T1, T2, T3>(NetworkStream networkStream, Request request, T1 param1, T2 param2, T3 param3)
         {
             try
             {
@@ -69,7 +69,7 @@ namespace Client_Application
 
 
         }
-        public static void RequestHandeller<T1, T2, T3, T4>(NetworkStream networkStream, Request request, T1 param1, T2 param2, T3 param3, T4 param4)
+        private void RequestHandeller<T1, T2, T3, T4>(NetworkStream networkStream, Request request, T1 param1, T2 param2, T3 param3, T4 param4)
         {
             try
             {
@@ -87,18 +87,54 @@ namespace Client_Application
 
 
         }
-        public static void ResponseHandeller(NetworkStream networkStream)
+        private void ResponseHandeller(NetworkStream networkStream)
         {
-            try
-            {
+            //try
+            //{
                 BinaryReader binaryReader = new BinaryReader(networkStream);
                 string strReq = binaryReader.ReadString();
                 string strPara = binaryReader.ReadString();
                 Request request = JsonSerializer.Deserialize<Request>(strReq);
                 List<string> para = JsonSerializer.Deserialize<List<string>>(strPara);
-                MessageBox.Show($"Request from server to client is {request}");
-            }
-            catch (Exception ex) { MessageBox.Show("From ResponseHandeller " + ex.Message); }
+                Distributer(request, para!);
+            //}
+            //catch (Exception ex) { MessageBox.Show("From Client ResponseHandeller " + ex.Message); }
         }
+
+        private void Distributer(Request req, List<string> para)
+        {
+            switch (req)
+            {
+                case Request.ServerToClientLogin: SetPlayerData(para); break;
+                default: MessageBox.Show($"{req}"); break;
+            }
+        }
+        //request handlers
+        private void SetPlayerData(List<string> para)
+        {
+            try 
+            {
+                if (para[0].GetOriginalData<bool>())
+                {
+                    player = para[1].GetOriginalData<Player>();
+                    Invoke(() => { 
+                        panelList[++index].BringToFront();
+                        panelList[index].Visible = true;
+                        MessageBox.Show($"{player.Name}, {player.State}");
+                    });
+                    
+                }
+                else
+                {
+                    MessageBox.Show("Couldn't connect To the Server, Please try again");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("from Method " + ex.Message);
+            }
+            
+        }
+            
     }
 }

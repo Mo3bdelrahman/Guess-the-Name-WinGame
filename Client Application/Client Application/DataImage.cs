@@ -9,15 +9,15 @@ namespace Client_Application
 {
     internal class Player
     {
-        TcpClient? tcpClient;
-        string? name;
-        PlayerState state;
+        public TcpClient? TcpClient { get; set; }
+        public string? Name { get; set; }
+        public PlayerState State { get; set; }
         public Player(){}
         public Player(TcpClient tcp , string pName)
         {
-            tcpClient = tcp;
-            name = pName;
-            state = PlayerState.Available;
+            TcpClient = tcp;
+            Name = pName;
+            State = PlayerState.Available;
         }
     }
     internal class Room

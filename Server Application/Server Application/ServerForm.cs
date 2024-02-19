@@ -17,7 +17,7 @@ namespace Server_Application
 
         private void ServerThread()
         {
-            server = new TcpListener(new IPAddress(new byte[] {127,0,0,1}), 12345);
+            server = new TcpListener(new IPAddress(new byte[] { 127, 0, 0, 1 }), 12345);
             server.Start();
 
             MessageBox.Show("Server Started");
@@ -41,26 +41,18 @@ namespace Server_Application
         private void ConnectToClient(object client)
         {
             TcpClient Client = (TcpClient)client;
-            // Temporary Player Until Name Is Recieved From The Login
-            Player player = new Player(Client, "Zeyad");
-
+            Player player = new Player(Client);
             try
-            {
-                // Temporary Code To Keep The Connection Running
+            { 
                 Players.Add(player);
-                MessageBox.Show($"{player.Name} is connected");
                 NetworkStream stream = player.Client.GetStream();
+
+                ResponseHandeller(stream);
+                MessageBox.Show($"Player {player.Name} is connected");
                 while (true)
-                { 
-                    ServerController.ResponseHandeller(stream);
+                {
+                    ResponseHandeller(stream);
                 }
-
-                // ( Mohamed Abdelrahman ) -> Stream Code
-
-                // If It Is The Login Message,
-                // Initialize The Player With The Client ( From Above ) And Name ( From Login )
-                // Add The Player Using The ServerController.AddPlayer Method
-                // A Loop Must Be Added, Waiting For Messages From The Client
             }
             catch (Exception ex)
             {
@@ -81,10 +73,14 @@ namespace Server_Application
         }
         private void btnStart_Click(object sender, EventArgs e)
         {
-
             StartServer();
         }
 
+        private void Test_Click(object sender, EventArgs e)
+        {
+            RequestHandeller<string>(Players.ToArray(), Request.ServerToClientLogin, "hamada");
+        }
 
+       
     }
 }
