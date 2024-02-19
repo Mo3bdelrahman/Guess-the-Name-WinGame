@@ -18,6 +18,7 @@ namespace Server_Application
         public bool playAgain;
         [JsonIgnore]
         public List<Player>? Watchers {  get; set; } 
+      
         public Room(Player owner)
         {
             this.Owner = owner;
