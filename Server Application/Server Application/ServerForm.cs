@@ -49,8 +49,11 @@ namespace Server_Application
                 // Temporary Code To Keep The Connection Running
                 Players.Add(player);
                 MessageBox.Show($"{player.Name} is connected");
+                NetworkStream stream = player.Client.GetStream();
                 while (true)
-                { }
+                { 
+                    ServerController.ResponseHandeller(stream);
+                }
 
                 // ( Mohamed Abdelrahman ) -> Stream Code
 
@@ -81,6 +84,7 @@ namespace Server_Application
 
             StartServer();
         }
+
 
     }
 }
