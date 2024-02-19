@@ -13,9 +13,9 @@ using System.Net;
 
 namespace Server_Application
 {
-    internal static class ServerController
+    public partial class ServerForm
     {
-        public static void RequestHandeller(Player[] players, Request request)
+        private void RequestHandeller(Player[] players, Request request)
         {
             try
             {
@@ -35,7 +35,7 @@ namespace Server_Application
             catch (Exception ex) { MessageBox.Show("From RequestHandeller " + ex.Message); }
 
         }
-        public static void RequestHandeller<T1>(Player[] players ,Request request, T1 param1)
+        private void RequestHandeller<T1>(Player[] players ,Request request, T1 param1)
         {
             try
             {
@@ -56,7 +56,7 @@ namespace Server_Application
             catch (Exception ex) { MessageBox.Show("From RequestHandeller " + ex.Message); }
            
         }
-        public static void RequestHandeller<T1, T2>(Player[] players, Request request, T1 param1, T2 param2)
+        private void RequestHandeller<T1, T2>(Player[] players, Request request, T1 param1, T2 param2)
         {
             try
             {
@@ -78,7 +78,7 @@ namespace Server_Application
             catch (Exception ex) { MessageBox.Show("From RequestHandeller " + ex.Message); }
 
         }
-        public static void RequestHandeller<T1, T2, T3>(Player[] players, Request request, T1 param1, T2 param2, T3 param3)
+        private void RequestHandeller<T1, T2, T3>(Player[] players, Request request, T1 param1, T2 param2, T3 param3)
         {
             try
             {
@@ -101,7 +101,7 @@ namespace Server_Application
 
 
         }
-        public static void RequestHandeller<T1, T2, T3, T4>(Player[] players, Request request, T1 param1, T2 param2, T3 param3, T4 param4)
+        private void RequestHandeller<T1, T2, T3, T4>(Player[] players, Request request, T1 param1, T2 param2, T3 param3, T4 param4)
         {
             try
             {
@@ -125,7 +125,7 @@ namespace Server_Application
             
 
         }
-        public static void ResponseHandeller(NetworkStream networkStream)
+        private void ResponseHandeller(NetworkStream networkStream)
         {
             try
             {
@@ -134,47 +134,39 @@ namespace Server_Application
                 string strPara = binaryReader.ReadString();
                 Request request = JsonSerializer.Deserialize<Request>(strReq);
                 List<string>? para = JsonSerializer.Deserialize<List<string>>(strPara);
-                MessageBox.Show($"Request from client to server is {request}");
-
+                Distributer(networkStream, request, para!);
             }
             catch (Exception ex) { MessageBox.Show("From ResponseHandeller " + ex.Message); }     
         }
         
-        //private static void BroadcastToClients(string message, List<TcpClient> clients)
-        //{
-        //    //List<TcpClient> clients = Players.Select(player => player.Client).ToList();
-
-        //    foreach (TcpClient client in clients)
-        //    {
-        //        try
-        //        {
-        //            // ( Mohamed Abdelrahman ) -> Stream Code
-
-        //            // Data To Be Send To All Clients
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            MessageBox.Show("Error: " + ex.Message);
-        //        }
-        //    }
-        //}
-
-        //private static void SendToClient(TcpClient client,string from, string to, string body, string? character = null)
-        //{
-        //    try
-        //    {
-        //        //TcpClient client = Players.Find(client => client.Name == to).Client;
-
-        //        // ( Mohamed Abdelrahman ) -> Stream Code
-
-        //        // Data To Be Sent To A Specific Client
-        //    }
-        //    catch
-        //    {
-        //        MessageBox.Show("Error");
-        //    }
-        //}
-
+        private void Distributer(NetworkStream stream, Request req, List<string> para)
+        {
+            switch(req)
+            {
+                case Request.ClientToServerLogin: SetPlayerData(stream, para); break;
+                default: MessageBox.Show($"{req}"); break;
+            }
+        }
+        //utility
+        private Player GetPlayer(NetworkStream stream)
+        {
+            Player? p = Players.Find(player => player.Client.GetStream() == stream);
+            return p!;
+        }
+        //response from login
+        public void SetPlayerData(NetworkStream stream, List<string> jsonStringList)
+        {
+            Player p = GetPlayer(stream);
+            try 
+            {
+                p.Name = jsonStringList[0].GetOriginalData<string>();
+                RequestHandeller<bool, Player>([p], Request.ServerToClientLogin, true, p);
+            }
+            catch
+            {
+                RequestHandeller<bool>([p], Request.ServerToClientLogin, false);
+            }
+        }
 
     }
 }
