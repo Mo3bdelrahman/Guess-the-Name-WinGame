@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Server_Application
 {
-    enum PlayerState
+  enum PlayerState
     {
         Available,
         Player1,
@@ -16,59 +16,12 @@ namespace Server_Application
     enum RoomState
     {
         Waiting,
-        Running
+        Running   
     }
-    enum Request
-
+    enum Requests
     {
-        ClientToServerLogin,// start button 
-        ServerToClientLogin,
-
-        ClientToServerLoadLobby, //on lobby load
-        ServerToClientLoadLobby,
-
-        ClientToServerCreateRoom,
-        ServerToClientCreateRoom,//on creating confrimed
-
-        ServerToClientUpdateRooms,//on creating to notify all players
-
-        ClientToServerAskToJoin,//on asking to join
-        ServerToClientAskToJoin,
-
-        ClientToServerResponseToJoin,
-        ServerToClientResponseToJoin,
-
-        ClientToServerWatch,//on watching
-        ServerToClientWatch,
-
-        ClientToServerP1LeaveRoomLobby,//with player only
-        ServerToClientP1LeaveRoomLobby,
-
-        ClientToServerP2LeaveRoomLobby,//with player only
-        ServerToClientP2LeaveRoomLobby,
-
-        ClientToServerLeaveGame,// with watcher and player
-        ServerToClientLeaveGame,
-
-        StartGameC,
-        SendCharC,
-    }
-    enum WordState
-    {
-        Missing,
-        Completed
+        CreateRoom,
+        JoinRoom
     }
 
-    enum WordCategories
-    {
-        Fruits,
-        Sports,
-        Languages,
-        NotAvailable
-    }
-    enum TurnState
-    {
-        Player1,
-        Player2
-    }
 }
