@@ -16,7 +16,7 @@ namespace Server_Application
     internal static  class ServerController
     {
         public static Action<NetworkStream, Request, List<string>>? DistributerD { get; set; }
-        public static void RequestHandeller(Player[] players, Request request)
+        public static void RequestHandeller(List<Player> players, Request request)
         {
             try
             {
@@ -36,7 +36,7 @@ namespace Server_Application
             catch (Exception ex) { MessageBox.Show("From RequestHandeller " + ex.Message); }
 
         }
-        public static void RequestHandeller<T1>(Player[] players ,Request request, T1 param1)
+        public static void RequestHandeller<T1>(List<Player> players ,Request request, T1 param1)
         {
             try
             {
@@ -57,7 +57,7 @@ namespace Server_Application
             catch (Exception ex) { MessageBox.Show("From RequestHandeller " + ex.Message); }
            
         }
-        public static void RequestHandeller<T1, T2>(Player[] players, Request request, T1 param1, T2 param2)
+        public static void RequestHandeller<T1, T2>(List<Player> players, Request request, T1 param1, T2 param2)
         {
             try
             {
@@ -79,7 +79,7 @@ namespace Server_Application
             catch (Exception ex) { MessageBox.Show("From RequestHandeller " + ex.Message); }
 
         }
-        public static void RequestHandeller<T1, T2, T3>(Player[] players, Request request, T1 param1, T2 param2, T3 param3)
+        public static void RequestHandeller<T1, T2, T3>(List<Player> players, Request request, T1 param1, T2 param2, T3 param3)
         {
             try
             {
@@ -102,7 +102,7 @@ namespace Server_Application
 
 
         }
-        public static void RequestHandeller<T1, T2, T3, T4>(Player[] players, Request request, T1 param1, T2 param2, T3 param3, T4 param4)
+        public static void RequestHandeller<T1, T2, T3, T4>(List<Player> players, Request request, T1 param1, T2 param2, T3 param3, T4 param4)
         {
             try
             {

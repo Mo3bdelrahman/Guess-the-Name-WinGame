@@ -18,10 +18,16 @@ namespace Server_Application
         public bool playAgain;
         [JsonIgnore]
         public List<Player>? Watchers {  get; set; } 
-      
-        public Room(Player owner)
+        public string Category { get; set; }
+        public string RoomName { get; set; }
+        public int RoomId { get; set; }
+
+        public Room(Player owner, string cat,int id)
         {
             this.Owner = owner;
+            this.Category = cat;
+            this.RoomName = $"{owner.Name}'s room";
+            this.RoomId = id;
             state = RoomState.Waiting;
         }
 
