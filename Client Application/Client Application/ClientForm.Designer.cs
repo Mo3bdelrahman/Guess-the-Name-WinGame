@@ -163,7 +163,7 @@ namespace Client_Application
             // PlayerTurnLabel
             // 
             PlayerTurnLabel.AutoSize = true;
-            PlayerTurnLabel.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
+            PlayerTurnLabel.Font = new Font("Segoe UI", 16.2F);
             PlayerTurnLabel.Location = new Point(313, 53);
             PlayerTurnLabel.Name = "PlayerTurnLabel";
             PlayerTurnLabel.Size = new Size(158, 38);
@@ -173,7 +173,7 @@ namespace Client_Application
             // DashLabel
             // 
             DashLabel.AutoSize = true;
-            DashLabel.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            DashLabel.Font = new Font("Segoe UI", 13.8F);
             DashLabel.Location = new Point(352, 150);
             DashLabel.Name = "DashLabel";
             DashLabel.Size = new Size(77, 31);
@@ -182,7 +182,7 @@ namespace Client_Application
             // 
             // QButton
             // 
-            QButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
+            QButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold);
             QButton.Location = new Point(102, 258);
             QButton.Name = "QButton";
             QButton.Size = new Size(51, 47);
@@ -192,7 +192,7 @@ namespace Client_Application
             // 
             // EButton
             // 
-            EButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
+            EButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold);
             EButton.Location = new Point(218, 258);
             EButton.Name = "EButton";
             EButton.Size = new Size(51, 47);
@@ -202,7 +202,7 @@ namespace Client_Application
             // 
             // RButton
             // 
-            RButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
+            RButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold);
             RButton.Location = new Point(276, 258);
             RButton.Name = "RButton";
             RButton.Size = new Size(51, 47);
@@ -212,7 +212,7 @@ namespace Client_Application
             // 
             // TButton
             // 
-            TButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
+            TButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold);
             TButton.Location = new Point(334, 258);
             TButton.Name = "TButton";
             TButton.Size = new Size(51, 47);
@@ -222,7 +222,7 @@ namespace Client_Application
             // 
             // PButton
             // 
-            PButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
+            PButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold);
             PButton.Location = new Point(624, 258);
             PButton.Name = "PButton";
             PButton.Size = new Size(51, 47);
@@ -232,7 +232,7 @@ namespace Client_Application
             // 
             // KButton
             // 
-            KButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
+            KButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold);
             KButton.Location = new Point(534, 311);
             KButton.Name = "KButton";
             KButton.Size = new Size(51, 47);
@@ -242,7 +242,7 @@ namespace Client_Application
             // 
             // AButton
             // 
-            AButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
+            AButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold);
             AButton.Location = new Point(135, 311);
             AButton.Name = "AButton";
             AButton.Size = new Size(51, 47);
@@ -252,7 +252,7 @@ namespace Client_Application
             // 
             // LButton
             // 
-            LButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
+            LButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold);
             LButton.Location = new Point(591, 311);
             LButton.Name = "LButton";
             LButton.Size = new Size(51, 47);
@@ -262,7 +262,7 @@ namespace Client_Application
             // 
             // IButton
             // 
-            IButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
+            IButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold);
             IButton.Location = new Point(508, 258);
             IButton.Name = "IButton";
             IButton.Size = new Size(51, 47);
@@ -272,7 +272,7 @@ namespace Client_Application
             // 
             // OButton
             // 
-            OButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
+            OButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold);
             OButton.Location = new Point(566, 258);
             OButton.Name = "OButton";
             OButton.Size = new Size(51, 47);
@@ -282,7 +282,7 @@ namespace Client_Application
             // 
             // VButton
             // 
-            VButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
+            VButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold);
             VButton.Location = new Point(363, 364);
             VButton.Name = "VButton";
             VButton.Size = new Size(51, 47);
@@ -292,7 +292,7 @@ namespace Client_Application
             // 
             // NButton
             // 
-            NButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
+            NButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold);
             NButton.Location = new Point(477, 363);
             NButton.Name = "NButton";
             NButton.Size = new Size(51, 47);
@@ -302,7 +302,7 @@ namespace Client_Application
             // 
             // BButton
             // 
-            BButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
+            BButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold);
             BButton.Location = new Point(420, 364);
             BButton.Name = "BButton";
             BButton.Size = new Size(51, 47);
@@ -312,7 +312,7 @@ namespace Client_Application
             // 
             // MButton
             // 
-            MButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
+            MButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold);
             MButton.Location = new Point(534, 364);
             MButton.Name = "MButton";
             MButton.Size = new Size(51, 47);
@@ -322,7 +322,7 @@ namespace Client_Application
             // 
             // UButton
             // 
-            UButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
+            UButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold);
             UButton.Location = new Point(450, 258);
             UButton.Name = "UButton";
             UButton.Size = new Size(51, 47);
@@ -332,7 +332,7 @@ namespace Client_Application
             // 
             // DButton
             // 
-            DButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
+            DButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold);
             DButton.Location = new Point(249, 311);
             DButton.Name = "DButton";
             DButton.Size = new Size(51, 47);
@@ -342,7 +342,7 @@ namespace Client_Application
             // 
             // FButton
             // 
-            FButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
+            FButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold);
             FButton.Location = new Point(306, 311);
             FButton.Name = "FButton";
             FButton.Size = new Size(51, 47);
@@ -352,7 +352,7 @@ namespace Client_Application
             // 
             // GButton
             // 
-            GButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
+            GButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold);
             GButton.Location = new Point(363, 311);
             GButton.Name = "GButton";
             GButton.Size = new Size(51, 47);
@@ -362,7 +362,7 @@ namespace Client_Application
             // 
             // HButton
             // 
-            HButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
+            HButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold);
             HButton.Location = new Point(420, 310);
             HButton.Name = "HButton";
             HButton.Size = new Size(51, 47);
@@ -372,7 +372,7 @@ namespace Client_Application
             // 
             // JButton
             // 
-            JButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
+            JButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold);
             JButton.Location = new Point(477, 311);
             JButton.Name = "JButton";
             JButton.Size = new Size(51, 47);
@@ -382,7 +382,7 @@ namespace Client_Application
             // 
             // XButton
             // 
-            XButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
+            XButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold);
             XButton.Location = new Point(249, 364);
             XButton.Name = "XButton";
             XButton.Size = new Size(51, 47);
@@ -392,7 +392,7 @@ namespace Client_Application
             // 
             // CButton
             // 
-            CButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
+            CButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold);
             CButton.Location = new Point(306, 364);
             CButton.Name = "CButton";
             CButton.Size = new Size(51, 47);
@@ -402,7 +402,7 @@ namespace Client_Application
             // 
             // SButton
             // 
-            SButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
+            SButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold);
             SButton.Location = new Point(192, 311);
             SButton.Name = "SButton";
             SButton.Size = new Size(51, 47);
@@ -412,7 +412,7 @@ namespace Client_Application
             // 
             // YButton
             // 
-            YButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
+            YButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold);
             YButton.Location = new Point(392, 258);
             YButton.Name = "YButton";
             YButton.Size = new Size(51, 47);
@@ -422,7 +422,7 @@ namespace Client_Application
             // 
             // WButton
             // 
-            WButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
+            WButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold);
             WButton.Location = new Point(160, 258);
             WButton.Name = "WButton";
             WButton.Size = new Size(51, 47);
@@ -432,7 +432,7 @@ namespace Client_Application
             // 
             // ZButton
             // 
-            ZButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
+            ZButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold);
             ZButton.Location = new Point(192, 364);
             ZButton.Name = "ZButton";
             ZButton.Size = new Size(51, 47);
@@ -461,7 +461,7 @@ namespace Client_Application
             // VSLabel
             // 
             VSLabel.AutoSize = true;
-            VSLabel.Font = new Font("Segoe UI", 48F, FontStyle.Bold, GraphicsUnit.Point);
+            VSLabel.Font = new Font("Segoe UI", 48F, FontStyle.Bold);
             VSLabel.Location = new Point(327, 34);
             VSLabel.Name = "VSLabel";
             VSLabel.Size = new Size(142, 106);
@@ -561,6 +561,7 @@ namespace Client_Application
             Name = "ClientForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
+            FormClosing += ClientForm_FormClosing;
             Load += Form1_Load;
             LoginPanel.ResumeLayout(false);
             LoginPanel.PerformLayout();
