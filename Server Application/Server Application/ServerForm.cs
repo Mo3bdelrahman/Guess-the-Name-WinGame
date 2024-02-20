@@ -10,10 +10,15 @@ namespace Server_Application
         TcpListener server;
         Thread clientThread;
         Thread serverThread;
+        int RoomIdG;
         public ServerForm()
         {
             InitializeComponent();
             ServerController.DistributerD += Distributer;
+            RoomIdG = 0;
+
+
+           // Rooms.Add(new Room()) ;
         }
 
         private void ServerThread()
@@ -72,14 +77,6 @@ namespace Server_Application
             serverThread = new Thread(ServerThread);
             serverThread.Start();
         }
-        private void Distributer(NetworkStream stream, Request req, List<string> para)
-        {
-            switch (req)
-            {
-                case Request.ClientToServerLogin: SetPlayerData(stream, para); break;
-                default: MessageBox.Show($"{req}"); break;
-            }
-        }
         private void btnStart_Click(object sender, EventArgs e)
         {
             StartServer();
@@ -87,7 +84,7 @@ namespace Server_Application
 
         private void Test_Click(object sender, EventArgs e)
         {
-            ServerController.RequestHandeller<string>(Players.ToArray(), Request.ServerToClientLogin, "hamada");
+            ServerController.RequestHandeller<string>(Players, Request.ServerToClientLogin, "hamada");
         }
 
         private void ServerForm_FormClosing(object sender, FormClosingEventArgs e)

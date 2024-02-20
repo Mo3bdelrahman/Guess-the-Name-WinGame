@@ -59,14 +59,6 @@ namespace Client_Application
             }
         }
 
-        private void Distributer(Request req, List<string> para)
-        {
-            switch (req)
-            {
-                case Request.ServerToClientLogin: SetPlayerData(para); break;
-                default: MessageBox.Show($"{req}"); break;
-            }
-        }
         
 
         private void LoginButton_Click(object sender, EventArgs e)
@@ -94,15 +86,18 @@ namespace Client_Application
             panelList.Add(LoginPanel);
             panelList.Add(LoobyPanel);
             panelList[index].Visible = true;
-            panelList[index].BringToFront();
+            panelList[index].BringToFront();       
 
         }
 
         private void CreateRoomButton_Click(object sender, EventArgs e)
         {
+
+            ClientController.RequestHandeller<string>(stream, Request.ClientToServerCreateRoom, "cars");
             panelList.Add(RoomLoobyPanel);
             panelList[++index].BringToFront();
             panelList[index].Visible = true;
+
 
         }
 
@@ -120,10 +115,17 @@ namespace Client_Application
 
         private void LeaveButton_Click(object sender, EventArgs e)
         {
-            panelList[index].Visible = false;
-            panelList[--index].BringToFront();
-            panelList[index].Visible = true;
-            panelList.Remove(panelList[index + 1]);
+           
+            if (player.State == PlayerState.Player1)
+            {
+                ClientController.RequestHandeller<int>(stream, Request.ClientToServerP1LeaveRoomLobby, room.RoomId);
+            }
+            else if(player.State == PlayerState.Player2)
+            {
+                ClientController.RequestHandeller<int>(stream, Request.ClientToServerP2LeaveRoomLobby, room.RoomId);
+            }
+            
+ 
         }
 
         private void StartButton_Click(object sender, EventArgs e)
@@ -135,7 +137,7 @@ namespace Client_Application
 
         private void ClientForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            stream.Close();
+            stream?.Close();
             Application.ExitThread();
             Environment.Exit(Environment.ExitCode);
 

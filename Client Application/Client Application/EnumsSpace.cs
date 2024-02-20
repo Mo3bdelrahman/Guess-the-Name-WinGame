@@ -31,6 +31,8 @@ namespace Client_Application
         ClientToServerCreateRoom,
         ServerToClientCreateRoom,//on creating confrimed
 
+        ServerToClientUpdateRooms,
+
         ClientToServerAskToJoin,//on asking to join
         ServerToClientAskToJoin,
 
@@ -40,8 +42,11 @@ namespace Client_Application
         ClientToServerWatch,//on watching
         ServerToClientWatch,
 
-        ClientToServerLeaveRoomLobby,//with player only
-        ServerToClientLeaveRoomLobby,
+        ClientToServerP1LeaveRoomLobby,//with player only
+        ServerToClientP1LeaveRoomLobby,
+
+        ClientToServerP2LeaveRoomLobby,//with player only
+        ServerToClientP2LeaveRoomLobby,
 
         ClientToServerLeaveGame,// with watcher and player
         ServerToClientLeaveGame,
