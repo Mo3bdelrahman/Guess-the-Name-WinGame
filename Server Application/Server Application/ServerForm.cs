@@ -13,6 +13,7 @@ namespace Server_Application
         public ServerForm()
         {
             InitializeComponent();
+            ServerController.DistributerD += Distributer;
         }
 
         private void ServerThread()
@@ -40,18 +41,18 @@ namespace Server_Application
 
         private void ConnectToClient(object client)
         {
-            TcpClient Client = (TcpClient)client;
+            TcpClient Client =client as TcpClient;
             Player player = new Player(Client);
             try
             {
                 Players.Add(player);
                 NetworkStream stream = player.Client.GetStream();
 
-                ResponseHandeller(stream);
+                ServerController.ResponseHandeller(stream);
                 MessageBox.Show($"Player {player.Name} is connected");
                 while (true)
                 {
-                    ResponseHandeller(stream);
+                    ServerController.ResponseHandeller(stream);
                 }
             }
             catch (Exception ex)
@@ -71,6 +72,14 @@ namespace Server_Application
             serverThread = new Thread(ServerThread);
             serverThread.Start();
         }
+        private void Distributer(NetworkStream stream, Request req, List<string> para)
+        {
+            switch (req)
+            {
+                case Request.ClientToServerLogin: SetPlayerData(stream, para); break;
+                default: MessageBox.Show($"{req}"); break;
+            }
+        }
         private void btnStart_Click(object sender, EventArgs e)
         {
             StartServer();
@@ -78,7 +87,7 @@ namespace Server_Application
 
         private void Test_Click(object sender, EventArgs e)
         {
-            RequestHandeller<string>(Players.ToArray(), Request.ServerToClientLogin, "hamada");
+            ServerController.RequestHandeller<string>(Players.ToArray(), Request.ServerToClientLogin, "hamada");
         }
 
         private void ServerForm_FormClosing(object sender, FormClosingEventArgs e)

@@ -16,6 +16,8 @@ namespace Client_Application
         public ClientForm()
         {
             InitializeComponent();
+            receiveThread = new Thread(new ThreadStart(ReceiveData));
+            ClientController.DistributerD += Distributer;
             player = new Player();
         }
 
@@ -25,7 +27,6 @@ namespace Client_Application
             {
                 player.TcpClient = new TcpClient("127.0.0.1", 12345);
                 stream = player.TcpClient.GetStream();
-                receiveThread = new Thread(new ThreadStart(ReceiveData));
                 receiveThread.Start();
 
 
@@ -54,9 +55,19 @@ namespace Client_Application
         {
             while (true)
             {
-                ResponseHandeller(stream);
+                ClientController.ResponseHandeller(stream);
             }
         }
+
+        private void Distributer(Request req, List<string> para)
+        {
+            switch (req)
+            {
+                case Request.ServerToClientLogin: SetPlayerData(para); break;
+                default: MessageBox.Show($"{req}"); break;
+            }
+        }
+        
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
@@ -71,7 +82,7 @@ namespace Client_Application
 
                 if (IsConnected)
                 {
-                    RequestHandeller<string>(stream, Request.ClientToServerLogin, UserNameTextBox.Text);
+                    ClientController.RequestHandeller<string>(stream, Request.ClientToServerLogin, UserNameTextBox.Text);
 
                 }
             }
