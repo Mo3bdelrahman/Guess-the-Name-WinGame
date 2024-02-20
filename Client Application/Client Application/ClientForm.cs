@@ -55,7 +55,12 @@ namespace Client_Application
         {
             while (true)
             {
-                ClientController.ResponseHandeller(stream);
+                bool IsConnected = ClientController.ResponseHandeller(stream);
+
+                if (!IsConnected) 
+                {
+                    break;
+                }
             }
         }
 
