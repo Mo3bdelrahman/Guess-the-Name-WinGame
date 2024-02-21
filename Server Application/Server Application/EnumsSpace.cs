@@ -58,6 +58,14 @@ namespace Server_Application
         Missing,
         Completed
     }
+
+    enum WordCategories
+    {
+        Fruits,
+        Sports,
+        Languages,
+        NotAvailable
+    }
     enum TurnState
     {
         Player1,

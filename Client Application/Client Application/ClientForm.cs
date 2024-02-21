@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing.Drawing2D;
 using System.Net.Sockets;
 using System.Text;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace Client_Application
 {
@@ -11,11 +12,14 @@ namespace Client_Application
         Player player;
         NetworkStream stream;
         Thread receiveThread;
-        List<Panel> panelList = new List<Panel>();
-        int index;
+        List<Panel> Panels;
+        Panel ActivePanel;
         public ClientForm()
         {
             InitializeComponent();
+            Panels = new List<Panel>() { LoginPanel, LoobyPanel, RoomLoobyPanel, GamePanel };
+            ActivePanel = LoginPanel;
+            this.Controls.Add(LoginPanel);
             receiveThread = new Thread(new ThreadStart(ReceiveData));
             ClientController.DistributerD += Distributer;
             player = new Player();
@@ -28,7 +32,6 @@ namespace Client_Application
                 player.TcpClient = new TcpClient("127.0.0.1", 12345);
                 stream = player.TcpClient.GetStream();
                 receiveThread.Start();
-
 
                 return true;
             }
@@ -55,18 +58,42 @@ namespace Client_Application
         {
             while (true)
             {
-                ClientController.ResponseHandeller(stream);
+                bool IsConnected = ClientController.ResponseHandeller(stream);
+
+                if (!IsConnected) 
+                {
+                    break;
+                }
             }
         }
 
-        
+        private void ViewPanel(Panel panel)
+        {
+            foreach (Panel p in Panels)
+            {
+                if (p == ActivePanel)
+                {
+                    this.Controls.Remove(p);
+                    break;
+                }
+            }
+
+            foreach (Panel p in Panels)
+            {
+                if (p == panel)
+                {
+                    ActivePanel = p;
+                    this.Controls.Add(p);
+                    break;
+                }
+            }
+        }
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(UserNameTextBox.Text))
+            if (string.IsNullOrWhiteSpace(textBox1.Text))
             {
-                string message = "please Enter your name";
-                MessageBox.Show(message);
+                MessageBox.Show("Please Enter Your Name", "Empty Name", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             else
             {
@@ -74,43 +101,32 @@ namespace Client_Application
 
                 if (IsConnected)
                 {
-                    ClientController.RequestHandeller<string>(stream, Request.ClientToServerLogin, UserNameTextBox.Text);
-
+                    ClientController.RequestHandeller<string>(stream, Request.ClientToServerLogin, textBox1.Text);
+                    ViewPanel(LoobyPanel);
                 }
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            index = 0;
-            panelList.Add(LoginPanel);
-            panelList.Add(LoobyPanel);
-            panelList[index].Visible = true;
-            panelList[index].BringToFront();       
-
-        }
-
         private void CreateRoomButton_Click(object sender, EventArgs e)
         {
+            Dialog dialog = new Dialog();
+            DialogResult result = dialog.ShowDialog();
 
-            ClientController.RequestHandeller<string>(stream, Request.ClientToServerCreateRoom, "cars");
-            panelList.Add(RoomLoobyPanel);
-            panelList[++index].BringToFront();
-            panelList[index].Visible = true;
-
-
+            if (result == DialogResult.OK)
+            {
+                ClientController.RequestHandeller<string>(stream, Request.ClientToServerCreateRoom, "cars");
+                ViewPanel(RoomLoobyPanel);
+            }
         }
 
         private void JoinRoomButton_Click(object sender, EventArgs e)
         {
-
-            RoomLoobyPanel.Visible = true;
-
+            ViewPanel(RoomLoobyPanel);
         }
 
         private void WatchGameButton_Click(object sender, EventArgs e)
         {
-            GamePanel.Visible = true;
+            ViewPanel(GamePanel);
         }
 
         private void LeaveButton_Click(object sender, EventArgs e)
@@ -124,23 +140,47 @@ namespace Client_Application
             {
                 ClientController.RequestHandeller<int>(stream, Request.ClientToServerP2LeaveRoomLobby, room.RoomId);
             }
-            
- 
+
+            ViewPanel(LoobyPanel);
         }
 
         private void StartButton_Click(object sender, EventArgs e)
         {
-            panelList.Add(GamePanel);
-            panelList[++index].BringToFront();
-            panelList[index].Visible = true;
+            ViewPanel(GamePanel);
         }
 
-        private void ClientForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void XExitLabel_Click(object sender, EventArgs e)
         {
             stream?.Close();
             Application.ExitThread();
             Environment.Exit(Environment.ExitCode);
+            Application.Exit(); 
+        }
 
+        private void XExitLabel_MouseHover(object sender, EventArgs e)
+        {
+            XExitLabel1.BackColor = Color.Red;
+            XExitLabel2.BackColor = Color.Red;
+            XExitLabel3.BackColor = Color.Red;
+            XExitLabel4.BackColor = Color.Red;
+        }
+
+        private void XExitLabel_MouseLeave(object sender, EventArgs e)
+        {
+            XExitLabel1.BackColor = Color.Transparent;
+            XExitLabel2.BackColor = Color.Transparent;
+            XExitLabel3.BackColor = Color.Transparent;
+            XExitLabel4.BackColor = Color.Transparent;
+        }
+
+        private void LeaveGameButton_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure you want to leave the game?", "Leave Game Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                ViewPanel(LoobyPanel);
+            }
         }
     }
 }

@@ -55,9 +55,11 @@ namespace Server_Application
 
                 ServerController.ResponseHandeller(stream);
                 MessageBox.Show($"Player {player.Name} is connected");
-                while (true)
+
+                while (Client.Connected)
                 {
-                    ServerController.ResponseHandeller(stream);
+                    if (stream.DataAvailable)
+                        ServerController.ResponseHandeller(stream);
                 }
             }
             catch (Exception ex)
@@ -84,15 +86,27 @@ namespace Server_Application
 
         private void Test_Click(object sender, EventArgs e)
         {
-            ServerController.RequestHandeller<string>(Players, Request.ServerToClientLogin, "hamada");
+            try
+            {
+                string category = WordCategory.GetCategory("Fruits");
+
+                if (category == string.Empty)
+                {
+                    throw new NullReferenceException();
+                }
+                else
+                {
+                    MessageBox.Show(category);
+                }
+            }
+            catch (Exception ex)
+            { MessageBox.Show("Category Doesn't Exist", "Wrong Category", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
         private void ServerForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-           
             Application.ExitThread();
             Environment.Exit(Environment.ExitCode);
-
         }
     }
 }

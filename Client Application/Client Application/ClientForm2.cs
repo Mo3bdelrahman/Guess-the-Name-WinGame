@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Client_Application
+﻿namespace Client_Application
 {
     internal partial class ClientForm
     {
@@ -34,12 +28,8 @@ namespace Client_Application
                 if (jsonStringList[0].GetOriginalData<bool>())
                 {
                     player = jsonStringList[1].GetOriginalData<Player>();
-                    Invoke(() => {
-                        panelList[++index].BringToFront();
-                        panelList[index].Visible = true;
-                        MessageBox.Show($"{player.Name}, {player.State}");
-                        ClientController.RequestHandeller(stream,Request.ClientToServerLoadLobby);
-                    });
+                    MessageBox.Show($"{player.Name}, {player.State}");
+                    ClientController.RequestHandeller(stream,Request.ClientToServerLoadLobby);
                 }
                 else
                 {
@@ -75,31 +65,13 @@ namespace Client_Application
                 player.State = jsonStringList[0].GetOriginalData<PlayerState>();
                 room = null;
                 ClientController.RequestHandeller(stream, Request.ClientToServerLoadLobby);
-                //back to lobby
-                Invoke(() =>
-                {
-                    panelList[index].Visible = false;
-                    panelList[--index].BringToFront();
-                    panelList[index].Visible = true;
-                    panelList.Remove(panelList[index + 1]);
-                });
             }
             else
             {
                 player.State = jsonStringList[0].GetOriginalData<PlayerState>();
                 room = null;
                 ClientController.RequestHandeller(stream, Request.ClientToServerLoadLobby);
-                //back to lobby
-                Invoke(() =>
-                {
-                    panelList[index].Visible = false;
-                    panelList[--index].BringToFront();
-                    panelList[index].Visible = true;
-                    panelList.Remove(panelList[index + 1]);
-                });
-
                 MessageBox.Show("Player1 Leave, The room was closed");
-
             }
         }
 
@@ -110,20 +82,11 @@ namespace Client_Application
                 player.State = jsonStringList[0].GetOriginalData<PlayerState>();
                 room = null;
                 ClientController.RequestHandeller(stream, Request.ClientToServerLoadLobby);
-                //back to lobby
-                Invoke(() =>
-                {
-                    panelList[index].Visible = false;
-                    panelList[--index].BringToFront();
-                    panelList[index].Visible = true;
-                    panelList.Remove(panelList[index + 1]);
-                });
             }
             else
             {
                 room = jsonStringList[0].GetOriginalData<Room>();
                 MessageBox.Show("Player2 Leave, Wait for Other Player");
-
             }
         }
 

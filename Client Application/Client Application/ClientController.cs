@@ -88,7 +88,7 @@ namespace Client_Application
 
 
         }
-        internal static void ResponseHandeller(NetworkStream networkStream)
+        internal static bool ResponseHandeller(NetworkStream networkStream)
         {
             try
             {
@@ -98,8 +98,9 @@ namespace Client_Application
                 Request request = JsonSerializer.Deserialize<Request>(strReq);
                 List<string>? para = JsonSerializer.Deserialize<List<string>>(strPara);
                 DistributerD(request, para!);
+                return true;
         }
-            catch (Exception ex) { MessageBox.Show("From Client ResponseHandeller " + ex.Message); }
+            catch (Exception ex) { MessageBox.Show("From Client ResponseHandeller " + ex.Message); return false; }
 }
 
 
