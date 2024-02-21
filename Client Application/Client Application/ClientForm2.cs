@@ -98,7 +98,7 @@
             listView1.Items.Clear();
             foreach (var r in roomList)
             {
-                string[] s = {$"{r.RoomId}", r.RoomName, r.Owner.Name, r.guest?.Name};
+                string[] s = {$"{r.RoomId}", r.RoomName, r.Owner.Name, r.Guest?.Name};
                 listView1.Items.Add(new ListViewItem(s));
             }
                 
