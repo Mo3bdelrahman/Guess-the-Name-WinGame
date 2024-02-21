@@ -96,16 +96,10 @@ namespace Client_Application
                 string strReq = binaryReader.ReadString();
                 string strPara = binaryReader.ReadString();
                 Request request = JsonSerializer.Deserialize<Request>(strReq);
-<<<<<<< HEAD
-                List<string> para = JsonSerializer.Deserialize<List<string>>(strPara);
-                Distributer(request, para!);
-            }
-            catch (Exception ex) { MessageBox.Show("From Client ResponseHandeller " + ex.Message); }
-=======
+
                 List<string>? para = JsonSerializer.Deserialize<List<string>>(strPara);
                 DistributerD(request, para!);
                 return true;
->>>>>>> d572663f4b15f5b8a245bdd19c8df91f26d0ea4d
         }
             catch (Exception ex) { MessageBox.Show("From Client ResponseHandeller " + ex.Message); return false; }
 }

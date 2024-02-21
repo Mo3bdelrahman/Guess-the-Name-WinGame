@@ -17,6 +17,11 @@ namespace Client_Application
         public ClientForm()
         {
             InitializeComponent();
+            listView1.View = View.Details;
+            listView1.Columns.Add("Room ID", 50);
+            listView1.Columns.Add("Room Name", 100);
+            listView1.Columns.Add("Room Owner", 100);
+            listView1.Columns.Add("Guest", 100);
             Panels = new List<Panel>() { LoginPanel, LoobyPanel, RoomLoobyPanel, GamePanel };
             ActivePanel = LoginPanel;
             this.Controls.Add(LoginPanel);
@@ -60,7 +65,7 @@ namespace Client_Application
             {
                 bool IsConnected = ClientController.ResponseHandeller(stream);
 
-                if (!IsConnected) 
+                if (!IsConnected)
                 {
                     break;
                 }
@@ -131,12 +136,12 @@ namespace Client_Application
 
         private void LeaveButton_Click(object sender, EventArgs e)
         {
-           
+
             if (player.State == PlayerState.Player1)
             {
                 ClientController.RequestHandeller<int>(stream, Request.ClientToServerP1LeaveRoomLobby, room.RoomId);
             }
-            else if(player.State == PlayerState.Player2)
+            else if (player.State == PlayerState.Player2)
             {
                 ClientController.RequestHandeller<int>(stream, Request.ClientToServerP2LeaveRoomLobby, room.RoomId);
             }
@@ -154,7 +159,7 @@ namespace Client_Application
             stream?.Close();
             Application.ExitThread();
             Environment.Exit(Environment.ExitCode);
-            Application.Exit(); 
+            Application.Exit();
         }
 
         private void XExitLabel_MouseHover(object sender, EventArgs e)
@@ -181,6 +186,14 @@ namespace Client_Application
             {
                 ViewPanel(LoobyPanel);
             }
+        }
+
+        private void ClientForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            stream?.Close();
+            Application.ExitThread();
+            Environment.Exit(Environment.ExitCode);
+            Application.Exit();
         }
     }
 }

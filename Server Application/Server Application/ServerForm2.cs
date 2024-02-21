@@ -46,11 +46,13 @@ namespace Server_Application
             {
                 ServerController.RequestHandeller<bool>([p], Request.ServerToClientLogin, false);
             }
+            UpdatePlayerList();
         }
         private void GetListOfRooms(NetworkStream stream, List<string> jsonStringList)
         {
             Player p = GetPlayer(stream);
             ServerController.RequestHandeller<List<Room>>([p],Request.ServerToClientLoadLobby,Rooms);
+            UpdateRoomList();
         }
         private void CreateRoom(NetworkStream stream, List<string> jsonStringList)
         {
@@ -61,13 +63,15 @@ namespace Server_Application
             p.State = PlayerState.Player1;
             ServerController.RequestHandeller<Room,PlayerState>([p], Request.ServerToClientCreateRoom, room,p.State);
             ServerController.RequestHandeller(Players, Request.ServerToClientUpdateRooms);
+            UpdateRoomList();
+            UpdatePlayerList();
         }
         private void P1LeaveRoom(NetworkStream stream, List<string> jsonStringList)
         {       
             int id = jsonStringList[0].GetOriginalData<int>();
             Player p = GetPlayer(stream);
             Room r = GetRoom(id);
-           
+            UpdateRoomList();
             Rooms.Remove(r);
             p.State = PlayerState.Available;
             if (r.Guest != null)
@@ -78,6 +82,8 @@ namespace Server_Application
             {
                 ServerController.RequestHandeller<PlayerState>([p], Request.ServerToClientP1LeaveRoomLobby, p.State);
             }
+            UpdatePlayerList();
+
         }
         private void P2LeaveRoom(NetworkStream stream, List<string> jsonStringList)
         {
@@ -88,7 +94,30 @@ namespace Server_Application
             r.Guest = null;
             p.State = PlayerState.Available;
             ServerController.RequestHandeller<PlayerState>([p], Request.ServerToClientP2LeaveRoomLobby, p.State);
-            ServerController.RequestHandeller<Room>([r.Owner!], Request.ServerToClientP2LeaveRoomLobby, r);            
+            ServerController.RequestHandeller<Room>([r.Owner!], Request.ServerToClientP2LeaveRoomLobby, r);
+            UpdatePlayerList();
+        }
+
+        private void UpdateRoomList()
+        {
+            listRooms.Items.Clear();
+            foreach (var r in Rooms)
+            {
+                string[] s = { $"{r.RoomId}", r.RoomName, r.Owner.Name};
+                listRooms.Items.Add(new ListViewItem(s));
+            }
+
+        }
+
+        private void UpdatePlayerList()
+        {
+            listPlayers.Items.Clear();
+            foreach (var p in Players)
+            {
+                string[] s = { $"{p.Name as string}", $"{p.State}" };
+                listPlayers.Items.Add(new ListViewItem(s));
+            }
+
         }
 
     }
