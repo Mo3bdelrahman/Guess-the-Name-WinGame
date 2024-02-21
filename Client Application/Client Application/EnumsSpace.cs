@@ -52,7 +52,9 @@ namespace Client_Application
         ClientToServerLeaveGame,// with watcher and player
         ServerToClientLeaveGame,
 
-        StartGameC,
+        ClientToServerStartGame,// with player only
+        ServerToClientStartGame,
+
         SendCharC,
     }
 

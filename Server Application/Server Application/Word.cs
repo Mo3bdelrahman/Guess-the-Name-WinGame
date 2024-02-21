@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
@@ -10,16 +11,22 @@ namespace Server_Application
 {
     internal class Word
     {
+        [JsonIgnore]
         //word from file
         string? originalWord;
         //game word
         public string? CurrentWord { get; set; }
         public WordState State { get; set; }
+
+        public Word(string word)
+        {
+            originalWord = word;
+            GetRandomWordFromFile();
+        }
         public void GetRandomWordFromFile()
         {
-            originalWord = WordCategory.GetCategory("Fruits");
             CurrentWord = "";
-            for (int i = 0; i < originalWord.Length; i++)
+            for (int i = 0; i < originalWord?.Length; i++)
             {
                 CurrentWord += "_";
             }

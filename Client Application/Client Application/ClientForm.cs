@@ -153,7 +153,8 @@ namespace Client_Application
 
         private void StartButton_Click(object sender, EventArgs e)
         {
-            ViewPanel(GamePanel);
+            ClientController.RequestHandeller<int>(stream,Request.ClientToServerStartGame,room.RoomId);
+           
         }
 
         private void XExitLabel_Click(object sender, EventArgs e)
