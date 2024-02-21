@@ -19,6 +19,7 @@
                 case Request.ServerToClientP2LeaveRoomLobby: P2leaveRoom(para); break;
                 case Request.ServerToClientAskToJoin: GuestAskToJoin(para); break;
                 case Request.ServerToClientResponseToJoin: PlayerResponseToJoin(para); break;
+                case Request.ServerToClientStartGame: StartGame(para);break;
 
 
                 default: MessageBox.Show($"Not Handelled  req : {req}"); break;
@@ -50,7 +51,7 @@
         private void LobbyLoad(List<string> jsonStringList)
         {
             roomList = jsonStringList[0].GetOriginalData<List<Room>>();
-            UpdateRoomList();
+            Invoke(() => UpdateRoomList());
 
 
         }
@@ -60,7 +61,7 @@
             room = jsonStringList[0].GetOriginalData<Room>();
             player.State = jsonStringList[1].GetOriginalData<PlayerState>();
             MessageBox.Show($" hi, {room.Owner.Name} you enterd {room.RoomName} Id: {room.RoomId} cat is {room.Category} and player is {player.State}");
-            UpdateRoomList();
+            Invoke(()=>UpdateRoomList());
 
         }
 
@@ -79,7 +80,7 @@
                 ClientController.RequestHandeller(stream, Request.ClientToServerLoadLobby);
                 MessageBox.Show("Player1 Leave, The room was closed");
             }
-            UpdateRoomList();
+            Invoke(() => UpdateRoomList());
         }
 
         private void P2leaveRoom(List<string> jsonStringList)
@@ -97,7 +98,6 @@
             }
         }
 
-
         private void GuestAskToJoin(List<string> jsonStringList)
         {
             Player guest = jsonStringList[0].GetOriginalData<Player>();
@@ -111,30 +111,44 @@
         {
             try
             {
-
-            }
-            catch (Exception e) {MessageBox.Show("from res to join"+e.Message); }
-            bool response = jsonStringList[0].GetOriginalData<bool>();
-            if(response)
-            {
-                room = jsonStringList[1].GetOriginalData<Room>();
-                // here we need to get into the room
-                if (player.State == PlayerState.Player1)
+                bool response = jsonStringList[0].GetOriginalData<bool>();
+                if (response)
                 {
-                    MessageBox.Show($"{room.Guest?.Name} Enterd your Room the state now is {room.state}");
+                    room = jsonStringList[1].GetOriginalData<Room>();
+                    // here we need to get into the room
+                    if (player.State == PlayerState.Player1)
+                    {
+                        MessageBox.Show($"{room.Guest?.Name} Enterd your Room the state now is {room.state}");
+                    }
+                    else
+                    {
+                        player.State = room.Guest.State;
+                        MessageBox.Show($"hi{player.Name} you Enterd {room.RoomName} the state now is {room.state}");
+                    }
                 }
                 else
                 {
-                    player.State = room.Guest.State;
-                    MessageBox.Show($"hi{player.Name} you Enterd {room.RoomName} the state now is {room.state}");
-                }    
+                    MessageBox.Show($"Sorry, {player.Name} the Owner refused ");
+                }
+
             }
-            else
-            {
-                MessageBox.Show($"Sorry, {player.Name} the Owner refused ");
-            } 
+            catch (Exception e) {MessageBox.Show("from res to join"+e.Message); }
+           
         }
 
+        private void StartGame(List<string> jsonStringList)
+        {
+            try
+            {
+                game = jsonStringList[0].GetOriginalData<Game>();
+                Invoke(() => ViewPanel(GamePanel));
+                MessageBox.Show($"the Game started {game.TurnState} turn and the word is {game.Word.CurrentWord}");
+            }
+            catch (Exception e) { MessageBox.Show("From start game" + e.Message); }
+           
+        }
+
+        //UI
         private void UpdateRoomList()
         {
             listView1.Items.Clear();

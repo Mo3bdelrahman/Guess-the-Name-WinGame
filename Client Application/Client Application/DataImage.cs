@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Client_Application
@@ -38,15 +39,14 @@ namespace Client_Application
             return $"Id: {RoomId} \t Name: {RoomName} \t state: {state}";
         }
     }
+    internal class Word
+    {
+        public string? CurrentWord { get; set; }
+        public WordState State { get; set; }
+    }
     internal class Game
     {
-        string? CurrentWord;
-        TurnState turnState;
-        public Game() { }
-        public Game(string word, TurnState ts)
-        {
-            CurrentWord = word;
-            turnState = ts;
-        }
+        public Word Word { get; set; }
+        public TurnState TurnState { get; set; }
     }
 }
