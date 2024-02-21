@@ -16,9 +16,14 @@ namespace Server_Application
             InitializeComponent();
             ServerController.DistributerD += Distributer;
             RoomIdG = 0;
-
-
-           // Rooms.Add(new Room()) ;
+            listRooms.View = View.Details;
+            listRooms.Columns.Add("Room ID", 100);
+            listRooms.Columns.Add("Room Name", 100);
+            listRooms.Columns.Add("Room Owner", 100);
+            listPlayers.View = View.Details;
+            listPlayers.Columns.Add("Player Name", 100);
+            listPlayers.Columns.Add("Player State", 100);
+            // Rooms.Add(new Room()) ;
         }
 
         private void ServerThread()
@@ -54,7 +59,6 @@ namespace Server_Application
                 NetworkStream stream = player.Client.GetStream();
 
                 ServerController.ResponseHandeller(stream);
-                MessageBox.Show($"Player {player.Name} is connected");
 
                 while (Client.Connected)
                 {

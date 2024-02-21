@@ -23,7 +23,7 @@ namespace Client_Application
     internal class Room
     {
         public Player? Owner { get; set; }
-        public Player? guest { get; set; }
+        public Player? Guest { get; set; }
         public RoomState state { get; set; }
         public int WatchersCount { get; set; }
         public string Category { get; set; }
