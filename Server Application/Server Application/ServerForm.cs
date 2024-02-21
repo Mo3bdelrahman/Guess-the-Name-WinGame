@@ -10,9 +10,15 @@ namespace Server_Application
         TcpListener server;
         Thread clientThread;
         Thread serverThread;
+        int RoomIdG;
         public ServerForm()
         {
             InitializeComponent();
+            ServerController.DistributerD += Distributer;
+            RoomIdG = 0;
+
+
+           // Rooms.Add(new Room()) ;
         }
 
         private void ServerThread()
@@ -40,18 +46,20 @@ namespace Server_Application
 
         private void ConnectToClient(object client)
         {
-            TcpClient Client = (TcpClient)client;
+            TcpClient Client =client as TcpClient;
             Player player = new Player(Client);
             try
-            { 
+            {
                 Players.Add(player);
                 NetworkStream stream = player.Client.GetStream();
 
-                ResponseHandeller(stream);
+                ServerController.ResponseHandeller(stream);
                 MessageBox.Show($"Player {player.Name} is connected");
-                while (true)
+
+                while (Client.Connected)
                 {
-                    ResponseHandeller(stream);
+                    if (stream.DataAvailable)
+                        ServerController.ResponseHandeller(stream);
                 }
             }
             catch (Exception ex)
@@ -78,9 +86,27 @@ namespace Server_Application
 
         private void Test_Click(object sender, EventArgs e)
         {
-            RequestHandeller<string>(Players.ToArray(), Request.ServerToClientLogin, "hamada");
+            try
+            {
+                string category = WordCategory.GetCategory("Fruits");
+
+                if (category == string.Empty)
+                {
+                    throw new NullReferenceException();
+                }
+                else
+                {
+                    MessageBox.Show(category);
+                }
+            }
+            catch (Exception ex)
+            { MessageBox.Show("Category Doesn't Exist", "Wrong Category", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
-       
+        private void ServerForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.ExitThread();
+            Environment.Exit(Environment.ExitCode);
+        }
     }
 }
