@@ -35,9 +35,8 @@
             listRooms = new ListView();
             tabResults = new TabPage();
             listResults = new ListView();
-            btnStart = new Button();
-            Test = new Button();
             LogPage = new TabPage();
+            btnStart = new Button();
             TabData.SuspendLayout();
             tabPlayers.SuspendLayout();
             tabRooms.SuspendLayout();
@@ -124,6 +123,16 @@
             listResults.UseCompatibleStateImageBehavior = false;
             listResults.View = View.List;
             // 
+            // LogPage
+            // 
+            LogPage.Location = new Point(4, 24);
+            LogPage.Name = "LogPage";
+            LogPage.Padding = new Padding(3);
+            LogPage.Size = new Size(638, 256);
+            LogPage.TabIndex = 3;
+            LogPage.Text = "Logs";
+            LogPage.UseVisualStyleBackColor = true;
+            // 
             // btnStart
             // 
             btnStart.Location = new Point(286, 307);
@@ -135,33 +144,11 @@
             btnStart.UseVisualStyleBackColor = true;
             btnStart.Click += btnStart_Click;
             // 
-            // Test
-            // 
-            Test.Location = new Point(446, 305);
-            Test.Margin = new Padding(3, 2, 3, 2);
-            Test.Name = "Test";
-            Test.Size = new Size(129, 22);
-            Test.TabIndex = 2;
-            Test.Text = "Test";
-            Test.UseVisualStyleBackColor = true;
-            Test.Click += Test_Click;
-            // 
-            // LogPage
-            // 
-            LogPage.Location = new Point(4, 24);
-            LogPage.Name = "LogPage";
-            LogPage.Padding = new Padding(3);
-            LogPage.Size = new Size(638, 256);
-            LogPage.TabIndex = 3;
-            LogPage.Text = "Logs";
-            LogPage.UseVisualStyleBackColor = true;
-            // 
             // ServerForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(700, 338);
-            Controls.Add(Test);
             Controls.Add(btnStart);
             Controls.Add(TabData);
             Margin = new Padding(3, 2, 3, 2);
@@ -185,7 +172,6 @@
         private ListView listPlayers;
         private ListView listRooms;
         private ListView listResults;
-        private Button Test;
         private TabPage LogPage;
     }
 }
