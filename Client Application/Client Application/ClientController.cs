@@ -89,16 +89,16 @@ namespace Client_Application
         }
         private void ResponseHandeller(NetworkStream networkStream)
         {
-            //try
-            //{
+            try
+            {
                 BinaryReader binaryReader = new BinaryReader(networkStream);
                 string strReq = binaryReader.ReadString();
                 string strPara = binaryReader.ReadString();
                 Request request = JsonSerializer.Deserialize<Request>(strReq);
                 List<string> para = JsonSerializer.Deserialize<List<string>>(strPara);
                 Distributer(request, para!);
-            //}
-            //catch (Exception ex) { MessageBox.Show("From Client ResponseHandeller " + ex.Message); }
+            }
+            catch (Exception ex) { MessageBox.Show("From Client ResponseHandeller " + ex.Message); }
         }
 
         private void Distributer(Request req, List<string> para)
