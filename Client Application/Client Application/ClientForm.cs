@@ -127,6 +127,8 @@ namespace Client_Application
         private void JoinRoomButton_Click(object sender, EventArgs e)
         {
             ViewPanel(RoomLoobyPanel);
+            //Note we need here get id of the selected room from list box
+            ClientController.RequestHandeller<int>(stream,Request.ClientToServerAskToJoin,1);
         }
 
         private void WatchGameButton_Click(object sender, EventArgs e)

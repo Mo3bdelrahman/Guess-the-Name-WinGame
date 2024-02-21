@@ -16,6 +16,7 @@ namespace Server_Application
     enum RoomState
     {
         Waiting,
+        StandBy,
         Running
     }
     enum Request

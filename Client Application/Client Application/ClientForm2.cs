@@ -17,7 +17,11 @@
                 case Request.ServerToClientUpdateRooms: ClientController.RequestHandeller(stream, Request.ClientToServerLoadLobby); break;
                 case Request.ServerToClientP1LeaveRoomLobby: P1leaveRoom(para); break;
                 case Request.ServerToClientP2LeaveRoomLobby: P2leaveRoom(para); break;
-                default: MessageBox.Show($"{req}"); break;
+                case Request.ServerToClientAskToJoin: GuestAskToJoin(para); break;
+                case Request.ServerToClientResponseToJoin: PlayerResponseToJoin(para); break;
+
+
+                default: MessageBox.Show($"Not Handelled  req : {req}"); break;
             }
         }
         //request handlers
@@ -93,6 +97,44 @@
             }
         }
 
+
+        private void GuestAskToJoin(List<string> jsonStringList)
+        {
+            Player guest = jsonStringList[0].GetOriginalData<Player>();
+            Room room = jsonStringList[1].GetOriginalData<Room>();
+            MessageBox.Show($"Player: {guest.Name} Ask To Join");
+            // here we need check if owner accept or not
+            ClientController.RequestHandeller<bool,int,int>(stream,Request.ClientToServerResponseToJoin,true,guest.Id,room.RoomId);
+        }
+
+        private void PlayerResponseToJoin(List<string> jsonStringList)
+        {
+            try
+            {
+
+            }
+            catch (Exception e) {MessageBox.Show("from res to join"+e.Message); }
+            bool response = jsonStringList[0].GetOriginalData<bool>();
+            if(response)
+            {
+                room = jsonStringList[1].GetOriginalData<Room>();
+                // here we need to get into the room
+                if (player.State == PlayerState.Player1)
+                {
+                    MessageBox.Show($"{room.Guest?.Name} Enterd your Room the state now is {room.state}");
+                }
+                else
+                {
+                    player.State = room.Guest.State;
+                    MessageBox.Show($"hi{player.Name} you Enterd {room.RoomName} the state now is {room.state}");
+                }    
+            }
+            else
+            {
+                MessageBox.Show($"Sorry, {player.Name} the Owner refused ");
+            } 
+        }
+
         private void UpdateRoomList()
         {
             listView1.Items.Clear();
@@ -103,6 +145,6 @@
             }
                 
         }
-
     }
+
 }
