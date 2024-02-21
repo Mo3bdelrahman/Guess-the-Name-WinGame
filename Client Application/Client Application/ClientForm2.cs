@@ -14,7 +14,7 @@
                 case Request.ServerToClientLogin: SetPlayerData(para); break;
                 case Request.ServerToClientLoadLobby: LobbyLoad(para); break;
                 case Request.ServerToClientCreateRoom: RoomLobbyLoad(para); break;
-                case Request.ServerToClientUpdateRooms: ClientController.RequestHandeller(stream,Request.ClientToServerLoadLobby); break;
+                case Request.ServerToClientUpdateRooms: ClientController.RequestHandeller(stream, Request.ClientToServerLoadLobby); break;
                 case Request.ServerToClientP1LeaveRoomLobby: P1leaveRoom(para); break;
                 case Request.ServerToClientP2LeaveRoomLobby: P2leaveRoom(para); break;
                 case Request.ServerToClientAskToJoin: GuestAskToJoin(para); break;
@@ -33,7 +33,7 @@
                 {
                     player = jsonStringList[1].GetOriginalData<Player>();
                     MessageBox.Show($"{player.Name}, {player.State}");
-                    ClientController.RequestHandeller(stream,Request.ClientToServerLoadLobby);
+                    ClientController.RequestHandeller(stream, Request.ClientToServerLoadLobby);
                 }
                 else
                 {
@@ -50,7 +50,8 @@
         private void LobbyLoad(List<string> jsonStringList)
         {
             roomList = jsonStringList[0].GetOriginalData<List<Room>>();
-            MessageBox.Show("Rooms is Here");
+            UpdateRoomList();
+
 
         }
 
@@ -59,6 +60,7 @@
             room = jsonStringList[0].GetOriginalData<Room>();
             player.State = jsonStringList[1].GetOriginalData<PlayerState>();
             MessageBox.Show($" hi, {room.Owner.Name} you enterd {room.RoomName} Id: {room.RoomId} cat is {room.Category} and player is {player.State}");
+            UpdateRoomList();
 
         }
 
@@ -77,6 +79,7 @@
                 ClientController.RequestHandeller(stream, Request.ClientToServerLoadLobby);
                 MessageBox.Show("Player1 Leave, The room was closed");
             }
+            UpdateRoomList();
         }
 
         private void P2leaveRoom(List<string> jsonStringList)
@@ -93,6 +96,7 @@
                 MessageBox.Show("Player2 Leave, Wait for Other Player");
             }
         }
+
 
         private void GuestAskToJoin(List<string> jsonStringList)
         {
@@ -129,6 +133,17 @@
             {
                 MessageBox.Show($"Sorry, {player.Name} the Owner refused ");
             } 
+        }
+
+        private void UpdateRoomList()
+        {
+            listView1.Items.Clear();
+            foreach (var r in roomList)
+            {
+                string[] s = {$"{r.RoomId}", r.RoomName, r.Owner.Name, r.Guest?.Name};
+                listView1.Items.Add(new ListViewItem(s));
+            }
+                
         }
     }
 
