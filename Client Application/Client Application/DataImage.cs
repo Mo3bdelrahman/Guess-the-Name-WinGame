@@ -12,18 +12,20 @@ namespace Client_Application
         public TcpClient? TcpClient { get; set; }
         public string? Name { get; set; }
         public PlayerState State { get; set; }
+        public int Id { get; set; }
         public Player(){}
-        public Player(TcpClient tcp , string pName)
+        public Player(TcpClient tcp , string pName, int id)
         {
             TcpClient = tcp;
             Name = pName;
             State = PlayerState.Available;
+            Id = id;
         }
     }
     internal class Room
     {
         public Player? Owner { get; set; }
-        public Player? guest { get; set; }
+        public Player? Guest { get; set; }
         public RoomState state { get; set; }
         public int WatchersCount { get; set; }
         public string Category { get; set; }

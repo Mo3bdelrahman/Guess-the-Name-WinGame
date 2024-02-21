@@ -11,11 +11,13 @@ namespace Server_Application
         Thread clientThread;
         Thread serverThread;
         int RoomIdG;
+        int PlayerIdG;
         public ServerForm()
         {
             InitializeComponent();
             ServerController.DistributerD += Distributer;
             RoomIdG = 0;
+            PlayerIdG = 0;
 
 
            // Rooms.Add(new Room()) ;
@@ -47,7 +49,7 @@ namespace Server_Application
         private void ConnectToClient(object client)
         {
             TcpClient Client =client as TcpClient;
-            Player player = new Player(Client);
+            Player player = new Player(Client,++PlayerIdG);
             try
             {
                 Players.Add(player);

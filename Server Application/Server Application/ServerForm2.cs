@@ -18,6 +18,8 @@ namespace Server_Application
                 case Request.ClientToServerCreateRoom: CreateRoom(stream, para); break;
                 case Request.ClientToServerP1LeaveRoomLobby: P1LeaveRoom(stream, para); break;
                 case Request.ClientToServerP2LeaveRoomLobby: P2LeaveRoom(stream, para); break;
+                case Request.ClientToServerAskToJoin: ClientAskToJoinRoom(stream, para);break;
+                case Request.ClientToServerResponseToJoin: ClientResponseToJoinRoom(stream, para);break;
 
                 default: MessageBox.Show($"{req}"); break;
             }
@@ -28,10 +30,15 @@ namespace Server_Application
             Player? p = Players.Find(player => player.Client.GetStream() == stream);
             return p!;
         }
+        private Player GetPlayer(int id)
+        {
+            Player? p = Players.Find(player => player.Id == id);
+            return p!;
+        }
         private Room GetRoom(int id)
         {
             Room? r = Rooms.Find(room => room.RoomId == id);
-            return r!;
+            return r!;     
         }
         //Response Handellers
         private void SetPlayerData(NetworkStream stream, List<string> jsonStringList)
@@ -89,6 +96,40 @@ namespace Server_Application
             p.State = PlayerState.Available;
             ServerController.RequestHandeller<PlayerState>([p], Request.ServerToClientP2LeaveRoomLobby, p.State);
             ServerController.RequestHandeller<Room>([r.Owner!], Request.ServerToClientP2LeaveRoomLobby, r);            
+        }
+        private void ClientAskToJoinRoom(NetworkStream stream, List<string> jsonStringList)
+        {
+            int id = jsonStringList[0].GetOriginalData<int>();
+            Room room = GetRoom(id);
+            Player guest = GetPlayer(stream);
+            ServerController.RequestHandeller<Player,Room>([room.Owner!],Request.ServerToClientAskToJoin,guest, room);
+        }
+        private void ClientResponseToJoinRoom(NetworkStream stream, List<string> jsonStringList)
+        {
+            try
+            {
+                bool response = jsonStringList[0].GetOriginalData<bool>();
+                int pId = jsonStringList[1].GetOriginalData<int>();
+                int rId = jsonStringList[2].GetOriginalData<int>();
+                Player owner = GetPlayer(stream);
+                Player guest = GetPlayer(pId);
+                Room room = GetRoom(rId);
+
+                if (response)
+                {
+                    guest.State = PlayerState.Player2;
+                    room.Guest = guest;
+                    room.state = RoomState.StandBy;
+                    ServerController.RequestHandeller<bool, Room>([owner, guest], Request.ServerToClientResponseToJoin, response, room);
+                }
+                else
+                {
+                    ServerController.RequestHandeller<bool>([guest], Request.ServerToClientResponseToJoin, response);
+                }
+
+            }
+            catch (Exception e) { MessageBox.Show("From res join"+e.Message); } 
+
         }
 
     }
