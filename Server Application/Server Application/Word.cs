@@ -1,35 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Server_Application
 {
     internal class Word
     {
         //word from file
-        string originalWord;
+        string? originalWord;
         //game word
-        public string CurrentWord { get; set; }
-        public WordState State { get; private set; }
-        public Word()
+        public string? CurrentWord { get; set; }
+        public WordState State { get; set; }
+        public void GetRandomWordFromFile()
         {
-            originalWord = string.Empty;
-            CurrentWord = string.Empty;
+            originalWord = WordCategory.GetCategory("Fruits");
+            CurrentWord = "";
+            for (int i = 0; i < originalWord.Length; i++)
+            {
+                CurrentWord += "_";
+            }
+            State = WordState.Missing;
         }
-        private void GetRandomWordFromFile()
-        {
 
-        }
-        public string SendWordToTheGame()
-        {
-            return CurrentWord;
-        }
-        public string UpdateWord(char letter)
-        {
-            return CurrentWord;
-        }
         public void IsTheWordCompleted()
         {
             if (originalWord == CurrentWord)
@@ -40,6 +36,20 @@ namespace Server_Application
             {
                 State = WordState.Missing;
             }
+        }
+        public bool CheckLetter(string letter)
+        {
+            bool retVal = false;
+            for (int i = 0; i < originalWord.Length; i++)
+            {
+                if (letter[0] == originalWord[i])
+                {
+                    CurrentWord = CurrentWord.Remove(i, 1).Insert(i, letter);
+                    retVal =  true;
+                }
+            }
+            IsTheWordCompleted();
+            return retVal;
         }
     }
 }

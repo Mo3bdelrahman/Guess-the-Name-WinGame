@@ -33,7 +33,6 @@ namespace Server_Application
                 {
                     result = $"{player1.Name} wins";
 
-
                 }
                 else
                 {
@@ -44,17 +43,5 @@ namespace Server_Application
             return false;
         }
 
-        public string UpdateWord(char letter)
-        {
-            if (turnState == TurnState.Player1)
-            {
-                turnState = TurnState.Player2;
-            }
-            else
-            {
-                turnState = TurnState.Player1;
-            }
-            return word.UpdateWord(letter);
-        }
     }
 }

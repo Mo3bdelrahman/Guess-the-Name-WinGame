@@ -59,7 +59,6 @@ namespace Server_Application
                 NetworkStream stream = player.Client.GetStream();
 
                 ServerController.ResponseHandeller(stream);
-                MessageBox.Show($"Player {player.Name} is connected");
 
                 while (Client.Connected)
                 {
