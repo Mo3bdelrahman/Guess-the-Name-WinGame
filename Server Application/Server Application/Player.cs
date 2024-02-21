@@ -14,16 +14,13 @@ namespace Server_Application
         [JsonIgnore]
         public TcpClient Client { set; get; }
         public string Name { set; get; }
-        PlayerState state;
+        public PlayerState State { set; get; }
         public Player(TcpClient client)
         {
             this.Client = client;
-            this.state = PlayerState.Available;
+            this.State = PlayerState.Available;
         }
-        public PlayerState getState()
-        { return state; }
-        public void setState(PlayerState state)
-        { this.state = state; }
+
 
     }
 }

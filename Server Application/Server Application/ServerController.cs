@@ -13,9 +13,10 @@ using System.Net;
 
 namespace Server_Application
 {
-    public partial class ServerForm
+    internal static  class ServerController
     {
-        private void RequestHandeller(Player[] players, Request request)
+        public static Action<NetworkStream, Request, List<string>>? DistributerD { get; set; }
+        public static void RequestHandeller(List<Player> players, Request request)
         {
             try
             {
@@ -35,7 +36,7 @@ namespace Server_Application
             catch (Exception ex) { MessageBox.Show("From RequestHandeller " + ex.Message); }
 
         }
-        private void RequestHandeller<T1>(Player[] players ,Request request, T1 param1)
+        public static void RequestHandeller<T1>(List<Player> players ,Request request, T1 param1)
         {
             try
             {
@@ -56,7 +57,7 @@ namespace Server_Application
             catch (Exception ex) { MessageBox.Show("From RequestHandeller " + ex.Message); }
            
         }
-        private void RequestHandeller<T1, T2>(Player[] players, Request request, T1 param1, T2 param2)
+        public static void RequestHandeller<T1, T2>(List<Player> players, Request request, T1 param1, T2 param2)
         {
             try
             {
@@ -78,7 +79,7 @@ namespace Server_Application
             catch (Exception ex) { MessageBox.Show("From RequestHandeller " + ex.Message); }
 
         }
-        private void RequestHandeller<T1, T2, T3>(Player[] players, Request request, T1 param1, T2 param2, T3 param3)
+        public static void RequestHandeller<T1, T2, T3>(List<Player> players, Request request, T1 param1, T2 param2, T3 param3)
         {
             try
             {
@@ -101,7 +102,7 @@ namespace Server_Application
 
 
         }
-        private void RequestHandeller<T1, T2, T3, T4>(Player[] players, Request request, T1 param1, T2 param2, T3 param3, T4 param4)
+        public static void RequestHandeller<T1, T2, T3, T4>(List<Player> players, Request request, T1 param1, T2 param2, T3 param3, T4 param4)
         {
             try
             {
@@ -125,7 +126,7 @@ namespace Server_Application
             
 
         }
-        private void ResponseHandeller(NetworkStream networkStream)
+        public static void ResponseHandeller(NetworkStream networkStream)
         {
             try
             {
@@ -134,39 +135,11 @@ namespace Server_Application
                 string strPara = binaryReader.ReadString();
                 Request request = JsonSerializer.Deserialize<Request>(strReq);
                 List<string>? para = JsonSerializer.Deserialize<List<string>>(strPara);
-                Distributer(networkStream, request, para!);
+                DistributerD(networkStream, request, para!);
             }
             catch (Exception ex) { MessageBox.Show("From ResponseHandeller " + ex.Message); }     
         }
-        
-        private void Distributer(NetworkStream stream, Request req, List<string> para)
-        {
-            switch(req)
-            {
-                case Request.ClientToServerLogin: SetPlayerData(stream, para); break;
-                default: MessageBox.Show($"{req}"); break;
-            }
-        }
-        //utility
-        private Player GetPlayer(NetworkStream stream)
-        {
-            Player? p = Players.Find(player => player.Client.GetStream() == stream);
-            return p!;
-        }
-        //response from login
-        public void SetPlayerData(NetworkStream stream, List<string> jsonStringList)
-        {
-            Player p = GetPlayer(stream);
-            try 
-            {
-                p.Name = jsonStringList[0].GetOriginalData<string>();
-                RequestHandeller<bool, Player>([p], Request.ServerToClientLogin, true, p);
-            }
-            catch
-            {
-                RequestHandeller<bool>([p], Request.ServerToClientLogin, false);
-            }
-        }
+      
 
     }
 }

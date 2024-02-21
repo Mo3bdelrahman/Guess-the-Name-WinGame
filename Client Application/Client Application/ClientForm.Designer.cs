@@ -1,5 +1,7 @@
 ﻿using System.Windows.Forms;
 using System.Xml.Linq;
+using static Guna.UI2.WinForms.Suite.Descriptions;
+using static System.Windows.Forms.DataFormats;
 
 namespace Client_Application
 {
@@ -31,10 +33,43 @@ namespace Client_Application
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClientForm));
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             LoginPanel = new Panel();
+            textBox1 = new Guna.UI2.WinForms.Guna2TextBox();
+            LoginButton = new Guna.UI2.WinForms.Guna2Button();
+            UserNameLabel = new Label();
+            XExitLabel1 = new Label();
+            XExitLabel2 = new Label();
+            XExitLabel3 = new Label();
+            XExitLabel4 = new Label();
             LoobyPanel = new Panel();
+            WatchGameButton = new Guna.UI2.WinForms.Guna2Button();
+            JoinRoomButton = new Guna.UI2.WinForms.Guna2Button();
+            CreateRoomButton = new Guna.UI2.WinForms.Guna2Button();
+            listView1 = new ListView();
             RoomLoobyPanel = new Panel();
+            LeaveButton = new Guna.UI2.WinForms.Guna2Button();
+            StartButton = new Guna.UI2.WinForms.Guna2Button();
+            Player2Label = new Label();
+            Player1Label = new Label();
+            VSLabel = new Label();
             GamePanel = new Panel();
+            LeaveGameButton = new Guna.UI2.WinForms.Guna2CircleButton();
             PlayerTurnLabel = new Label();
             DashLabel = new Label();
             QButton = new Button();
@@ -63,18 +98,6 @@ namespace Client_Application
             YButton = new Button();
             WButton = new Button();
             ZButton = new Button();
-            Player2Label = new Label();
-            Player1Label = new Label();
-            VSLabel = new Label();
-            StartButton = new Button();
-            LeaveButton = new Button();
-            listView1 = new ListView();
-            WatchGameButton = new Button();
-            JoinRoomButton = new Button();
-            CreateRoomButton = new Button();
-            LoginButton = new Button();
-            UserNameTextBox = new TextBox();
-            UserNameLabel = new Label();
             LoginPanel.SuspendLayout();
             LoobyPanel.SuspendLayout();
             RoomLoobyPanel.SuspendLayout();
@@ -83,49 +106,309 @@ namespace Client_Application
             // 
             // LoginPanel
             // 
-            LoginPanel.Anchor = AnchorStyles.None;
-            LoginPanel.BackColor = SystemColors.GradientActiveCaption;
-            LoginPanel.Controls.Add(LoobyPanel);
+            LoginPanel.BackColor = Color.Transparent;
+            LoginPanel.BackgroundImage = (Image)resources.GetObject("LoginPanel.BackgroundImage");
+            LoginPanel.BackgroundImageLayout = ImageLayout.Stretch;
+            LoginPanel.Controls.Add(textBox1);
             LoginPanel.Controls.Add(LoginButton);
-            LoginPanel.Controls.Add(UserNameTextBox);
             LoginPanel.Controls.Add(UserNameLabel);
+            LoginPanel.Controls.Add(XExitLabel1);
+            LoginPanel.Dock = DockStyle.Fill;
             LoginPanel.Location = new Point(0, 0);
             LoginPanel.Name = "LoginPanel";
-            LoginPanel.Size = new Size(800, 450);
+            LoginPanel.Size = new Size(1226, 581);
             LoginPanel.TabIndex = 0;
+            // 
+            // textBox1
+            // 
+            textBox1.BorderRadius = 15;
+            textBox1.CustomizableEdges = customizableEdges1;
+            textBox1.DefaultText = "";
+            textBox1.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            textBox1.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            textBox1.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            textBox1.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            textBox1.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            textBox1.Font = new Font("Segoe UI", 9F);
+            textBox1.ForeColor = Color.Black;
+            textBox1.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+            textBox1.Location = new Point(480, 335);
+            textBox1.Margin = new Padding(3, 4, 3, 4);
+            textBox1.Name = "textBox1";
+            textBox1.PasswordChar = '\0';
+            textBox1.PlaceholderText = "";
+            textBox1.SelectedText = "";
+            textBox1.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            textBox1.Size = new Size(293, 39);
+            textBox1.TabIndex = 7;
+            // 
+            // LoginButton
+            // 
+            LoginButton.BorderRadius = 30;
+            LoginButton.CustomizableEdges = customizableEdges3;
+            LoginButton.DisabledState.BorderColor = Color.DarkGray;
+            LoginButton.DisabledState.CustomBorderColor = Color.DarkGray;
+            LoginButton.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            LoginButton.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            LoginButton.FillColor = Color.MediumSeaGreen;
+            LoginButton.Font = new Font("Ravie", 10.8F);
+            LoginButton.ForeColor = Color.White;
+            LoginButton.Location = new Point(558, 380);
+            LoginButton.Name = "LoginButton";
+            LoginButton.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            LoginButton.Size = new Size(139, 56);
+            LoginButton.TabIndex = 1;
+            LoginButton.Text = "Login";
+            LoginButton.Click += LoginButton_Click;
+            // 
+            // UserNameLabel
+            // 
+            UserNameLabel.AutoSize = true;
+            UserNameLabel.Font = new Font("Showcard Gothic", 13.8F);
+            UserNameLabel.ForeColor = Color.Orange;
+            UserNameLabel.Location = new Point(280, 339);
+            UserNameLabel.Name = "UserNameLabel";
+            UserNameLabel.Size = new Size(164, 29);
+            UserNameLabel.TabIndex = 0;
+            UserNameLabel.Text = "Player Name";
+            // 
+            // XExitLabel1
+            // 
+            XExitLabel1.AutoSize = true;
+            XExitLabel1.Cursor = Cursors.Hand;
+            XExitLabel1.Font = new Font("Ravie", 18F, FontStyle.Bold);
+            XExitLabel1.ForeColor = SystemColors.ButtonHighlight;
+            XExitLabel1.Location = new Point(1164, 9);
+            XExitLabel1.Name = "XExitLabel1";
+            XExitLabel1.Size = new Size(46, 40);
+            XExitLabel1.TabIndex = 6;
+            XExitLabel1.Text = "X";
+            XExitLabel1.Click += XExitLabel_Click;
+            XExitLabel1.MouseLeave += XExitLabel_MouseLeave;
+            XExitLabel1.MouseHover += XExitLabel_MouseHover;
+            // 
+            // XExitLabel2
+            // 
+            XExitLabel2.AutoSize = true;
+            XExitLabel2.Cursor = Cursors.Hand;
+            XExitLabel2.Font = new Font("Ravie", 18F, FontStyle.Bold);
+            XExitLabel2.ForeColor = SystemColors.ButtonHighlight;
+            XExitLabel2.Location = new Point(1164, 9);
+            XExitLabel2.Name = "XExitLabel2";
+            XExitLabel2.Size = new Size(46, 40);
+            XExitLabel2.TabIndex = 6;
+            XExitLabel2.Text = "X";
+            XExitLabel2.Click += XExitLabel_Click;
+            XExitLabel2.MouseLeave += XExitLabel_MouseLeave;
+            XExitLabel2.MouseHover += XExitLabel_MouseHover;
+            // 
+            // XExitLabel3
+            // 
+            XExitLabel3.AutoSize = true;
+            XExitLabel3.Cursor = Cursors.Hand;
+            XExitLabel3.Font = new Font("Ravie", 18F, FontStyle.Bold);
+            XExitLabel3.ForeColor = SystemColors.ButtonHighlight;
+            XExitLabel3.Location = new Point(1164, 9);
+            XExitLabel3.Name = "XExitLabel3";
+            XExitLabel3.Size = new Size(46, 40);
+            XExitLabel3.TabIndex = 6;
+            XExitLabel3.Text = "X";
+            XExitLabel3.Click += XExitLabel_Click;
+            XExitLabel3.MouseLeave += XExitLabel_MouseLeave;
+            XExitLabel3.MouseHover += XExitLabel_MouseHover;
+            // 
+            // XExitLabel4
+            // 
+            XExitLabel4.AutoSize = true;
+            XExitLabel4.Cursor = Cursors.Hand;
+            XExitLabel4.Font = new Font("Ravie", 18F, FontStyle.Bold);
+            XExitLabel4.ForeColor = SystemColors.ButtonHighlight;
+            XExitLabel4.Location = new Point(1164, 9);
+            XExitLabel4.Name = "XExitLabel4";
+            XExitLabel4.Size = new Size(46, 40);
+            XExitLabel4.TabIndex = 6;
+            XExitLabel4.Text = "X";
+            XExitLabel4.Click += XExitLabel_Click;
+            XExitLabel4.MouseLeave += XExitLabel_MouseLeave;
+            XExitLabel4.MouseHover += XExitLabel_MouseHover;
             // 
             // LoobyPanel
             // 
-            LoobyPanel.Anchor = AnchorStyles.None;
-            LoobyPanel.Controls.Add(RoomLoobyPanel);
-            LoobyPanel.Controls.Add(listView1);
+            LoobyPanel.BackColor = Color.Transparent;
+            LoobyPanel.BackgroundImage = (Image)resources.GetObject("LoobyPanel.BackgroundImage");
+            LoobyPanel.BackgroundImageLayout = ImageLayout.Stretch;
             LoobyPanel.Controls.Add(WatchGameButton);
             LoobyPanel.Controls.Add(JoinRoomButton);
             LoobyPanel.Controls.Add(CreateRoomButton);
-            LoobyPanel.Location = new Point(3, 3);
+            LoobyPanel.Controls.Add(listView1);
+            LoobyPanel.Controls.Add(XExitLabel2);
+            LoobyPanel.Dock = DockStyle.Fill;
+            LoobyPanel.Location = new Point(0, 0);
             LoobyPanel.Name = "LoobyPanel";
-            LoobyPanel.Size = new Size(800, 449);
+            LoobyPanel.Size = new Size(1226, 581);
             LoobyPanel.TabIndex = 3;
-            LoobyPanel.Visible = false;
+            // 
+            // WatchGameButton
+            // 
+            WatchGameButton.BorderRadius = 15;
+            WatchGameButton.CustomizableEdges = customizableEdges5;
+            WatchGameButton.DisabledState.BorderColor = Color.DarkGray;
+            WatchGameButton.DisabledState.CustomBorderColor = Color.DarkGray;
+            WatchGameButton.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            WatchGameButton.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            WatchGameButton.FillColor = Color.SaddleBrown;
+            WatchGameButton.Font = new Font("Ravie", 10.8F);
+            WatchGameButton.ForeColor = Color.Gold;
+            WatchGameButton.Location = new Point(68, 257);
+            WatchGameButton.Name = "WatchGameButton";
+            WatchGameButton.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            WatchGameButton.Size = new Size(225, 56);
+            WatchGameButton.TabIndex = 8;
+            WatchGameButton.Text = "Watch Game";
+            WatchGameButton.Click += WatchGameButton_Click;
+            // 
+            // JoinRoomButton
+            // 
+            JoinRoomButton.BorderRadius = 15;
+            JoinRoomButton.CustomizableEdges = customizableEdges7;
+            JoinRoomButton.DisabledState.BorderColor = Color.DarkGray;
+            JoinRoomButton.DisabledState.CustomBorderColor = Color.DarkGray;
+            JoinRoomButton.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            JoinRoomButton.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            JoinRoomButton.FillColor = Color.SaddleBrown;
+            JoinRoomButton.Font = new Font("Ravie", 10.8F);
+            JoinRoomButton.ForeColor = Color.Gold;
+            JoinRoomButton.Location = new Point(68, 360);
+            JoinRoomButton.Name = "JoinRoomButton";
+            JoinRoomButton.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            JoinRoomButton.Size = new Size(225, 56);
+            JoinRoomButton.TabIndex = 7;
+            JoinRoomButton.Text = "Join Room";
+            JoinRoomButton.Click += JoinRoomButton_Click;
+            // 
+            // CreateRoomButton
+            // 
+            CreateRoomButton.BorderRadius = 15;
+            CreateRoomButton.CustomizableEdges = customizableEdges9;
+            CreateRoomButton.DisabledState.BorderColor = Color.DarkGray;
+            CreateRoomButton.DisabledState.CustomBorderColor = Color.DarkGray;
+            CreateRoomButton.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            CreateRoomButton.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            CreateRoomButton.FillColor = Color.SaddleBrown;
+            CreateRoomButton.Font = new Font("Ravie", 10.8F);
+            CreateRoomButton.ForeColor = Color.Gold;
+            CreateRoomButton.Location = new Point(68, 145);
+            CreateRoomButton.Name = "CreateRoomButton";
+            CreateRoomButton.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            CreateRoomButton.Size = new Size(225, 56);
+            CreateRoomButton.TabIndex = 4;
+            CreateRoomButton.Text = "Create Room";
+            CreateRoomButton.Click += CreateRoomButton_Click;
+            // 
+            // listView1
+            // 
+            listView1.BackColor = Color.FromArgb(23, 30, 46);
+            listView1.Location = new Point(460, 38);
+            listView1.Name = "listView1";
+            listView1.Size = new Size(673, 489);
+            listView1.TabIndex = 5;
+            listView1.UseCompatibleStateImageBehavior = false;
             // 
             // RoomLoobyPanel
             // 
-            RoomLoobyPanel.Anchor = AnchorStyles.None;
-            RoomLoobyPanel.Controls.Add(GamePanel);
+            RoomLoobyPanel.BackColor = Color.Transparent;
+            RoomLoobyPanel.BackgroundImage = (Image)resources.GetObject("RoomLoobyPanel.BackgroundImage");
+            RoomLoobyPanel.BackgroundImageLayout = ImageLayout.Stretch;
+            RoomLoobyPanel.Controls.Add(LeaveButton);
+            RoomLoobyPanel.Controls.Add(StartButton);
             RoomLoobyPanel.Controls.Add(Player2Label);
             RoomLoobyPanel.Controls.Add(Player1Label);
             RoomLoobyPanel.Controls.Add(VSLabel);
-            RoomLoobyPanel.Controls.Add(StartButton);
-            RoomLoobyPanel.Controls.Add(LeaveButton);
-            RoomLoobyPanel.Location = new Point(0, 3);
+            RoomLoobyPanel.Controls.Add(XExitLabel3);
+            RoomLoobyPanel.Dock = DockStyle.Fill;
+            RoomLoobyPanel.Location = new Point(0, 0);
             RoomLoobyPanel.Name = "RoomLoobyPanel";
-            RoomLoobyPanel.Size = new Size(800, 461);
+            RoomLoobyPanel.Size = new Size(1226, 581);
             RoomLoobyPanel.TabIndex = 4;
-            RoomLoobyPanel.Visible = false;
+            // 
+            // LeaveButton
+            // 
+            LeaveButton.BorderRadius = 25;
+            LeaveButton.CustomizableEdges = customizableEdges11;
+            LeaveButton.DisabledState.BorderColor = Color.DarkGray;
+            LeaveButton.DisabledState.CustomBorderColor = Color.DarkGray;
+            LeaveButton.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            LeaveButton.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            LeaveButton.FillColor = Color.Red;
+            LeaveButton.Font = new Font("Ravie", 10.8F);
+            LeaveButton.ForeColor = Color.White;
+            LeaveButton.Location = new Point(789, 378);
+            LeaveButton.Name = "LeaveButton";
+            LeaveButton.ShadowDecoration.CustomizableEdges = customizableEdges12;
+            LeaveButton.Size = new Size(168, 56);
+            LeaveButton.TabIndex = 7;
+            LeaveButton.Text = "Leave";
+            LeaveButton.Click += LeaveButton_Click;
+            // 
+            // StartButton
+            // 
+            StartButton.BorderRadius = 25;
+            StartButton.CustomizableEdges = customizableEdges13;
+            StartButton.DisabledState.BorderColor = Color.DarkGray;
+            StartButton.DisabledState.CustomBorderColor = Color.DarkGray;
+            StartButton.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            StartButton.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            StartButton.FillColor = Color.LimeGreen;
+            StartButton.Font = new Font("Ravie", 10.8F);
+            StartButton.ForeColor = Color.White;
+            StartButton.Location = new Point(286, 378);
+            StartButton.Name = "StartButton";
+            StartButton.ShadowDecoration.CustomizableEdges = customizableEdges14;
+            StartButton.Size = new Size(168, 56);
+            StartButton.TabIndex = 5;
+            StartButton.Text = "Start";
+            StartButton.Click += StartButton_Click;
+            // 
+            // Player2Label
+            // 
+            Player2Label.AutoSize = true;
+            Player2Label.Font = new Font("Ravie", 24F, FontStyle.Bold);
+            Player2Label.ForeColor = Color.Khaki;
+            Player2Label.Location = new Point(831, 113);
+            Player2Label.Name = "Player2Label";
+            Player2Label.Size = new Size(239, 54);
+            Player2Label.TabIndex = 5;
+            Player2Label.Text = "Player2";
+            // 
+            // Player1Label
+            // 
+            Player1Label.AutoSize = true;
+            Player1Label.Font = new Font("Ravie", 24F, FontStyle.Bold);
+            Player1Label.ForeColor = Color.Khaki;
+            Player1Label.Location = new Point(183, 113);
+            Player1Label.Name = "Player1Label";
+            Player1Label.Size = new Size(227, 54);
+            Player1Label.TabIndex = 4;
+            Player1Label.Text = "Player1";
+            // 
+            // VSLabel
+            // 
+            VSLabel.AutoSize = true;
+            VSLabel.Font = new Font("Ravie", 48F);
+            VSLabel.ForeColor = Color.PapayaWhip;
+            VSLabel.Location = new Point(531, 74);
+            VSLabel.Name = "VSLabel";
+            VSLabel.Size = new Size(186, 107);
+            VSLabel.TabIndex = 3;
+            VSLabel.Text = "VS";
             // 
             // GamePanel
             // 
-            GamePanel.Anchor = AnchorStyles.None;
+            GamePanel.BackColor = Color.Transparent;
+            GamePanel.BackgroundImage = (Image)resources.GetObject("GamePanel.BackgroundImage");
+            GamePanel.BackgroundImageLayout = ImageLayout.Stretch;
+            GamePanel.Controls.Add(LeaveGameButton);
+            GamePanel.Controls.Add(XExitLabel4);
             GamePanel.Controls.Add(PlayerTurnLabel);
             GamePanel.Controls.Add(DashLabel);
             GamePanel.Controls.Add(QButton);
@@ -154,417 +437,381 @@ namespace Client_Application
             GamePanel.Controls.Add(YButton);
             GamePanel.Controls.Add(WButton);
             GamePanel.Controls.Add(ZButton);
-            GamePanel.Location = new Point(0, 3);
+            GamePanel.Dock = DockStyle.Fill;
+            GamePanel.Location = new Point(0, 0);
             GamePanel.Name = "GamePanel";
-            GamePanel.Size = new Size(800, 484);
+            GamePanel.Size = new Size(1226, 581);
             GamePanel.TabIndex = 6;
-            GamePanel.Visible = false;
+            // 
+            // LeaveGameButton
+            // 
+            LeaveGameButton.DisabledState.BorderColor = Color.DarkGray;
+            LeaveGameButton.DisabledState.CustomBorderColor = Color.DarkGray;
+            LeaveGameButton.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            LeaveGameButton.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            LeaveGameButton.FillColor = Color.Red;
+            LeaveGameButton.Font = new Font("Segoe UI", 9F);
+            LeaveGameButton.ForeColor = Color.White;
+            LeaveGameButton.ImageSize = new Size(40, 40);
+            LeaveGameButton.Location = new Point(24, 442);
+            LeaveGameButton.Name = "LeaveGameButton";
+            LeaveGameButton.ShadowDecoration.CustomizableEdges = customizableEdges15;
+            LeaveGameButton.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            LeaveGameButton.Size = new Size(101, 97);
+            LeaveGameButton.TabIndex = 29;
+            LeaveGameButton.Click += LeaveGameButton_Click;
             // 
             // PlayerTurnLabel
             // 
             PlayerTurnLabel.AutoSize = true;
-            PlayerTurnLabel.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
-            PlayerTurnLabel.Location = new Point(313, 53);
+            PlayerTurnLabel.Font = new Font("Ravie", 25.8000011F);
+            PlayerTurnLabel.ForeColor = Color.PapayaWhip;
+            PlayerTurnLabel.Location = new Point(423, 113);
             PlayerTurnLabel.Name = "PlayerTurnLabel";
-            PlayerTurnLabel.Size = new Size(158, 38);
+            PlayerTurnLabel.Size = new Size(380, 59);
             PlayerTurnLabel.TabIndex = 28;
             PlayerTurnLabel.Text = "Player Turn";
             // 
             // DashLabel
             // 
             DashLabel.AutoSize = true;
-            DashLabel.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            DashLabel.Location = new Point(352, 150);
+            DashLabel.Font = new Font("Segoe UI", 24F);
+            DashLabel.ForeColor = Color.PapayaWhip;
+            DashLabel.Location = new Point(546, 186);
             DashLabel.Name = "DashLabel";
-            DashLabel.Size = new Size(77, 31);
+            DashLabel.Size = new Size(135, 54);
             DashLabel.TabIndex = 27;
             DashLabel.Text = "-------";
             // 
             // QButton
             // 
-            QButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
-            QButton.Location = new Point(102, 258);
+            QButton.BackColor = Color.PapayaWhip;
+            QButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
+            QButton.ForeColor = Color.Teal;
+            QButton.Location = new Point(325, 361);
             QButton.Name = "QButton";
-            QButton.Size = new Size(51, 47);
+            QButton.Size = new Size(55, 50);
             QButton.TabIndex = 26;
             QButton.Text = "Q";
-            QButton.UseVisualStyleBackColor = true;
+            QButton.UseVisualStyleBackColor = false;
             // 
             // EButton
             // 
-            EButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
-            EButton.Location = new Point(218, 258);
+            EButton.BackColor = Color.PapayaWhip;
+            EButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
+            EButton.ForeColor = Color.Teal;
+            EButton.Location = new Point(441, 361);
             EButton.Name = "EButton";
-            EButton.Size = new Size(51, 47);
+            EButton.Size = new Size(55, 50);
             EButton.TabIndex = 25;
             EButton.Text = "E";
-            EButton.UseVisualStyleBackColor = true;
+            EButton.UseVisualStyleBackColor = false;
             // 
             // RButton
             // 
-            RButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
-            RButton.Location = new Point(276, 258);
+            RButton.BackColor = Color.PapayaWhip;
+            RButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
+            RButton.ForeColor = Color.Teal;
+            RButton.Location = new Point(499, 361);
             RButton.Name = "RButton";
-            RButton.Size = new Size(51, 47);
+            RButton.Size = new Size(55, 50);
             RButton.TabIndex = 24;
             RButton.Text = "R";
-            RButton.UseVisualStyleBackColor = true;
+            RButton.UseVisualStyleBackColor = false;
             // 
             // TButton
             // 
-            TButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
-            TButton.Location = new Point(334, 258);
+            TButton.BackColor = Color.PapayaWhip;
+            TButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
+            TButton.ForeColor = Color.Teal;
+            TButton.Location = new Point(557, 361);
             TButton.Name = "TButton";
-            TButton.Size = new Size(51, 47);
+            TButton.Size = new Size(55, 50);
             TButton.TabIndex = 23;
             TButton.Text = "T";
-            TButton.UseVisualStyleBackColor = true;
+            TButton.UseVisualStyleBackColor = false;
             // 
             // PButton
             // 
-            PButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
-            PButton.Location = new Point(624, 258);
+            PButton.BackColor = Color.PapayaWhip;
+            PButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
+            PButton.ForeColor = Color.Teal;
+            PButton.Location = new Point(847, 361);
             PButton.Name = "PButton";
-            PButton.Size = new Size(51, 47);
+            PButton.Size = new Size(55, 50);
             PButton.TabIndex = 22;
             PButton.Text = "P";
-            PButton.UseVisualStyleBackColor = true;
+            PButton.UseVisualStyleBackColor = false;
             // 
             // KButton
             // 
-            KButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
-            KButton.Location = new Point(534, 311);
+            KButton.BackColor = Color.PapayaWhip;
+            KButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
+            KButton.ForeColor = Color.Teal;
+            KButton.Location = new Point(757, 414);
             KButton.Name = "KButton";
-            KButton.Size = new Size(51, 47);
+            KButton.Size = new Size(55, 50);
             KButton.TabIndex = 21;
             KButton.Text = "K";
-            KButton.UseVisualStyleBackColor = true;
+            KButton.UseVisualStyleBackColor = false;
             // 
             // AButton
             // 
-            AButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
-            AButton.Location = new Point(135, 311);
+            AButton.BackColor = Color.PapayaWhip;
+            AButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
+            AButton.ForeColor = Color.Teal;
+            AButton.Location = new Point(358, 414);
             AButton.Name = "AButton";
-            AButton.Size = new Size(51, 47);
+            AButton.Size = new Size(55, 50);
             AButton.TabIndex = 20;
             AButton.Text = "A";
-            AButton.UseVisualStyleBackColor = true;
+            AButton.UseVisualStyleBackColor = false;
             // 
             // LButton
             // 
-            LButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
-            LButton.Location = new Point(591, 311);
+            LButton.BackColor = Color.PapayaWhip;
+            LButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
+            LButton.ForeColor = Color.Teal;
+            LButton.Location = new Point(814, 414);
             LButton.Name = "LButton";
-            LButton.Size = new Size(51, 47);
+            LButton.Size = new Size(55, 50);
             LButton.TabIndex = 19;
             LButton.Text = "L";
-            LButton.UseVisualStyleBackColor = true;
+            LButton.UseVisualStyleBackColor = false;
             // 
             // IButton
             // 
-            IButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
-            IButton.Location = new Point(508, 258);
+            IButton.BackColor = Color.PapayaWhip;
+            IButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
+            IButton.ForeColor = Color.Teal;
+            IButton.Location = new Point(731, 361);
             IButton.Name = "IButton";
-            IButton.Size = new Size(51, 47);
+            IButton.Size = new Size(55, 50);
             IButton.TabIndex = 18;
             IButton.Text = "I";
-            IButton.UseVisualStyleBackColor = true;
+            IButton.UseVisualStyleBackColor = false;
             // 
             // OButton
             // 
-            OButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
-            OButton.Location = new Point(566, 258);
+            OButton.BackColor = Color.PapayaWhip;
+            OButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
+            OButton.ForeColor = Color.Teal;
+            OButton.Location = new Point(789, 361);
             OButton.Name = "OButton";
-            OButton.Size = new Size(51, 47);
+            OButton.Size = new Size(55, 50);
             OButton.TabIndex = 17;
             OButton.Text = "O";
-            OButton.UseVisualStyleBackColor = true;
+            OButton.UseVisualStyleBackColor = false;
             // 
             // VButton
             // 
-            VButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
-            VButton.Location = new Point(363, 364);
+            VButton.BackColor = Color.PapayaWhip;
+            VButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
+            VButton.ForeColor = Color.Teal;
+            VButton.Location = new Point(586, 467);
             VButton.Name = "VButton";
-            VButton.Size = new Size(51, 47);
+            VButton.Size = new Size(55, 50);
             VButton.TabIndex = 16;
             VButton.Text = "V";
-            VButton.UseVisualStyleBackColor = true;
+            VButton.UseVisualStyleBackColor = false;
             // 
             // NButton
             // 
-            NButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
-            NButton.Location = new Point(477, 363);
+            NButton.BackColor = Color.PapayaWhip;
+            NButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
+            NButton.ForeColor = Color.Teal;
+            NButton.Location = new Point(700, 466);
             NButton.Name = "NButton";
-            NButton.Size = new Size(51, 47);
+            NButton.Size = new Size(55, 50);
             NButton.TabIndex = 15;
             NButton.Text = "N";
-            NButton.UseVisualStyleBackColor = true;
+            NButton.UseVisualStyleBackColor = false;
             // 
             // BButton
             // 
-            BButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
-            BButton.Location = new Point(420, 364);
+            BButton.BackColor = Color.PapayaWhip;
+            BButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
+            BButton.ForeColor = Color.Teal;
+            BButton.Location = new Point(643, 467);
             BButton.Name = "BButton";
-            BButton.Size = new Size(51, 47);
+            BButton.Size = new Size(55, 50);
             BButton.TabIndex = 14;
             BButton.Text = "B";
-            BButton.UseVisualStyleBackColor = true;
+            BButton.UseVisualStyleBackColor = false;
             // 
             // MButton
             // 
-            MButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
-            MButton.Location = new Point(534, 364);
+            MButton.BackColor = Color.PapayaWhip;
+            MButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
+            MButton.ForeColor = Color.Teal;
+            MButton.Location = new Point(757, 467);
             MButton.Name = "MButton";
-            MButton.Size = new Size(51, 47);
+            MButton.Size = new Size(55, 50);
             MButton.TabIndex = 13;
             MButton.Text = "M";
-            MButton.UseVisualStyleBackColor = true;
+            MButton.UseVisualStyleBackColor = false;
             // 
             // UButton
             // 
-            UButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
-            UButton.Location = new Point(450, 258);
+            UButton.BackColor = Color.PapayaWhip;
+            UButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
+            UButton.ForeColor = Color.Teal;
+            UButton.Location = new Point(673, 361);
             UButton.Name = "UButton";
-            UButton.Size = new Size(51, 47);
+            UButton.Size = new Size(55, 50);
             UButton.TabIndex = 12;
             UButton.Text = "U";
-            UButton.UseVisualStyleBackColor = true;
+            UButton.UseVisualStyleBackColor = false;
             // 
             // DButton
             // 
-            DButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
-            DButton.Location = new Point(249, 311);
+            DButton.BackColor = Color.PapayaWhip;
+            DButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
+            DButton.ForeColor = Color.Teal;
+            DButton.Location = new Point(472, 414);
             DButton.Name = "DButton";
-            DButton.Size = new Size(51, 47);
+            DButton.Size = new Size(55, 50);
             DButton.TabIndex = 11;
             DButton.Text = "D";
-            DButton.UseVisualStyleBackColor = true;
+            DButton.UseVisualStyleBackColor = false;
             // 
             // FButton
             // 
-            FButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
-            FButton.Location = new Point(306, 311);
+            FButton.BackColor = Color.PapayaWhip;
+            FButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
+            FButton.ForeColor = Color.Teal;
+            FButton.Location = new Point(529, 414);
             FButton.Name = "FButton";
-            FButton.Size = new Size(51, 47);
+            FButton.Size = new Size(55, 50);
             FButton.TabIndex = 10;
             FButton.Text = "F";
-            FButton.UseVisualStyleBackColor = true;
+            FButton.UseVisualStyleBackColor = false;
             // 
             // GButton
             // 
-            GButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
-            GButton.Location = new Point(363, 311);
+            GButton.BackColor = Color.PapayaWhip;
+            GButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
+            GButton.ForeColor = Color.Teal;
+            GButton.Location = new Point(586, 414);
             GButton.Name = "GButton";
-            GButton.Size = new Size(51, 47);
+            GButton.Size = new Size(55, 50);
             GButton.TabIndex = 9;
             GButton.Text = "G";
-            GButton.UseVisualStyleBackColor = true;
+            GButton.UseVisualStyleBackColor = false;
             // 
             // HButton
             // 
-            HButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
-            HButton.Location = new Point(420, 310);
+            HButton.BackColor = Color.PapayaWhip;
+            HButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
+            HButton.ForeColor = Color.Teal;
+            HButton.Location = new Point(643, 413);
             HButton.Name = "HButton";
-            HButton.Size = new Size(51, 47);
+            HButton.Size = new Size(55, 50);
             HButton.TabIndex = 8;
             HButton.Text = "H";
-            HButton.UseVisualStyleBackColor = true;
+            HButton.UseVisualStyleBackColor = false;
             // 
             // JButton
             // 
-            JButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
-            JButton.Location = new Point(477, 311);
+            JButton.BackColor = Color.PapayaWhip;
+            JButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
+            JButton.ForeColor = Color.Teal;
+            JButton.Location = new Point(700, 414);
             JButton.Name = "JButton";
-            JButton.Size = new Size(51, 47);
+            JButton.Size = new Size(55, 50);
             JButton.TabIndex = 7;
             JButton.Text = "J";
-            JButton.UseVisualStyleBackColor = true;
+            JButton.UseVisualStyleBackColor = false;
             // 
             // XButton
             // 
-            XButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
-            XButton.Location = new Point(249, 364);
+            XButton.BackColor = Color.PapayaWhip;
+            XButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
+            XButton.ForeColor = Color.Teal;
+            XButton.Location = new Point(472, 467);
             XButton.Name = "XButton";
-            XButton.Size = new Size(51, 47);
+            XButton.Size = new Size(55, 50);
             XButton.TabIndex = 6;
             XButton.Text = "X";
-            XButton.UseVisualStyleBackColor = true;
+            XButton.UseVisualStyleBackColor = false;
             // 
             // CButton
             // 
-            CButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
-            CButton.Location = new Point(306, 364);
+            CButton.BackColor = Color.PapayaWhip;
+            CButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
+            CButton.ForeColor = Color.Teal;
+            CButton.Location = new Point(529, 467);
             CButton.Name = "CButton";
-            CButton.Size = new Size(51, 47);
+            CButton.Size = new Size(55, 50);
             CButton.TabIndex = 5;
             CButton.Text = "C";
-            CButton.UseVisualStyleBackColor = true;
+            CButton.UseVisualStyleBackColor = false;
             // 
             // SButton
             // 
-            SButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
-            SButton.Location = new Point(192, 311);
+            SButton.BackColor = Color.PapayaWhip;
+            SButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
+            SButton.ForeColor = Color.Teal;
+            SButton.Location = new Point(415, 414);
             SButton.Name = "SButton";
-            SButton.Size = new Size(51, 47);
+            SButton.Size = new Size(55, 50);
             SButton.TabIndex = 4;
             SButton.Text = "S";
-            SButton.UseVisualStyleBackColor = true;
+            SButton.UseVisualStyleBackColor = false;
             // 
             // YButton
             // 
-            YButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
-            YButton.Location = new Point(392, 258);
+            YButton.BackColor = Color.PapayaWhip;
+            YButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
+            YButton.ForeColor = Color.Teal;
+            YButton.Location = new Point(615, 361);
             YButton.Name = "YButton";
-            YButton.Size = new Size(51, 47);
+            YButton.Size = new Size(55, 50);
             YButton.TabIndex = 3;
             YButton.Text = "Y";
-            YButton.UseVisualStyleBackColor = true;
+            YButton.UseVisualStyleBackColor = false;
             // 
             // WButton
             // 
-            WButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
-            WButton.Location = new Point(160, 258);
+            WButton.BackColor = Color.PapayaWhip;
+            WButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
+            WButton.ForeColor = Color.Teal;
+            WButton.Location = new Point(383, 361);
             WButton.Name = "WButton";
-            WButton.Size = new Size(51, 47);
+            WButton.Size = new Size(55, 50);
             WButton.TabIndex = 2;
             WButton.Text = "W";
-            WButton.UseVisualStyleBackColor = true;
+            WButton.UseVisualStyleBackColor = false;
             // 
             // ZButton
             // 
-            ZButton.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
-            ZButton.Location = new Point(192, 364);
+            ZButton.BackColor = Color.PapayaWhip;
+            ZButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
+            ZButton.ForeColor = Color.Teal;
+            ZButton.Location = new Point(415, 467);
             ZButton.Name = "ZButton";
-            ZButton.Size = new Size(51, 47);
+            ZButton.Size = new Size(55, 50);
             ZButton.TabIndex = 1;
             ZButton.Text = "Z";
-            ZButton.UseVisualStyleBackColor = true;
-            // 
-            // Player2Label
-            // 
-            Player2Label.AutoSize = true;
-            Player2Label.Location = new Point(638, 76);
-            Player2Label.Name = "Player2Label";
-            Player2Label.Size = new Size(57, 20);
-            Player2Label.TabIndex = 5;
-            Player2Label.Text = "Player2";
-            // 
-            // Player1Label
-            // 
-            Player1Label.AutoSize = true;
-            Player1Label.Location = new Point(87, 67);
-            Player1Label.Name = "Player1Label";
-            Player1Label.Size = new Size(57, 20);
-            Player1Label.TabIndex = 4;
-            Player1Label.Text = "Player1";
-            // 
-            // VSLabel
-            // 
-            VSLabel.AutoSize = true;
-            VSLabel.Font = new Font("Segoe UI", 48F, FontStyle.Bold, GraphicsUnit.Point);
-            VSLabel.Location = new Point(327, 34);
-            VSLabel.Name = "VSLabel";
-            VSLabel.Size = new Size(142, 106);
-            VSLabel.TabIndex = 3;
-            VSLabel.Text = "VS";
-            // 
-            // StartButton
-            // 
-            StartButton.Location = new Point(159, 249);
-            StartButton.Name = "StartButton";
-            StartButton.Size = new Size(94, 29);
-            StartButton.TabIndex = 1;
-            StartButton.Text = "Start";
-            StartButton.UseVisualStyleBackColor = true;
-            StartButton.Click += StartButton_Click;
-            // 
-            // LeaveButton
-            // 
-            LeaveButton.Location = new Point(482, 249);
-            LeaveButton.Name = "LeaveButton";
-            LeaveButton.Size = new Size(94, 29);
-            LeaveButton.TabIndex = 2;
-            LeaveButton.Text = "Leave";
-            LeaveButton.UseVisualStyleBackColor = true;
-            LeaveButton.Click += LeaveButton_Click;
-            // 
-            // listView1
-            // 
-            listView1.Location = new Point(352, 12);
-            listView1.Name = "listView1";
-            listView1.Size = new Size(424, 560);
-            listView1.TabIndex = 5;
-            listView1.UseCompatibleStateImageBehavior = false;
-            // 
-            // WatchGameButton
-            // 
-            WatchGameButton.Location = new Point(41, 214);
-            WatchGameButton.Name = "WatchGameButton";
-            WatchGameButton.Size = new Size(133, 29);
-            WatchGameButton.TabIndex = 2;
-            WatchGameButton.Text = "Watch Game";
-            WatchGameButton.UseVisualStyleBackColor = true;
-            WatchGameButton.Click += WatchGameButton_Click;
-            // 
-            // JoinRoomButton
-            // 
-            JoinRoomButton.Location = new Point(41, 325);
-            JoinRoomButton.Name = "JoinRoomButton";
-            JoinRoomButton.Size = new Size(133, 29);
-            JoinRoomButton.TabIndex = 1;
-            JoinRoomButton.Text = "Join Room";
-            JoinRoomButton.UseVisualStyleBackColor = true;
-            JoinRoomButton.Click += JoinRoomButton_Click;
-            // 
-            // CreateRoomButton
-            // 
-            CreateRoomButton.Location = new Point(41, 100);
-            CreateRoomButton.Name = "CreateRoomButton";
-            CreateRoomButton.Size = new Size(133, 29);
-            CreateRoomButton.TabIndex = 0;
-            CreateRoomButton.Text = "Create Room";
-            CreateRoomButton.UseVisualStyleBackColor = true;
-            CreateRoomButton.Click += CreateRoomButton_Click;
-            // 
-            // LoginButton
-            // 
-            LoginButton.Location = new Point(337, 325);
-            LoginButton.Name = "LoginButton";
-            LoginButton.Size = new Size(94, 29);
-            LoginButton.TabIndex = 2;
-            LoginButton.Text = "Login";
-            LoginButton.UseVisualStyleBackColor = true;
-            LoginButton.Click += LoginButton_Click;
-            // 
-            // UserNameTextBox
-            // 
-            UserNameTextBox.Location = new Point(352, 184);
-            UserNameTextBox.Name = "UserNameTextBox";
-            UserNameTextBox.Size = new Size(303, 27);
-            UserNameTextBox.TabIndex = 1;
-            // 
-            // UserNameLabel
-            // 
-            UserNameLabel.AutoSize = true;
-            UserNameLabel.Location = new Point(116, 191);
-            UserNameLabel.Name = "UserNameLabel";
-            UserNameLabel.Size = new Size(82, 20);
-            UserNameLabel.TabIndex = 0;
-            UserNameLabel.Text = "User Name";
+            ZButton.UseVisualStyleBackColor = false;
             // 
             // ClientForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(LoginPanel);
+            AutoSize = true;
+            AutoValidate = AutoValidate.EnablePreventFocusChange;
+            BackColor = Color.FromArgb(23, 30, 46);
+            BackgroundImageLayout = ImageLayout.Stretch;
+            ClientSize = new Size(1226, 581);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "ClientForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
-            Load += Form1_Load;
             LoginPanel.ResumeLayout(false);
             LoginPanel.PerformLayout();
             LoobyPanel.ResumeLayout(false);
+            LoobyPanel.PerformLayout();
             RoomLoobyPanel.ResumeLayout(false);
             RoomLoobyPanel.PerformLayout();
             GamePanel.ResumeLayout(false);
@@ -575,23 +822,23 @@ namespace Client_Application
         #endregion
 
         private Panel LoginPanel;
-        private TextBox UserNameTextBox;
         private Label UserNameLabel;
         private Panel LoobyPanel;
-        private Button LoginButton;
-        private Button WatchGameButton;
-        private Button JoinRoomButton;
-        private Button CreateRoomButton;
         private ListView listView1;
         private Panel RoomLoobyPanel;
-        private Button StartButton;
-        private Button LeaveButton;
         private Label Player1Label;
         private Label VSLabel;
-        private Label Player2Label;
         private Panel GamePanel;
-        private Label PlayerTurnLabel;
-        private Label DashLabel;
+        private Button UButton;
+        private Button DButton;
+        private Button FButton;
+        private Button GButton;
+        private Button HButton;
+        private Button JButton;
+        private Button SButton;
+        private Button YButton;
+        private Button WButton;
+        private Label Player2Label;
         private Button QButton;
         private Button EButton;
         private Button RButton;
@@ -606,17 +853,22 @@ namespace Client_Application
         private Button NButton;
         private Button BButton;
         private Button MButton;
-        private Button UButton;
-        private Button DButton;
-        private Button FButton;
-        private Button GButton;
-        private Button HButton;
-        private Button JButton;
         private Button XButton;
         private Button CButton;
-        private Button SButton;
-        private Button YButton;
-        private Button WButton;
         private Button ZButton;
-    }
+        private Label DashLabel;
+        private Label PlayerTurnLabel;
+        private Label XExitLabel1;
+        private Label XExitLabel2;
+        private Label XExitLabel3;
+        private Label XExitLabel4;
+        private Guna.UI2.WinForms.Guna2Button LoginButton;
+        private Guna.UI2.WinForms.Guna2TextBox textBox1;
+        private Guna.UI2.WinForms.Guna2Button WatchGameButton;
+        private Guna.UI2.WinForms.Guna2Button JoinRoomButton;
+        private Guna.UI2.WinForms.Guna2Button CreateRoomButton;
+        private Guna.UI2.WinForms.Guna2Button StartButton;
+        private Guna.UI2.WinForms.Guna2Button LeaveButton;
+        private Guna.UI2.WinForms.Guna2CircleButton LeaveGameButton;
+    }
 }

@@ -22,11 +22,19 @@ namespace Client_Application
     }
     internal class Room
     {
-        Player? owner;
-        Player? guest;
-        RoomState state;
-        int watchersCount;
-        public Room() { watchersCount = 0; }
+        public Player? Owner { get; set; }
+        public Player? guest { get; set; }
+        public RoomState state { get; set; }
+        public int WatchersCount { get; set; }
+        public string Category { get; set; }
+        public string RoomName { get; set; }
+        public int RoomId { get; set; }
+        public Room() { WatchersCount = 0; }
+
+        public override string ToString()
+        {
+            return $"Id: {RoomId} \t Name: {RoomName} \t state: {state}";
+        }
     }
     internal class Game
     {
