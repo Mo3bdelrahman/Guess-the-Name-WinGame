@@ -151,7 +151,10 @@ namespace Client_Application
 
         private void XExitLabel_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            stream?.Close();
+            Application.ExitThread();
+            Environment.Exit(Environment.ExitCode);
+            Application.Exit(); 
         }
 
         private void XExitLabel_MouseHover(object sender, EventArgs e)
@@ -178,13 +181,6 @@ namespace Client_Application
             {
                 ViewPanel(LoobyPanel);
             }
-        }
-
-        private void ClientForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            stream?.Close();
-            Application.ExitThread();
-            Environment.Exit(Environment.ExitCode);
         }
     }
 }

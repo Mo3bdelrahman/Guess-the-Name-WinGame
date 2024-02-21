@@ -105,10 +105,8 @@ namespace Server_Application
 
         private void ServerForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-           
             Application.ExitThread();
             Environment.Exit(Environment.ExitCode);
-
         }
     }
 }
