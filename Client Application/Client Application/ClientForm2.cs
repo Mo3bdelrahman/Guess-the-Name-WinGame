@@ -159,7 +159,7 @@
             listView1.Items.Clear();
             foreach (var r in roomList)
             {
-                string[] s = {$"{r.RoomId}", r.RoomName, r.Owner.Name, r.Guest?.Name};
+                string s = r.ToString();
                 listView1.Items.Add(new ListViewItem(s));
             }
         }
