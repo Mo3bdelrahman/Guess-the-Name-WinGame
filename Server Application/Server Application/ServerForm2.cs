@@ -211,7 +211,7 @@ namespace Server_Application
             listPlayers.Items.Clear();
             foreach (var p in Players)
             {
-                string[] s = { $"{p.Name as string}", $"{p.State}" };
+                string[] s = { $"{p.Name}", $"{p.State}" };
                 listPlayers.Items.Add(new ListViewItem(s));
             }
         }
