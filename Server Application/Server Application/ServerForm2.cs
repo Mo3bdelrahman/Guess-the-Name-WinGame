@@ -162,9 +162,9 @@ namespace Server_Application
                 if (room.StartGameFlag)
                 {
                     //Note we need here => get Category
-                    room.Game = new Game(WordCategory.GetRandomWord("Food"));
+                    room.Game = new Game(WordCategory.GetRandomWord(room.Category));
                     room.state = RoomState.Running;
-                    ServerController.RequestHandeller<Game,RoomState>([room.Owner!,room.Guest!],Request.ServerToClientStartGame,room.Game, room.state);
+                    ServerController.RequestHandeller<Game,RoomState>([room.Owner!,room.Guest!],Request.ServerToClientStartGame,room.Game, RoomState.Running);
                     Invoke(() => UpdateRoomList());
                     Invoke(() => UpdatePlayerList());
                 }
@@ -201,7 +201,6 @@ namespace Server_Application
             catch (Exception e) { MessageBox.Show("From send at server char "+e.Message); }
 
         }
-
         private void SendCategories(NetworkStream stream, List<string> jsonStringList)
         {
             try
