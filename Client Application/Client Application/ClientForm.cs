@@ -113,6 +113,7 @@ namespace Client_Application
                 if (IsConnected)
                 {
                     ClientController.RequestHandeller<string>(stream, Request.ClientToServerLogin, textBox1.Text);
+                    ViewPanel(LoobyPanel);
                 }
             }
         }
@@ -125,19 +126,22 @@ namespace Client_Application
             if (result == DialogResult.OK)
             {
                 ClientController.RequestHandeller<string>(stream, Request.ClientToServerCreateRoom, ActiveRoom);
+                ViewPanel(RoomLoobyPanel);
             }
         }
 
         private void JoinRoomButton_Click(object sender, EventArgs e)
         {
-            OnJoinResponseReceive();
+            //OnJoinResponseReceive();
+            ViewPanel(RoomLoobyPanel);
             //Note we need here get id of the selected room from list box
             ClientController.RequestHandeller<int>(stream,Request.ClientToServerAskToJoin,1);
         }
 
         private void WatchGameButton_Click(object sender, EventArgs e)
         {
-            OnWatchClick();
+            //OnWatchClick();
+            ViewPanel(GamePanel);
         }
 
         private void LeaveButton_Click(object sender, EventArgs e)
@@ -157,7 +161,7 @@ namespace Client_Application
 
         private void StartButton_Click(object sender, EventArgs e)
         {
-            OnStartClick();
+            //OnStartClick();
             ClientController.RequestHandeller<int>(stream,Request.ClientToServerStartGame,room.RoomId);
         }
 
@@ -187,7 +191,14 @@ namespace Client_Application
 
         private void LeaveGameButton_Click(object sender, EventArgs e)
         {
-            OnLeaveClick();
+            //OnLeaveClick();
+
+            DialogResult result = MessageBox.Show("Are you sure you want to leave the game?", "Leave Game Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                ViewPanel(LoobyPanel);
+            }
         }
 
         private void AddLetters()

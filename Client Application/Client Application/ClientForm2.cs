@@ -33,7 +33,7 @@
                 if (jsonStringList[0].GetOriginalData<bool>())
                 {
                     player = jsonStringList[1].GetOriginalData<Player>();
-                    OnLoginClick();
+                    //OnLoginClick();
                     MessageBox.Show($"{player.Name}, {player.State}");
                     ClientController.RequestHandeller(stream, Request.ClientToServerLoadLobby);
                 }
@@ -51,8 +51,8 @@
         private void LobbyLoad(List<string> jsonStringList)
         {
             roomList = jsonStringList[0].GetOriginalData<List<Room>>();
-            OnLoadLobby();
-            MessageBox.Show("Rooms is Here");
+            //OnLoadLobby();
+            //MessageBox.Show("Rooms is Here");
             Invoke(() => UpdateRoomList());
         }
 
@@ -61,8 +61,8 @@
             room = jsonStringList[0].GetOriginalData<Room>();
             player.State = jsonStringList[1].GetOriginalData<PlayerState>();
             // I Also Need A Boolean Value For Confirmation
-            MessageBox.Show(room.ToString());
-            OnCreateClick(true);
+            //MessageBox.Show(room.ToString());
+            //OnCreateClick(true);
             MessageBox.Show($" hi, {room.Owner.Name} you enterd {room.RoomName} Id: {room.RoomId} cat is {room.Category} and player is {player.State}");
             Invoke(()=>UpdateRoomList());
         }
@@ -74,7 +74,7 @@
                 player.State = jsonStringList[0].GetOriginalData<PlayerState>();
                 room = null;
                 ClientController.RequestHandeller(stream, Request.ClientToServerLoadLobby);
-                OnLeaveClick();
+                //OnLeaveClick();
             }
             else
             {
@@ -82,7 +82,7 @@
                 room = null;
                 ClientController.RequestHandeller(stream, Request.ClientToServerLoadLobby);
                 MessageBox.Show("Player1 Leave, The room was closed");
-                OnLeaveReceive();
+                //OnLeaveReceive();
             }
             Invoke(() => UpdateRoomList());
         }
@@ -94,13 +94,13 @@
                 player.State = jsonStringList[0].GetOriginalData<PlayerState>();
                 room = null;
                 ClientController.RequestHandeller(stream, Request.ClientToServerLoadLobby);
-                OnLeaveClick();
+                //OnLeaveClick();
             }
             else
             {
                 room = jsonStringList[0].GetOriginalData<Room>();
                 MessageBox.Show("Player2 Leave, Wait for Other Player");
-                OnLeaveReceive();
+                //OnLeaveReceive();
             }
         }
 
@@ -162,7 +162,6 @@
                 string[] s = {$"{r.RoomId}", r.RoomName, r.Owner.Name, r.Guest?.Name};
                 listView1.Items.Add(new ListViewItem(s));
             }
-                
         }
     }
 
