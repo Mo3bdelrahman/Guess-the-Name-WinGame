@@ -20,7 +20,7 @@
                 case Request.ServerToClientP2LeaveRoomLobby: P2leaveRoom(para); break;
                 case Request.ServerToClientAskToJoin: GuestAskToJoin(para); break;
                 case Request.ServerToClientResponseToJoin: PlayerResponseToJoin(para); break;
-                case Request.ServerToClientStartGame: StartGame(para);break;
+                case Request.ServerToClientStartGame: StartGame(para); break;
                 case Request.ServerToClientSendChar: Play(para); break;
                 case Request.ServerToClientLoadCategories: loadCategories(para); break;
                 case Request.ServerToClientWatch: WatchGame(para); break;
@@ -69,7 +69,7 @@
             //MessageBox.Show(room.ToString());
             //OnCreateClick(true);
             MessageBox.Show($" hi, {room.Owner.Name} you enterd {room.RoomName} Id: {room.RoomId} cat is {room.Category} and player is {player.State}");
-            Invoke(()=>UpdateRoomList());
+            Invoke(() => UpdateRoomList());
         }
 
         private void P1leaveRoom(List<string> jsonStringList)
@@ -115,7 +115,7 @@
             Room room = jsonStringList[1].GetOriginalData<Room>();
             MessageBox.Show($"Player: {guest.Name} Ask To Join");
             // here we need check if owner accept or not
-            ClientController.RequestHandeller<bool,int,int>(stream,Request.ClientToServerResponseToJoin,true,guest.Id,room.RoomId);
+            ClientController.RequestHandeller<bool, int, int>(stream, Request.ClientToServerResponseToJoin, true, guest.Id, room.RoomId);
         }
 
         private void PlayerResponseToJoin(List<string> jsonStringList)
@@ -144,8 +144,8 @@
                 }
 
             }
-            catch (Exception e) {MessageBox.Show("from res to join"+e.Message); }
-           
+            catch (Exception e) { MessageBox.Show("from res to join" + e.Message); }
+
         }
 
         private void StartGame(List<string> jsonStringList)
@@ -158,7 +158,7 @@
                 MessageBox.Show($"the Game started {game.TurnState} turn and the word is {game.Word.CurrentWord}");
             }
             catch (Exception e) { MessageBox.Show("From start game" + e.Message); }
-           
+
         }
 
         private void Play(List<string> jsonStringList)
@@ -167,7 +167,7 @@
             game = jsonStringList[1].GetOriginalData<Game>();
 
             // update UI here
-            Invoke( () => MessageBox.Show("Game updated turn of "+ game.TurnState + "the Word now is"+game.Word.CurrentWord));
+            Invoke(() => MessageBox.Show("Game updated turn of " + game.TurnState + "the Word now is" + game.Word.CurrentWord));
 
 
         }
@@ -176,9 +176,9 @@
             try
             {
                 Categories = jsonStringList[0].GetOriginalData<string[]>();
-                MessageBox.Show("Categories : " +String.Join(",",Categories));
+                MessageBox.Show("Categories : " + String.Join(",", Categories));
             }
-            catch(Exception e) { MessageBox.Show("Load Categories"+e.Message); }
+            catch (Exception e) { MessageBox.Show("Load Categories" + e.Message); }
         }
         private void WatchGame(List<string> jsonStringList)
         {

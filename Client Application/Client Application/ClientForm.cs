@@ -25,10 +25,10 @@ namespace Client_Application
             InitializeComponent();
             listView1.View = View.Details;
             listView1.Columns.Add("Rooms", listView1.Width);
-            Panels = new List<Panel>() { LoginPanel, LoobyPanel, RoomLoobyPanel, GamePanel };
+            Panels = new List<Panel>() { StartPanel, LoginPanel, LoobyPanel, RoomLoobyPanel, GamePanel };
             AddLetters();
-            ActivePanel = LoginPanel;
-            this.Controls.Add(LoginPanel);
+            ActivePanel = StartPanel;
+            this.Controls.Add(StartPanel);
             receiveThread = new Thread(new ThreadStart(ReceiveData));
             ClientController.DistributerD += Distributer;
             player = new Player();
@@ -210,7 +210,10 @@ namespace Client_Application
                 ViewPanel(LoobyPanel);
             }
         }
-
+        private void label1_Click(object sender, EventArgs e)
+        {
+            ViewPanel(LoginPanel);
+        }
         private void AddLetters()
         {
             Letters.Add(AButton);
