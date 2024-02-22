@@ -96,6 +96,7 @@ namespace Client_Application
                 string strReq = binaryReader.ReadString();
                 string strPara = binaryReader.ReadString();
                 Request request = JsonSerializer.Deserialize<Request>(strReq);
+
                 List<string>? para = JsonSerializer.Deserialize<List<string>>(strPara);
                 DistributerD(request, para!);
                 return true;

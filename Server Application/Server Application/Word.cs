@@ -1,35 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Server_Application
 {
     internal class Word
     {
+        [JsonIgnore]
         //word from file
-        string originalWord;
+        string? originalWord;
         //game word
-        public string CurrentWord { get; set; }
-        public WordState State { get; private set; }
-        public Word()
-        {
-            originalWord = string.Empty;
-            CurrentWord = string.Empty;
-        }
-        private void GetRandomWordFromFile()
-        {
+        public string? CurrentWord { get; set; }
+        public WordState State { get; set; }
 
-        }
-        public string SendWordToTheGame()
+        public Word(string word)
         {
-            return CurrentWord;
+            originalWord = word;
+            GetRandomWordFromFile();
         }
-        public string UpdateWord(char letter)
+        public void GetRandomWordFromFile()
         {
-            return CurrentWord;
+            CurrentWord = "";
+            for (int i = 0; i < originalWord?.Length; i++)
+            {
+                CurrentWord += "_";
+            }
+            State = WordState.Missing;
         }
+
         public void IsTheWordCompleted()
         {
             if (originalWord == CurrentWord)
@@ -40,6 +43,20 @@ namespace Server_Application
             {
                 State = WordState.Missing;
             }
+        }
+        public bool CheckLetter(string letter)
+        {
+            bool retVal = false;
+            for (int i = 0; i < originalWord.Length; i++)
+            {
+                if (letter[0] == originalWord[i])
+                {
+                    CurrentWord = CurrentWord.Remove(i, 1).Insert(i, letter);
+                    retVal =  true;
+                }
+            }
+            IsTheWordCompleted();
+            return retVal;
         }
     }
 }

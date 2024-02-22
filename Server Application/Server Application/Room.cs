@@ -21,7 +21,8 @@ namespace Server_Application
         public string Category { get; set; }
         public string RoomName { get; set; }
         public int RoomId { get; set; }
-
+        [JsonIgnore]
+        public bool StartGameFlag { get; set; }
         public Room(Player owner, string cat,int id)
         {
             this.Owner = owner;
@@ -29,6 +30,7 @@ namespace Server_Application
             this.RoomName = $"{owner.Name}'s room";
             this.RoomId = id;
             state = RoomState.Waiting;
+            StartGameFlag = false;
         }
 
         private void CreateGame()
@@ -53,6 +55,24 @@ namespace Server_Application
         {
             return $"Id: {RoomId} \t Name: {RoomName} \t state: {state}";
         }
+      
+        //private void CreateGame()
+        //{
+        //    Game = new Game();
+        //    state = RoomState.Running;
+        //}
+        //private void guestHasJoined(Player guest)
+        //{
+        //    this.Guest = guest;
+        //    CreateGame();
+        //}
+        //private void PlayAgain()
+        //{
+        //    if (playAgain)
+        //    {
+        //        CreateGame();
+        //    }
+        //}
         //public bool IsRoomCompleted()
         //{
         //    if (game.IsGameCompleted())

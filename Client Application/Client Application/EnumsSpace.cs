@@ -17,6 +17,7 @@ namespace Client_Application
     enum RoomState
     {
         Waiting,
+        StandBy,
         Running
     }
     enum Request
@@ -51,7 +52,9 @@ namespace Client_Application
         ClientToServerLeaveGame,// with watcher and player
         ServerToClientLeaveGame,
 
-        StartGameC,
+        ClientToServerStartGame,// with player only
+        ServerToClientStartGame,
+
         SendCharC,
     }
 

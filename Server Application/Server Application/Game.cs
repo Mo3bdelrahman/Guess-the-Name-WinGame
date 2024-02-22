@@ -9,52 +9,33 @@ namespace Server_Application
 {
     internal class Game
     {
-        Player player1;
-        Player player2;
-        List<Player> watchers;
-        Word word;
-        TurnState turnState;
-        string result;
+        public Word Word { get; set; }
+        public TurnState TurnState { get; set; }
+        //string result;
 
-        public Game(Player p1, Player p2)
+        public Game(string wordStr)
         {
-            word = new Word();
-            player1 = p1;
-            player2 = p2;
-            watchers = new List<Player>();
-            turnState = TurnState.Player1;
+            Word = new Word(wordStr);
+            TurnState = TurnState.Player1;
         }
 
-        public bool IsGameCompleted()
-        {
-            if (word.State == WordState.Completed)
-            {
-                if (turnState == TurnState.Player1)
-                {
-                    result = $"{player1.Name} wins";
+        //public bool IsGameCompleted()
+        //{
+        //    if (word.State == WordState.Completed)
+        //    {
+        //        if (turnState == TurnState.Player1)
+        //        {
+        //            result = $"{player1.Name} wins";
 
+        //        }
+        //        else
+        //        {
+        //            result = $"{player2.Name} wins";
+        //        }
+        //        return true;
+        //    }
+        //    return false;
+        //}
 
-                }
-                else
-                {
-                    result = $"{player2.Name} wins";
-                }
-                return true;
-            }
-            return false;
-        }
-
-        public string UpdateWord(char letter)
-        {
-            if (turnState == TurnState.Player1)
-            {
-                turnState = TurnState.Player2;
-            }
-            else
-            {
-                turnState = TurnState.Player1;
-            }
-            return word.UpdateWord(letter);
-        }
     }
 }

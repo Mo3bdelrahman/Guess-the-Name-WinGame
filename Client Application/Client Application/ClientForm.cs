@@ -22,6 +22,11 @@ namespace Client_Application
         public ClientForm()
         {
             InitializeComponent();
+            listView1.View = View.Details;
+            listView1.Columns.Add("Room ID", 50);
+            listView1.Columns.Add("Room Name", 100);
+            listView1.Columns.Add("Room Owner", 100);
+            listView1.Columns.Add("Guest", 100);
             Panels = new List<Panel>() { LoginPanel, LoobyPanel, RoomLoobyPanel, GamePanel };
             AddLetters();
             ActivePanel = LoginPanel;
@@ -126,6 +131,8 @@ namespace Client_Application
         private void JoinRoomButton_Click(object sender, EventArgs e)
         {
             OnJoinResponseReceive();
+            //Note we need here get id of the selected room from list box
+            ClientController.RequestHandeller<int>(stream,Request.ClientToServerAskToJoin,1);
         }
 
         private void WatchGameButton_Click(object sender, EventArgs e)
@@ -151,6 +158,7 @@ namespace Client_Application
         private void StartButton_Click(object sender, EventArgs e)
         {
             OnStartClick();
+            ClientController.RequestHandeller<int>(stream,Request.ClientToServerStartGame,room.RoomId);
         }
 
         private void XExitLabel_Click(object sender, EventArgs e)
@@ -590,6 +598,14 @@ namespace Client_Application
         private void MButton_Click(object sender, EventArgs e)
         {
             OnCharacterClick(MButton);
+        }
+        
+        private void ClientForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            stream?.Close();
+            Application.ExitThread();
+            Environment.Exit(Environment.ExitCode);
+            Application.Exit();
         }
     }
 }
