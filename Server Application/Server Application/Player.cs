@@ -15,10 +15,12 @@ namespace Server_Application
         public TcpClient Client { set; get; }
         public string Name { set; get; }
         public PlayerState State { set; get; }
-        public Player(TcpClient client)
+        public int Id { get; set; }
+        public Player(TcpClient client,int id)
         {
             this.Client = client;
             this.State = PlayerState.Available;
+            Id = id;    
         }
 
 

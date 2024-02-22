@@ -16,6 +16,7 @@ namespace Server_Application
     enum RoomState
     {
         Waiting,
+        StandBy,
         Running
     }
     enum Request
@@ -50,7 +51,9 @@ namespace Server_Application
         ClientToServerLeaveGame,// with watcher and player
         ServerToClientLeaveGame,
 
-        StartGameC,
+        ClientToServerStartGame,// with player only
+        ServerToClientStartGame,
+
         SendCharC,
     }
     enum WordState
@@ -61,7 +64,7 @@ namespace Server_Application
 
     enum WordCategories
     {
-        Fruits,
+        Food,
         Sports,
         Languages,
         NotAvailable

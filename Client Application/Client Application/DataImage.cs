@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Client_Application
@@ -12,12 +13,14 @@ namespace Client_Application
         public TcpClient? TcpClient { get; set; }
         public string? Name { get; set; }
         public PlayerState State { get; set; }
+        public int Id { get; set; }
         public Player(){}
-        public Player(TcpClient tcp , string pName)
+        public Player(TcpClient tcp , string pName, int id)
         {
             TcpClient = tcp;
             Name = pName;
             State = PlayerState.Available;
+            Id = id;
         }
     }
     internal class Room
@@ -36,15 +39,14 @@ namespace Client_Application
             return $"Id: {RoomId} \t Name: {RoomName} \t state: {state}";
         }
     }
+    internal class Word
+    {
+        public string? CurrentWord { get; set; }
+        public WordState State { get; set; }
+    }
     internal class Game
     {
-        string? CurrentWord;
-        TurnState turnState;
-        public Game() { }
-        public Game(string word, TurnState ts)
-        {
-            CurrentWord = word;
-            turnState = ts;
-        }
+        public Word Word { get; set; }
+        public TurnState TurnState { get; set; }
     }
 }
