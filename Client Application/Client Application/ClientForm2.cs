@@ -20,6 +20,7 @@
                 case Request.ServerToClientAskToJoin: GuestAskToJoin(para); break;
                 case Request.ServerToClientResponseToJoin: PlayerResponseToJoin(para); break;
                 case Request.ServerToClientStartGame: StartGame(para);break;
+                case Request.ServerToClientSendChar: Play(para); break;
 
 
                 default: MessageBox.Show($"Not Handelled  req : {req}"); break;
@@ -154,6 +155,16 @@
            
         }
 
+        private void Play(List<string> jsonStringList)
+        {
+            bool res = jsonStringList[0].GetOriginalData<bool>();
+            game = jsonStringList[1].GetOriginalData<Game>();
+
+            // update UI here
+            Invoke( () => MessageBox.Show("Game updated turn of "+ game.TurnState + "the Word now is"+game.Word.CurrentWord));
+
+
+        }
         private void UpdateRoomList()
         {
             listView1.Items.Clear();

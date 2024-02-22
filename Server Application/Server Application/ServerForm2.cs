@@ -21,6 +21,7 @@ namespace Server_Application
                 case Request.ClientToServerAskToJoin: ClientAskToJoinRoom(stream, para);break;
                 case Request.ClientToServerResponseToJoin: ClientResponseToJoinRoom(stream, para);break;
                 case Request.ClientToServerStartGame: StartGame(stream, para);  break;
+                case Request.ClientToServerSendChar: CheckChar(stream, para); break;
 
                 default: MessageBox.Show($"{req}"); break;
             }
@@ -60,7 +61,7 @@ namespace Server_Application
         {
             Player p = GetPlayer(stream);
             ServerController.RequestHandeller<List<Room>>([p],Request.ServerToClientLoadLobby,Rooms);
-            Invoke(() => UpdateRoomList());
+           
             
         }
         private void CreateRoom(NetworkStream stream, List<string> jsonStringList)
@@ -158,8 +159,8 @@ namespace Server_Application
                 Room room = GetRoom(id);
                 if (room.StartGameFlag)
                 {
-                    //getRand word
-                    room.Game = new Game("red");
+                    //Note we need here => get Category
+                    room.Game = new Game(WordCategory.GetRandomWord("Food"));
                     ServerController.RequestHandeller<Game>([room.Owner!,room.Guest!],Request.ServerToClientStartGame,room.Game);
                     Invoke(() => UpdateRoomList());
                     Invoke(() => UpdatePlayerList());
@@ -172,6 +173,25 @@ namespace Server_Application
             }
             catch (Exception e) { MessageBox.Show(e.Message); }
            
+        }
+
+        private void CheckChar(NetworkStream stream, List<string> jsonStringList)
+        {
+            try
+            {
+                int id = jsonStringList[0].GetOriginalData<int>();
+                string GameChar = jsonStringList[1].GetOriginalData<string>();
+                Room room = GetRoom(id);
+                bool res =  room.Game.Word.CheckLetter(GameChar);
+                if (!res)
+                {
+                    room.Game.TurnTogeller();
+                }
+                ServerController.RequestHandeller<bool, Game>([room.Owner! , room.Guest!],Request.ServerToClientSendChar,res,room.Game);
+
+            }
+            catch (Exception e) { MessageBox.Show("From send at server char "+e.Message); }
+
         }
 
         //UI

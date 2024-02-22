@@ -54,6 +54,9 @@ namespace Server_Application
         ClientToServerStartGame,// with player only
         ServerToClientStartGame,
 
+        ClientToServerSendChar,// Game
+        ServerToClientSendChar,
+
         SendCharC,
     }
     enum WordState

@@ -120,6 +120,7 @@ namespace Client_Application
         {
             Dialog dialog = new Dialog();
             DialogResult result = dialog.ShowDialog();
+            ClientController.RequestHandeller<string>(stream, Request.ClientToServerCreateRoom, ActiveRoom);
 
             if (result == DialogResult.OK)
             {
@@ -381,15 +382,18 @@ namespace Client_Application
             {
                 ClickedCharacters.Add(btn);
                 btn.Enabled = false;
+                ClientController.RequestHandeller<int,string>(stream,Request.ClientToServerSendChar,room.RoomId,btn.Text);
                 if(game.TurnState != turnState)
                 {
                     turnState = game.TurnState;
                     PlayerTurnLabel.Text = $"{turnState}'s Turn";
                     foreach (Button btn in Letters)
                     {
+
                         btn.Enabled = false;
                     }
                 }
+
             });
         }
 

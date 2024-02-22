@@ -94,15 +94,20 @@ namespace Server_Application
         {
             try
             {
-                string category = WordCategory.GetCategory("Food");
 
-                if (category == string.Empty)
+                using (OpenFileDialog openFileDialog = new OpenFileDialog())
                 {
-                    throw new NullReferenceException();
-                }
-                else
-                {
-                    MessageBox.Show(category);
+                    openFileDialog.InitialDirectory = "c:\\";
+                    openFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*"; 
+                    openFileDialog.FilterIndex = 1;
+
+                    if (openFileDialog.ShowDialog() == DialogResult.OK) 
+                    {
+                        string selectedFilePath = openFileDialog.FileName; 
+                        WordCategory.AddCategory("team", selectedFilePath);
+                        string str = String.Join(", ",WordCategory.GetAllCategories());
+                        MessageBox.Show(str);
+                    }
                 }
             }
             catch (Exception ex)
