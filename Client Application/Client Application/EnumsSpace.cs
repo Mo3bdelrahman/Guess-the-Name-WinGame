@@ -55,6 +55,9 @@ namespace Client_Application
         ClientToServerStartGame,// with player only
         ServerToClientStartGame,
 
+        ClientToServerSendChar,// Game
+        ServerToClientSendChar,
+
         SendCharC,
     }
 

@@ -1,27 +1,39 @@
-﻿namespace Server_Application
+﻿using System.Collections.Generic;
+
+namespace Server_Application
 {
     internal static class WordCategory
     {
         static string currentDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
 
-        static Dictionary<WordCategories, string[]> filePaths = new Dictionary<WordCategories, string[]>() 
+        static Dictionary<string, string> filePaths = new Dictionary<string, string>() 
         {
-            { WordCategories.Food, File.ReadAllLines($@"{currentDirectory}\CategoryFiles\Food.txt")},
-            { WordCategories.Sports, File.ReadAllLines($@"{currentDirectory}\CategoryFiles\Sports.txt") },
-            { WordCategories.Languages, File.ReadAllLines($@"{currentDirectory}\CategoryFiles\Languages.txt") },
+            {"Food", $@"{currentDirectory}\CategoryFiles\Food.txt"},
+            {"Sports",$@"{currentDirectory}\CategoryFiles\Sports.txt" },
+            {"Languages", $@"{currentDirectory}\CategoryFiles\Languages.txt" },
         };
 
-        public static string GetCategory(string category)
-        {
+        public static string GetRandomWord(string category)
+        {    
+            string[] words = File.ReadAllLines(filePaths[category]);
             int randomIndex = new Random().Next(0, 5);
+           return words[randomIndex];
+        }
 
-            switch (category)
+        public static bool AddCategory(string catName,string path)
+        {
+            try
             {
-                case "Food": return filePaths[WordCategories.Food][randomIndex];
-                case "Sports": return filePaths[WordCategories.Sports][randomIndex];
-                case "Languages": return filePaths[WordCategories.Languages][randomIndex];
-                default: return string.Empty;
+                filePaths.Add(catName, path);
+                return true;
             }
+            catch { return false; }
+            
+        }
+
+        public static string[] GetAllCategories()
+        {
+           return filePaths.Keys.ToArray();
         }
     }
 }

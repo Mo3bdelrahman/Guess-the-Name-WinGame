@@ -122,6 +122,7 @@ namespace Client_Application
         {
             Dialog dialog = new Dialog();
             DialogResult result = dialog.ShowDialog();
+            ClientController.RequestHandeller<string>(stream, Request.ClientToServerCreateRoom, ActiveRoom);
 
             if (result == DialogResult.OK)
             {
@@ -416,6 +417,8 @@ namespace Client_Application
                     {
                         ClickedCharacters.Add(button.Text);
                         button.Enabled = false;
+
+                        ClientController.RequestHandeller<int,string>(stream,Request.ClientToServerSendChar,room.RoomId,btn.Text);
                     }
                 }
 
@@ -430,7 +433,7 @@ namespace Client_Application
                     PlayerTurnLabel.Text = "Player 1's Turn";
                 }
 
-                ToggleTurn();
+                //ToggleTurn();
             });
         }
 
