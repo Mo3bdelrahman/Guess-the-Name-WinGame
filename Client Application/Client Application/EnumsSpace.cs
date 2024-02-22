@@ -73,7 +73,7 @@ namespace Client_Application
 
     enum TurnState
     {
-        Player1 =1,
+        Player1 = 1,
         Player2
     }
 

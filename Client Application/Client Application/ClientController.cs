@@ -10,7 +10,7 @@ namespace Client_Application
 {
     internal static class ClientController
     {
-        public static Action<Request,List<string>>? DistributerD {  get; set; }
+        public static Action<Request, List<string>>? DistributerD { get; set; }
         internal static void RequestHandeller(NetworkStream networkStream, Request request)
         {
             try
@@ -100,11 +100,11 @@ namespace Client_Application
                 List<string>? para = JsonSerializer.Deserialize<List<string>>(strPara);
                 DistributerD(request, para!);
                 return true;
-        }
+            }
             catch (Exception ex) { MessageBox.Show("From Client ResponseHandeller " + ex.Message); return false; }
-}
+        }
 
 
-            
+
     }
 }

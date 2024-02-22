@@ -45,7 +45,6 @@ namespace Client_Application
             {
                 cat = CategoryComboBox.Text;
                 DialogResult = DialogResult.OK;
-                
             }
         }
     }
