@@ -14,8 +14,8 @@ namespace Client_Application
         public string? Name { get; set; }
         public PlayerState State { get; set; }
         public int Id { get; set; }
-        public Player(){}
-        public Player(TcpClient tcp , string pName, int id)
+        public Player() { }
+        public Player(TcpClient tcp, string pName, int id)
         {
             TcpClient = tcp;
             Name = pName;
