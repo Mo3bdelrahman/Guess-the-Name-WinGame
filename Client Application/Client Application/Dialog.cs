@@ -12,6 +12,7 @@ namespace Client_Application
 {
     public partial class Dialog : Form
     {
+        public string cat;
         public Dialog()
         {
             InitializeComponent();
@@ -42,7 +43,9 @@ namespace Client_Application
             }
             else
             {
+                cat = CategoryComboBox.Text;
                 DialogResult = DialogResult.OK;
+                
             }
         }
     }
