@@ -2,6 +2,7 @@ using Client_Application;
 using Guna.UI2.WinForms.Suite;
 using System.Collections.Generic;
 using System.Drawing.Drawing2D;
+using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
@@ -15,7 +16,7 @@ namespace Client_Application
         Thread receiveThread;
         List<Panel> Panels;
         List<Button> Letters = new List<Button>();
-        List<string> ClickedCharacters = new List<string>();
+        List<Button> ClickedCharacters = new List<Button>();
         TurnState turnState;
         Panel ActivePanel;
         string ActiveRoom;
@@ -23,10 +24,7 @@ namespace Client_Application
         {
             InitializeComponent();
             listView1.View = View.Details;
-            listView1.Columns.Add("Room ID", 50);
-            listView1.Columns.Add("Room Name", 100);
-            listView1.Columns.Add("Room Owner", 100);
-            listView1.Columns.Add("Guest", 100);
+            listView1.Columns.Add("Rooms", listView1.Width);
             Panels = new List<Panel>() { LoginPanel, LoobyPanel, RoomLoobyPanel, GamePanel };
             AddLetters();
             ActivePanel = LoginPanel;
@@ -122,26 +120,38 @@ namespace Client_Application
         {
             Dialog dialog = new Dialog();
             DialogResult result = dialog.ShowDialog();
+            ClientController.RequestHandeller(stream, Request.ClientToServerLoadCategories);
 
             if (result == DialogResult.OK)
             {
-                ClientController.RequestHandeller<string>(stream, Request.ClientToServerCreateRoom, ActiveRoom);
+                ClientController.RequestHandeller<string>(stream, Request.ClientToServerCreateRoom, dialog.cat);
                 ViewPanel(RoomLoobyPanel);
             }
         }
 
         private void JoinRoomButton_Click(object sender, EventArgs e)
         {
+            try
+            {
+                //Note we need here get id of the selected room from list box
+                ClientController.RequestHandeller<int>(stream, Request.ClientToServerAskToJoin, int.Parse(ActiveRoom.Split(' ')[1]));
+            }
+            catch (Exception ex) { MessageBox.Show("You Cant Join that Room.."); }
             //OnJoinResponseReceive();
-            ViewPanel(RoomLoobyPanel);
-            //Note we need here get id of the selected room from list box
-            ClientController.RequestHandeller<int>(stream,Request.ClientToServerAskToJoin,1);
+             
         }
 
         private void WatchGameButton_Click(object sender, EventArgs e)
         {
             //OnWatchClick();
-            ViewPanel(GamePanel);
+            //ViewPanel(GamePanel);
+            try
+            {
+                int id = int.Parse(ActiveRoom.Split(' ')[1]);
+                ClientController.RequestHandeller<int>(stream, Request.ClientToServerWatch, id);
+            }
+            catch{ MessageBox.Show("You Cant Watch that Room.."); }
+            
         }
 
         private void LeaveButton_Click(object sender, EventArgs e)
@@ -248,35 +258,6 @@ namespace Client_Application
                 }
             });
         }
-
-        private void ToggleTurn()
-        {
-            Invoke(() =>
-            {
-                if (turnState == TurnState.Player2)
-                {
-                    foreach (Button btn in Letters)
-                    {
-                        btn.Enabled = false;
-                    }
-                }
-                else
-                {
-                    foreach (Button btn in Letters)
-                    {
-                        if (ClickedCharacters.Contains(btn.Text))
-                        {
-                            btn.Enabled = false;
-                        }
-                        else
-                        {
-                            btn.Enabled = true;
-                        }
-                    }
-                }
-            });
-        }
-
         private void EnableLetters()
         {
             foreach(Button btn in Letters)
@@ -410,35 +391,28 @@ namespace Client_Application
         {
             Invoke(() =>
             {
-                foreach (Button button in Letters)
+                ClickedCharacters.Add(btn);
+                btn.Enabled = false;
+                ClientController.RequestHandeller<int,string>(stream,Request.ClientToServerSendChar,room.RoomId,btn.Text);
+                if(game.TurnState != turnState)
                 {
-                    if (button.Text == btn.Text)
+                    turnState = game.TurnState;
+                    PlayerTurnLabel.Text = $"{turnState}'s Turn";
+                    foreach (Button btn in Letters)
                     {
-                        ClickedCharacters.Add(button.Text);
-                        button.Enabled = false;
+
+                        btn.Enabled = false;
                     }
                 }
 
-                if (turnState == TurnState.Player1)
-                {
-                    turnState = TurnState.Player2;
-                    PlayerTurnLabel.Text = "Player 2's Turn";
-                }
-                else
-                {
-                    turnState = TurnState.Player1;
-                    PlayerTurnLabel.Text = "Player 1's Turn";
-                }
-
-                ToggleTurn();
             });
         }
 
-        private void OnGameEnd(string result)
+        private void OnGameEnd()
         {
             Invoke(() =>
             {
-                if (result == "winner")
+                if (WordState.Completed == game.Word.State && game.TurnState == turnState)
                     MessageBox.Show("Congrats! You Won");
                 else
                     MessageBox.Show("Better Luck Next Time");
@@ -447,26 +421,33 @@ namespace Client_Application
 
                 if (confirmation == DialogResult.Yes)
                 {
-                    if (result == "winner")
-                    {
-                        foreach (Button button in Letters)
-                        {
-                            button.Enabled = true;
-                        }
+                    //send the message to the server 
+                    //if (condition)
+                    //{
+                    //    ClickedCharacters.Clear();
+                    //    if (condition)
+                    //    {
+                    //        foreach (Button button in Letters)
+                    //        {
+                    //            button.Enabled = true;
+                    //        }
 
-                        turnState = TurnState.Player1;
-                        PlayerTurnLabel.Text = "Player1's Turn";
-                    }
-                    else
-                    {
-                        foreach (Button button in Letters)
-                        {
-                            button.Enabled = false;
-                        }
+                    //    }
+                    //    else
+                    //    {
+                    //        foreach (Button button in Letters)
+                    //        {
+                    //            button.Enabled = false;
+                    //        }
+                    //    }
 
-                        turnState = TurnState.Player2;
-                        PlayerTurnLabel.Text = "Player2's Turn";
-                    }
+                    //    turnState = game.TurnState;
+                    //    PlayerTurnLabel.Text = $"{turnState}'s Turn";
+                    //}
+                    //else
+                    //{
+                    //    ViewPanel(LoobyPanel);
+                    //}
                 }
             });
         }

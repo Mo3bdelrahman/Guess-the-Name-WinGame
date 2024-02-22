@@ -19,23 +19,18 @@ namespace Server_Application
             TurnState = TurnState.Player1;
         }
 
-        //public bool IsGameCompleted()
-        //{
-        //    if (word.State == WordState.Completed)
-        //    {
-        //        if (turnState == TurnState.Player1)
-        //        {
-        //            result = $"{player1.Name} wins";
-
-        //        }
-        //        else
-        //        {
-        //            result = $"{player2.Name} wins";
-        //        }
-        //        return true;
-        //    }
-        //    return false;
-        //}
+        public void TurnTogeller()
+        {
+            if (TurnState == TurnState.Player1 )
+            {
+                TurnState = TurnState.Player2;
+            }
+            else
+            {
+                TurnState = TurnState.Player1;
+            }
+        }
+   
 
     }
 }
