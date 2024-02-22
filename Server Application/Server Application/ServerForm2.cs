@@ -194,9 +194,6 @@ namespace Server_Application
                 string[] s = { $"{p.Name as string}", $"{p.State}" };
                 listPlayers.Items.Add(new ListViewItem(s));
             }
-
         }
-
-
     }
 }

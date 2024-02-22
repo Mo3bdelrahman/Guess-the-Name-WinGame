@@ -34,21 +34,21 @@ namespace Client_Application
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClientForm));
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges361 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges362 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges363 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges364 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges365 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges366 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges367 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges368 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges369 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges370 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges371 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges372 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges373 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges374 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges375 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             LoginPanel = new Panel();
             textBox1 = new Guna.UI2.WinForms.Guna2TextBox();
             LoginButton = new Guna.UI2.WinForms.Guna2Button();
@@ -122,7 +122,7 @@ namespace Client_Application
             // textBox1
             // 
             textBox1.BorderRadius = 15;
-            textBox1.CustomizableEdges = customizableEdges1;
+            textBox1.CustomizableEdges = customizableEdges361;
             textBox1.DefaultText = "";
             textBox1.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             textBox1.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -138,14 +138,14 @@ namespace Client_Application
             textBox1.PasswordChar = '\0';
             textBox1.PlaceholderText = "";
             textBox1.SelectedText = "";
-            textBox1.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            textBox1.ShadowDecoration.CustomizableEdges = customizableEdges362;
             textBox1.Size = new Size(293, 39);
             textBox1.TabIndex = 7;
             // 
             // LoginButton
             // 
             LoginButton.BorderRadius = 30;
-            LoginButton.CustomizableEdges = customizableEdges3;
+            LoginButton.CustomizableEdges = customizableEdges363;
             LoginButton.DisabledState.BorderColor = Color.DarkGray;
             LoginButton.DisabledState.CustomBorderColor = Color.DarkGray;
             LoginButton.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -155,7 +155,7 @@ namespace Client_Application
             LoginButton.ForeColor = Color.White;
             LoginButton.Location = new Point(558, 380);
             LoginButton.Name = "LoginButton";
-            LoginButton.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            LoginButton.ShadowDecoration.CustomizableEdges = customizableEdges364;
             LoginButton.Size = new Size(139, 56);
             LoginButton.TabIndex = 1;
             LoginButton.Text = "Login";
@@ -251,7 +251,7 @@ namespace Client_Application
             // WatchGameButton
             // 
             WatchGameButton.BorderRadius = 15;
-            WatchGameButton.CustomizableEdges = customizableEdges5;
+            WatchGameButton.CustomizableEdges = customizableEdges365;
             WatchGameButton.DisabledState.BorderColor = Color.DarkGray;
             WatchGameButton.DisabledState.CustomBorderColor = Color.DarkGray;
             WatchGameButton.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -261,7 +261,7 @@ namespace Client_Application
             WatchGameButton.ForeColor = Color.Gold;
             WatchGameButton.Location = new Point(68, 257);
             WatchGameButton.Name = "WatchGameButton";
-            WatchGameButton.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            WatchGameButton.ShadowDecoration.CustomizableEdges = customizableEdges366;
             WatchGameButton.Size = new Size(225, 56);
             WatchGameButton.TabIndex = 8;
             WatchGameButton.Text = "Watch Game";
@@ -270,7 +270,7 @@ namespace Client_Application
             // JoinRoomButton
             // 
             JoinRoomButton.BorderRadius = 15;
-            JoinRoomButton.CustomizableEdges = customizableEdges7;
+            JoinRoomButton.CustomizableEdges = customizableEdges367;
             JoinRoomButton.DisabledState.BorderColor = Color.DarkGray;
             JoinRoomButton.DisabledState.CustomBorderColor = Color.DarkGray;
             JoinRoomButton.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -280,7 +280,7 @@ namespace Client_Application
             JoinRoomButton.ForeColor = Color.Gold;
             JoinRoomButton.Location = new Point(68, 360);
             JoinRoomButton.Name = "JoinRoomButton";
-            JoinRoomButton.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            JoinRoomButton.ShadowDecoration.CustomizableEdges = customizableEdges368;
             JoinRoomButton.Size = new Size(225, 56);
             JoinRoomButton.TabIndex = 7;
             JoinRoomButton.Text = "Join Room";
@@ -289,7 +289,7 @@ namespace Client_Application
             // CreateRoomButton
             // 
             CreateRoomButton.BorderRadius = 15;
-            CreateRoomButton.CustomizableEdges = customizableEdges9;
+            CreateRoomButton.CustomizableEdges = customizableEdges369;
             CreateRoomButton.DisabledState.BorderColor = Color.DarkGray;
             CreateRoomButton.DisabledState.CustomBorderColor = Color.DarkGray;
             CreateRoomButton.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -299,7 +299,7 @@ namespace Client_Application
             CreateRoomButton.ForeColor = Color.Gold;
             CreateRoomButton.Location = new Point(68, 145);
             CreateRoomButton.Name = "CreateRoomButton";
-            CreateRoomButton.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            CreateRoomButton.ShadowDecoration.CustomizableEdges = customizableEdges370;
             CreateRoomButton.Size = new Size(225, 56);
             CreateRoomButton.TabIndex = 4;
             CreateRoomButton.Text = "Create Room";
@@ -308,12 +308,14 @@ namespace Client_Application
             // listView1
             // 
             listView1.BackColor = Color.FromArgb(23, 30, 46);
-            listView1.ForeColor = SystemColors.MenuHighlight;
+            listView1.ForeColor = SystemColors.Menu;
             listView1.Location = new Point(460, 38);
             listView1.Name = "listView1";
             listView1.Size = new Size(673, 489);
             listView1.TabIndex = 5;
             listView1.UseCompatibleStateImageBehavior = false;
+            listView1.View = View.List;
+            listView1.SelectedIndexChanged += listView1_SelectedIndexChanged;
             // 
             // RoomLoobyPanel
             // 
@@ -335,7 +337,7 @@ namespace Client_Application
             // LeaveButton
             // 
             LeaveButton.BorderRadius = 25;
-            LeaveButton.CustomizableEdges = customizableEdges11;
+            LeaveButton.CustomizableEdges = customizableEdges371;
             LeaveButton.DisabledState.BorderColor = Color.DarkGray;
             LeaveButton.DisabledState.CustomBorderColor = Color.DarkGray;
             LeaveButton.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -345,7 +347,7 @@ namespace Client_Application
             LeaveButton.ForeColor = Color.White;
             LeaveButton.Location = new Point(789, 378);
             LeaveButton.Name = "LeaveButton";
-            LeaveButton.ShadowDecoration.CustomizableEdges = customizableEdges12;
+            LeaveButton.ShadowDecoration.CustomizableEdges = customizableEdges372;
             LeaveButton.Size = new Size(168, 56);
             LeaveButton.TabIndex = 7;
             LeaveButton.Text = "Leave";
@@ -354,7 +356,7 @@ namespace Client_Application
             // StartButton
             // 
             StartButton.BorderRadius = 25;
-            StartButton.CustomizableEdges = customizableEdges13;
+            StartButton.CustomizableEdges = customizableEdges373;
             StartButton.DisabledState.BorderColor = Color.DarkGray;
             StartButton.DisabledState.CustomBorderColor = Color.DarkGray;
             StartButton.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -364,7 +366,7 @@ namespace Client_Application
             StartButton.ForeColor = Color.White;
             StartButton.Location = new Point(286, 378);
             StartButton.Name = "StartButton";
-            StartButton.ShadowDecoration.CustomizableEdges = customizableEdges14;
+            StartButton.ShadowDecoration.CustomizableEdges = customizableEdges374;
             StartButton.Size = new Size(168, 56);
             StartButton.TabIndex = 5;
             StartButton.Text = "Start";
@@ -456,7 +458,7 @@ namespace Client_Application
             LeaveGameButton.ImageSize = new Size(40, 40);
             LeaveGameButton.Location = new Point(24, 442);
             LeaveGameButton.Name = "LeaveGameButton";
-            LeaveGameButton.ShadowDecoration.CustomizableEdges = customizableEdges15;
+            LeaveGameButton.ShadowDecoration.CustomizableEdges = customizableEdges375;
             LeaveGameButton.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             LeaveGameButton.Size = new Size(101, 97);
             LeaveGameButton.TabIndex = 29;
@@ -495,6 +497,7 @@ namespace Client_Application
             QButton.TabIndex = 26;
             QButton.Text = "Q";
             QButton.UseVisualStyleBackColor = false;
+            QButton.Click += QButton_Click;
             // 
             // EButton
             // 
@@ -507,6 +510,7 @@ namespace Client_Application
             EButton.TabIndex = 25;
             EButton.Text = "E";
             EButton.UseVisualStyleBackColor = false;
+            EButton.Click += EButton_Click;
             // 
             // RButton
             // 
@@ -519,6 +523,7 @@ namespace Client_Application
             RButton.TabIndex = 24;
             RButton.Text = "R";
             RButton.UseVisualStyleBackColor = false;
+            RButton.Click += RButton_Click;
             // 
             // TButton
             // 
@@ -531,6 +536,7 @@ namespace Client_Application
             TButton.TabIndex = 23;
             TButton.Text = "T";
             TButton.UseVisualStyleBackColor = false;
+            TButton.Click += TButton_Click;
             // 
             // PButton
             // 
@@ -543,6 +549,7 @@ namespace Client_Application
             PButton.TabIndex = 22;
             PButton.Text = "P";
             PButton.UseVisualStyleBackColor = false;
+            PButton.Click += PButton_Click;
             // 
             // KButton
             // 
@@ -555,6 +562,7 @@ namespace Client_Application
             KButton.TabIndex = 21;
             KButton.Text = "K";
             KButton.UseVisualStyleBackColor = false;
+            KButton.Click += KButton_Click;
             // 
             // AButton
             // 
@@ -567,6 +575,7 @@ namespace Client_Application
             AButton.TabIndex = 20;
             AButton.Text = "A";
             AButton.UseVisualStyleBackColor = false;
+            AButton.Click += AButton_Click;
             // 
             // LButton
             // 
@@ -579,6 +588,7 @@ namespace Client_Application
             LButton.TabIndex = 19;
             LButton.Text = "L";
             LButton.UseVisualStyleBackColor = false;
+            LButton.Click += LButton_Click;
             // 
             // IButton
             // 
@@ -591,6 +601,7 @@ namespace Client_Application
             IButton.TabIndex = 18;
             IButton.Text = "I";
             IButton.UseVisualStyleBackColor = false;
+            IButton.Click += IButton_Click;
             // 
             // OButton
             // 
@@ -603,6 +614,7 @@ namespace Client_Application
             OButton.TabIndex = 17;
             OButton.Text = "O";
             OButton.UseVisualStyleBackColor = false;
+            OButton.Click += OButton_Click;
             // 
             // VButton
             // 
@@ -615,6 +627,7 @@ namespace Client_Application
             VButton.TabIndex = 16;
             VButton.Text = "V";
             VButton.UseVisualStyleBackColor = false;
+            VButton.Click += VButton_Click;
             // 
             // NButton
             // 
@@ -627,6 +640,7 @@ namespace Client_Application
             NButton.TabIndex = 15;
             NButton.Text = "N";
             NButton.UseVisualStyleBackColor = false;
+            NButton.Click += NButton_Click;
             // 
             // BButton
             // 
@@ -639,6 +653,7 @@ namespace Client_Application
             BButton.TabIndex = 14;
             BButton.Text = "B";
             BButton.UseVisualStyleBackColor = false;
+            BButton.Click += BButton_Click;
             // 
             // MButton
             // 
@@ -651,6 +666,7 @@ namespace Client_Application
             MButton.TabIndex = 13;
             MButton.Text = "M";
             MButton.UseVisualStyleBackColor = false;
+            MButton.Click += MButton_Click;
             // 
             // UButton
             // 
@@ -663,6 +679,7 @@ namespace Client_Application
             UButton.TabIndex = 12;
             UButton.Text = "U";
             UButton.UseVisualStyleBackColor = false;
+            UButton.Click += UButton_Click;
             // 
             // DButton
             // 
@@ -675,6 +692,7 @@ namespace Client_Application
             DButton.TabIndex = 11;
             DButton.Text = "D";
             DButton.UseVisualStyleBackColor = false;
+            DButton.Click += DButton_Click;
             // 
             // FButton
             // 
@@ -687,6 +705,7 @@ namespace Client_Application
             FButton.TabIndex = 10;
             FButton.Text = "F";
             FButton.UseVisualStyleBackColor = false;
+            FButton.Click += FButton_Click;
             // 
             // GButton
             // 
@@ -699,6 +718,7 @@ namespace Client_Application
             GButton.TabIndex = 9;
             GButton.Text = "G";
             GButton.UseVisualStyleBackColor = false;
+            GButton.Click += GButton_Click;
             // 
             // HButton
             // 
@@ -711,6 +731,7 @@ namespace Client_Application
             HButton.TabIndex = 8;
             HButton.Text = "H";
             HButton.UseVisualStyleBackColor = false;
+            HButton.Click += HButton_Click;
             // 
             // JButton
             // 
@@ -723,6 +744,7 @@ namespace Client_Application
             JButton.TabIndex = 7;
             JButton.Text = "J";
             JButton.UseVisualStyleBackColor = false;
+            JButton.Click += JButton_Click;
             // 
             // XButton
             // 
@@ -735,6 +757,7 @@ namespace Client_Application
             XButton.TabIndex = 6;
             XButton.Text = "X";
             XButton.UseVisualStyleBackColor = false;
+            XButton.Click += XButton_Click;
             // 
             // CButton
             // 
@@ -747,6 +770,7 @@ namespace Client_Application
             CButton.TabIndex = 5;
             CButton.Text = "C";
             CButton.UseVisualStyleBackColor = false;
+            CButton.Click += CButton_Click;
             // 
             // SButton
             // 
@@ -759,6 +783,7 @@ namespace Client_Application
             SButton.TabIndex = 4;
             SButton.Text = "S";
             SButton.UseVisualStyleBackColor = false;
+            SButton.Click += SButton_Click;
             // 
             // YButton
             // 
@@ -771,6 +796,7 @@ namespace Client_Application
             YButton.TabIndex = 3;
             YButton.Text = "Y";
             YButton.UseVisualStyleBackColor = false;
+            YButton.Click += YButton_Click;
             // 
             // WButton
             // 
@@ -783,6 +809,7 @@ namespace Client_Application
             WButton.TabIndex = 2;
             WButton.Text = "W";
             WButton.UseVisualStyleBackColor = false;
+            WButton.Click += WButton_Click;
             // 
             // ZButton
             // 
@@ -795,6 +822,7 @@ namespace Client_Application
             ZButton.TabIndex = 1;
             ZButton.Text = "Z";
             ZButton.UseVisualStyleBackColor = false;
+            ZButton.Click += ZButton_Click;
             // 
             // ClientForm
             // 
@@ -804,7 +832,7 @@ namespace Client_Application
             AutoValidate = AutoValidate.EnablePreventFocusChange;
             BackColor = Color.FromArgb(23, 30, 46);
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1073, 436);
+            ClientSize = new Size(1226, 581);
             FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 2, 3, 2);
             Name = "ClientForm";
