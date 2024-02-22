@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Server_Application
+﻿namespace Server_Application
 {
     internal static class WordCategory
     {
-        static string[] fruits = File.ReadAllLines(@"C:\Users\Lenovo\Desktop\Guess-the-Name-WinGame\Server Application\Server Application\WordCategoryFiles\Food.txt");
-        static string[] sports = File.ReadAllLines(@"C:\Users\Lenovo\Desktop\Guess-the-Name-WinGame\Server Application\Server Application\WordCategoryFiles\Sports.txt");
-        static string[] languages = File.ReadAllLines(@"C:\Users\Lenovo\Desktop\Guess-the-Name-WinGame\Server Application\Server Application\WordCategoryFiles\Languages.txt");
+        static string currentDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+
+        static Dictionary<WordCategories, string[]> filePaths = new Dictionary<WordCategories, string[]>() 
+        {
+            { WordCategories.Food, File.ReadAllLines($@"{currentDirectory}\CategoryFiles\Food.txt")},
+            { WordCategories.Sports, File.ReadAllLines($@"{currentDirectory}\CategoryFiles\Sports.txt") },
+            { WordCategories.Languages, File.ReadAllLines($@"{currentDirectory}\CategoryFiles\Languages.txt") },
+        };
 
         public static string GetCategory(string category)
         {
@@ -18,9 +17,9 @@ namespace Server_Application
 
             switch (category)
             {
-                case "Fruits": return fruits[randomIndex];
-                case "Sports": return sports[randomIndex];
-                case "Languages": return languages[randomIndex];
+                case "Food": return filePaths[WordCategories.Food][randomIndex];
+                case "Sports": return filePaths[WordCategories.Sports][randomIndex];
+                case "Languages": return filePaths[WordCategories.Languages][randomIndex];
                 default: return string.Empty;
             }
         }

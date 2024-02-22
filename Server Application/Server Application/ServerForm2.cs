@@ -90,6 +90,5 @@ namespace Server_Application
             ServerController.RequestHandeller<PlayerState>([p], Request.ServerToClientP2LeaveRoomLobby, p.State);
             ServerController.RequestHandeller<Room>([r.Owner!], Request.ServerToClientP2LeaveRoomLobby, r);            
         }
-
     }
 }

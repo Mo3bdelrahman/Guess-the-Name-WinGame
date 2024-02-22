@@ -20,13 +20,9 @@ namespace Client_Application
         private void Dialog_Load(object sender, EventArgs e)
         {
             Dictionary<string, string> test = new Dictionary<string, string>();
-            test.Add("1", "");
-            test.Add("2", "dfdfdf");
-            test.Add("3", "dfdfdf");
-            test.Add("4", "dfdfdf");
-            test.Add("5", "dfdfdf");
-            test.Add("6", "dfdfdf");
-            test.Add("7", "dfdfdf");
+            test.Add("1", "Food");
+            test.Add("2", "Sports");
+            test.Add("3", "Languages");
 
             CategoryComboBox.DataSource = new BindingSource(test, null);
             CategoryComboBox.DisplayMember = "Value";

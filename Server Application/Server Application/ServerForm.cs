@@ -88,7 +88,7 @@ namespace Server_Application
         {
             try
             {
-                string category = WordCategory.GetCategory("Fruits");
+                string category = WordCategory.GetCategory("Food");
 
                 if (category == string.Empty)
                 {

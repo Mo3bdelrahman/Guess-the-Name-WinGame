@@ -61,7 +61,7 @@ namespace Server_Application
 
     enum WordCategories
     {
-        Fruits,
+        Food,
         Sports,
         Languages,
         NotAvailable

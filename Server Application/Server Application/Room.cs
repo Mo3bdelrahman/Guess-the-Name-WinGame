@@ -48,6 +48,11 @@ namespace Server_Application
                 CreateGame();
             }
         }
+
+        public override string ToString()
+        {
+            return $"Id: {RoomId} \t Name: {RoomName} \t state: {state}";
+        }
         //public bool IsRoomCompleted()
         //{
         //    if (game.IsGameCompleted())
