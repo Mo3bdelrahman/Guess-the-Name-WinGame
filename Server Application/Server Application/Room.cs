@@ -27,6 +27,7 @@ namespace Server_Application
         {
             this.Owner = owner;
             this.Category = cat;
+            Watchers = new List<Player>();
             this.RoomName = $"{owner.Name}'s room";
             this.RoomId = id;
             state = RoomState.Waiting;

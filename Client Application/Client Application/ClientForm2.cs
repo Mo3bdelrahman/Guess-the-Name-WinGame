@@ -5,6 +5,7 @@
         Room room;
         List<Room> roomList;
         Game game;
+        string[] Categories;
 
 
         private void Distributer(Request req, List<string> para)
@@ -21,6 +22,9 @@
                 case Request.ServerToClientResponseToJoin: PlayerResponseToJoin(para); break;
                 case Request.ServerToClientStartGame: StartGame(para);break;
                 case Request.ServerToClientSendChar: Play(para); break;
+                case Request.ServerToClientLoadCategories: loadCategories(para); break;
+                case Request.ServerToClientWatch: WatchGame(para); break;
+                case Request.ServerToClientAddWatcher: AddWatcher(para); break;
 
 
                 default: MessageBox.Show($"Not Handelled  req : {req}"); break;
@@ -131,6 +135,7 @@
                     {
                         player.State = room.Guest.State;
                         MessageBox.Show($"hi{player.Name} you Enterd {room.RoomName} the state now is {room.state}");
+                        Invoke(() => ViewPanel(RoomLoobyPanel));
                     }
                 }
                 else
@@ -148,6 +153,7 @@
             try
             {
                 game = jsonStringList[0].GetOriginalData<Game>();
+                room.state = jsonStringList[1].GetOriginalData<RoomState>();
                 Invoke(() => ViewPanel(GamePanel));
                 MessageBox.Show($"the Game started {game.TurnState} turn and the word is {game.Word.CurrentWord}");
             }
@@ -165,6 +171,41 @@
 
 
         }
+        private void loadCategories(List<string> jsonStringList)
+        {
+            try
+            {
+                Categories = jsonStringList[0].GetOriginalData<string[]>();
+                MessageBox.Show("Categories : " +String.Join(",",Categories));
+            }
+            catch(Exception e) { MessageBox.Show("Load Categories"+e.Message); }
+        }
+        private void WatchGame(List<string> jsonStringList)
+        {
+            try
+            {
+                player = jsonStringList[0].GetOriginalData<Player>();
+                room = jsonStringList[1].GetOriginalData<Room>();
+                game = jsonStringList[2].GetOriginalData<Game>();
+                //update game Panal
+                Invoke(() => ViewPanel(GamePanel));
+                MessageBox.Show($"Wellcome {player?.Name}, Have fun in {room?.RoomName} now turn of {game?.TurnState} the word is {game?.Word?.CurrentWord}");
+            }
+            catch (Exception e) { MessageBox.Show("From watch game" + e.Message); }
+
+        }
+        private void AddWatcher(List<string> jsonStringList)
+        {
+            try
+            {
+                room.WatchersCount++;
+                // update Counter in game panal
+                MessageBox.Show($"the Watcher count is {room.WatchersCount} ");
+            }
+            catch (Exception e) { MessageBox.Show("From add watcher " + e.Message); }
+
+        }
+
         private void UpdateRoomList()
         {
             listView1.Items.Clear();

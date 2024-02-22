@@ -120,7 +120,7 @@ namespace Client_Application
         {
             Dialog dialog = new Dialog();
             DialogResult result = dialog.ShowDialog();
-            ClientController.RequestHandeller<string>(stream, Request.ClientToServerCreateRoom, ActiveRoom);
+            ClientController.RequestHandeller(stream, Request.ClientToServerLoadCategories);
 
             if (result == DialogResult.OK)
             {
@@ -131,16 +131,27 @@ namespace Client_Application
 
         private void JoinRoomButton_Click(object sender, EventArgs e)
         {
+            try
+            {
+                //Note we need here get id of the selected room from list box
+                ClientController.RequestHandeller<int>(stream, Request.ClientToServerAskToJoin, int.Parse(ActiveRoom.Split(' ')[1]));
+            }
+            catch (Exception ex) { MessageBox.Show("You Cant Join that Room.."); }
             //OnJoinResponseReceive();
-            ViewPanel(RoomLoobyPanel);
-            //Note we need here get id of the selected room from list box
-            ClientController.RequestHandeller<int>(stream,Request.ClientToServerAskToJoin,int.Parse(ActiveRoom.Split(' ')[1]));
+             
         }
 
         private void WatchGameButton_Click(object sender, EventArgs e)
         {
             //OnWatchClick();
-            ViewPanel(GamePanel);
+            //ViewPanel(GamePanel);
+            try
+            {
+                int id = int.Parse(ActiveRoom.Split(' ')[1]);
+                ClientController.RequestHandeller<int>(stream, Request.ClientToServerWatch, id);
+            }
+            catch{ MessageBox.Show("You Cant Watch that Room.."); }
+            
         }
 
         private void LeaveButton_Click(object sender, EventArgs e)
