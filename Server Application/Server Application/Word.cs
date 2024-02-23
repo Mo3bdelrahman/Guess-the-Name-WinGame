@@ -21,9 +21,9 @@ namespace Server_Application
         public Word(string word)
         {
             originalWord = word;
-            GetRandomWordFromFile();
+            GetHashWord();
         }
-        public void GetRandomWordFromFile()
+        public void GetHashWord()
         {
             CurrentWord = "";
             for (int i = 0; i < originalWord?.Length; i++)
