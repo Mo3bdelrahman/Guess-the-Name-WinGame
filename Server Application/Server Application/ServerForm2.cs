@@ -76,6 +76,7 @@ namespace Server_Application
             p.State = PlayerState.Player1;
             ServerController.RequestHandeller<Room,PlayerState>([p], Request.ServerToClientCreateRoom, room,p.State);
             ServerController.RequestHandeller(Players, Request.ServerToClientUpdateRooms);
+            Logger.Write(Log.General,$"{p.Name} create room ");
             Invoke(() => UpdateRoomList());
             Invoke(() => UpdatePlayerList());
         }
@@ -197,7 +198,7 @@ namespace Server_Application
 
 
             }
-            catch (Exception e) { MessageBox.Show("From send at server char "+e.Message); }
+            catch (Exception e) { Logger.Write(Log.ServerError, e.Message); }
 
         }
         private void SendCategories(NetworkStream stream, List<string> jsonStringList)

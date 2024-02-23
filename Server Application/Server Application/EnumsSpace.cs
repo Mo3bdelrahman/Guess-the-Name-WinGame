@@ -81,4 +81,13 @@ namespace Server_Application
         Player1 = 1,
         Player2
     }
+
+    enum Log
+    {
+        General,
+        ServerError,
+        ClientError,
+        GameResult,
+        All
+    }
 }

@@ -37,12 +37,16 @@
             tabResults = new TabPage();
             listResults = new ListView();
             LogPage = new TabPage();
+            LogsListBox = new ListBox();
+            ExportBtn = new Button();
+            LogsComboBox = new ComboBox();
             btnStart = new Button();
             button1 = new Button();
             TabData.SuspendLayout();
             tabPlayers.SuspendLayout();
             tabRooms.SuspendLayout();
             tabResults.SuspendLayout();
+            LogPage.SuspendLayout();
             SuspendLayout();
             // 
             // TabData
@@ -120,6 +124,9 @@
             // 
             // LogPage
             // 
+            LogPage.Controls.Add(LogsListBox);
+            LogPage.Controls.Add(ExportBtn);
+            LogPage.Controls.Add(LogsComboBox);
             LogPage.Location = new Point(4, 29);
             LogPage.Margin = new Padding(3, 4, 3, 4);
             LogPage.Name = "LogPage";
@@ -128,6 +135,36 @@
             LogPage.TabIndex = 3;
             LogPage.Text = "Logs";
             LogPage.UseVisualStyleBackColor = true;
+            // 
+            // LogsListBox
+            // 
+            LogsListBox.FormattingEnabled = true;
+            LogsListBox.HorizontalScrollbar = true;
+            LogsListBox.Location = new Point(23, 70);
+            LogsListBox.Name = "LogsListBox";
+            LogsListBox.Size = new Size(684, 244);
+            LogsListBox.TabIndex = 2;
+            // 
+            // ExportBtn
+            // 
+            ExportBtn.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            ExportBtn.Location = new Point(244, 19);
+            ExportBtn.Name = "ExportBtn";
+            ExportBtn.Size = new Size(161, 36);
+            ExportBtn.TabIndex = 1;
+            ExportBtn.Text = "Export";
+            ExportBtn.UseVisualStyleBackColor = true;
+            ExportBtn.Click += ExportBtn_Click;
+            // 
+            // LogsComboBox
+            // 
+            LogsComboBox.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LogsComboBox.FormattingEnabled = true;
+            LogsComboBox.Location = new Point(23, 19);
+            LogsComboBox.Name = "LogsComboBox";
+            LogsComboBox.Size = new Size(172, 36);
+            LogsComboBox.TabIndex = 0;
+            LogsComboBox.SelectedIndexChanged += LogsComboBox_SelectedIndexChanged;
             // 
             // btnStart
             // 
@@ -165,6 +202,7 @@
             tabPlayers.ResumeLayout(false);
             tabRooms.ResumeLayout(false);
             tabResults.ResumeLayout(false);
+            LogPage.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -180,5 +218,8 @@
         private ListView listResults;
         private TabPage LogPage;
         private Button button1;
+        private ComboBox LogsComboBox;
+        private Button ExportBtn;
+        private ListBox LogsListBox;
     }
 }
