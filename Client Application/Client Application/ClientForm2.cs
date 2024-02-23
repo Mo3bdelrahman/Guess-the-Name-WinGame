@@ -161,7 +161,8 @@
         private void Play(List<string> jsonStringList)
         {
             bool res = jsonStringList[0].GetOriginalData<bool>();
-            game = jsonStringList[1].GetOriginalData<Game>();
+            string GameChar = jsonStringList[1].GetOriginalData<string>();
+            game = jsonStringList[2].GetOriginalData<Game>();
             // update UI here
             Invoke(() => MessageBox.Show("Game updated turn of " + game.TurnState + "the Word now is" + game.Word.CurrentWord + "boolean value" + res));
             ToggleTurn();
