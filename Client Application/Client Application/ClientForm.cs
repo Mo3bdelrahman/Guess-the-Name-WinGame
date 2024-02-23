@@ -207,7 +207,8 @@ namespace Client_Application
 
             if (result == DialogResult.Yes)
             {
-                ViewPanel(LoobyPanel);
+                //ViewPanel(LoobyPanel);
+                ClientController.RequestHandeller<int>(stream,Request.ClientToServerLeaveGame,room.RoomId);
             }
         }
         private void label1_Click(object sender, EventArgs e)
@@ -397,16 +398,16 @@ namespace Client_Application
                 ClickedCharacters.Add(btn);
                 btn.Enabled = false;
                 ClientController.RequestHandeller<int,string>(stream,Request.ClientToServerSendChar,room.RoomId,btn.Text);
-                if(game.TurnState != turnState)
-                {
-                    turnState = game.TurnState;
-                    PlayerTurnLabel.Text = $"{turnState}'s Turn";
-                    foreach (Button btn in Letters)
-                    {
+                //if(game.TurnState.ToString() != turnState.ToString())
+                //{
+                //    turnState = game.TurnState;
+                //    PlayerTurnLabel.Text = $"{turnState}'s Turn";
+                //    foreach (Button btn in Letters)
+                //    {
 
-                        btn.Enabled = false;
-                    }
-                }
+                //        btn.Enabled = false;
+                //    }
+                //}
 
             });
         }
