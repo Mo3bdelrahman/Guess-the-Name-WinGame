@@ -194,7 +194,8 @@ namespace Client_Application
 
             if (result == DialogResult.Yes)
             {
-                ViewPanel(LoobyPanel);
+                //ViewPanel(LoobyPanel);
+                ClientController.RequestHandeller<int>(stream,Request.ClientToServerLeaveGame,room.RoomId);
             }
         }
         private void label1_Click(object sender, EventArgs e)

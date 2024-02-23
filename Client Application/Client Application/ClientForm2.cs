@@ -25,6 +25,7 @@
                 case Request.ServerToClientLoadCategories: loadCategories(para); break;
                 case Request.ServerToClientWatch: WatchGame(para); break;
                 case Request.ServerToClientAddWatcher: AddWatcher(para); break;
+                case Request.ServerToClientLeaveGame: LeaveGame(para); break;
 
 
                 default: MessageBox.Show($"Not Handelled  req : {req}"); break;
@@ -201,6 +202,20 @@
             }
             catch (Exception e) { MessageBox.Show("From add watcher " + e.Message); }
 
+        }
+        private void LeaveGame(List<string> jsonStringList)
+        {
+            try
+            {
+                player.State = jsonStringList[0].GetOriginalData<PlayerState>();
+                room = null;
+                ClientController.RequestHandeller(stream, Request.ClientToServerLoadLobby);
+                MessageBox.Show("Player Leaved,Game Finished and The room was closed");
+                Invoke(() => ViewPanel(LoobyPanel));
+                //OnLeaveClick();
+            }
+            catch(Exception e) { MessageBox.Show("Leave Game Error"+e.Message); }
+            Invoke(() => UpdateRoomList());
         }
 
         private void UpdateRoomList()

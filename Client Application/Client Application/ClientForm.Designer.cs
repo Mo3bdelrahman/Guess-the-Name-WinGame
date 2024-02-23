@@ -907,9 +907,10 @@ namespace Client_Application
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1164, 620);
             FormBorderStyle = FormBorderStyle.None;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "ClientForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Form1";
+            Text = "Guess Word";
             LoginPanel.ResumeLayout(false);
             LoginPanel.PerformLayout();
             LoobyPanel.ResumeLayout(false);
