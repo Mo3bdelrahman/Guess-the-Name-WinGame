@@ -19,6 +19,7 @@ namespace Client_Application
         List<Button> ClickedCharacters = new List<Button>();
         TurnState turnState;
         Panel ActivePanel;
+        Button ClickedButton;
         string ActiveRoom;
         public ClientForm()
         {
@@ -111,22 +112,13 @@ namespace Client_Application
                 if (IsConnected)
                 {
                     ClientController.RequestHandeller<string>(stream, Request.ClientToServerLogin, textBox1.Text);
-                    ViewPanel(LoobyPanel);
                 }
             }
         }
 
         private void CreateRoomButton_Click(object sender, EventArgs e)
         {
-            Dialog dialog = new Dialog();
-            DialogResult result = dialog.ShowDialog();
             ClientController.RequestHandeller(stream, Request.ClientToServerLoadCategories);
-
-            if (result == DialogResult.OK)
-            {
-                ClientController.RequestHandeller<string>(stream, Request.ClientToServerCreateRoom, dialog.cat);
-                ViewPanel(RoomLoobyPanel);
-            }
         }
 
         private void JoinRoomButton_Click(object sender, EventArgs e)
@@ -137,7 +129,6 @@ namespace Client_Application
                 ClientController.RequestHandeller<int>(stream, Request.ClientToServerAskToJoin, int.Parse(ActiveRoom.Split(' ')[1]));
             }
             catch (Exception ex) { MessageBox.Show("You Cant Join that Room.."); }
-            //OnJoinResponseReceive();
              
         }
 
@@ -165,13 +156,11 @@ namespace Client_Application
             {
                 ClientController.RequestHandeller<int>(stream, Request.ClientToServerP2LeaveRoomLobby, room.RoomId);
             }
-
-            ViewPanel(LoobyPanel);
         }
 
         private void StartButton_Click(object sender, EventArgs e)
         {
-            //OnStartClick();
+            StartButton.Enabled = false;
             ClientController.RequestHandeller<int>(stream,Request.ClientToServerStartGame,room.RoomId);
         }
 
@@ -201,8 +190,6 @@ namespace Client_Application
 
         private void LeaveGameButton_Click(object sender, EventArgs e)
         {
-            //OnLeaveClick();
-
             DialogResult result = MessageBox.Show("Are you sure you want to leave the game?", "Leave Game Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
@@ -245,32 +232,6 @@ namespace Client_Application
             Letters.Add(ZButton);
         }
 
-        private void FillRooms(List<Room> rooms)
-        {
-            Invoke(() =>
-            {
-                listView1.Items.Clear();
-
-                if (rooms.Count > 0)
-                {
-                    foreach (var room in rooms)
-                    {
-                        ListViewItem roomItem = new ListViewItem(room.ToString());
-                        roomList.Add(room);
-                        listView1.Items.Add(roomItem);
-                    }
-                }
-            });
-        }
-        private void EnableLetters()
-        {
-            foreach(Button btn in Letters)
-            {
-                btn.Visible = true;
-                btn.Enabled = true;
-            }
-        }
-
         // Custom Event Functions
 
         private void OnLoginClick()
@@ -278,33 +239,31 @@ namespace Client_Application
             Invoke(() => ViewPanel(LoobyPanel));
         }
 
-        private void OnLoadLobby()
+        private void OnCreateClick()
         {
             Invoke(() =>
             {
-                FillRooms(roomList);
+                Dialog dialog = new Dialog(Categories);
+                DialogResult result = dialog.ShowDialog();
 
-                WatchGameButton.Enabled = false;
-                JoinRoomButton.Enabled = false;
+                if (result == DialogResult.OK)
+                {
+                    ClientController.RequestHandeller<string>(stream, Request.ClientToServerCreateRoom, dialog.cat);
+                    ViewPanel(RoomLoobyPanel);
+                }
             });
         }
 
-        private void OnCreateClick(bool IsCreated)
+        private void OnCreateResponse()
         {
             Invoke(() =>
             {
-                if (IsCreated)
-                {
-                    ListViewItem roomItem = new ListViewItem(room.ToString());
-                    roomList.Add(room);
-                    listView1.Items.Add(roomItem);
-                    CreateRoomButton.Enabled = false;
-                }
-                else
-                {
-                    MessageBox.Show("Failed To Create Room");
-                }
+                UpdateRoomList();
+                Player1Label.Text = room.Owner?.Name;
+                Player2Label.Text = "Searching...";
+                StartButton.Enabled = false;
             });
+            
         }
 
         private void OnWatchClick()
@@ -319,47 +278,33 @@ namespace Client_Application
             });
         }
 
-        private void OnJoinRequestReceive()
+        private void OnJoinClick(bool response)
         {
-            DialogResult result = MessageBox.Show("Player anything Wants to join your room", "Join Request", MessageBoxButtons.YesNo);
-
-            if (result == DialogResult.Yes)
+            Invoke(() => 
             {
-                Invoke(() =>
+                if (response) 
                 {
-                    ViewPanel(RoomLoobyPanel);
-                });
-            }
-        }
-
-        private void OnJoinResponseReceive()
-        {
-            Invoke(() =>
-            {
-                ViewPanel(RoomLoobyPanel);
-            });
-        }
-
-        private void OnLeaveClick()
-        {
-            Invoke(() =>
-            {
-                DialogResult result = MessageBox.Show("Are you sure you want to leave the game?", "Leave Game Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                if (result == DialogResult.Yes)
-                {
-                    ClickedCharacters.Clear();
-                    EnableLetters();
-                    ViewPanel(LoobyPanel);
+                    if (player.State == PlayerState.Player1)
+                    {
+                        Player2Label.Text = room.Guest?.Name;
+                        StartButton.Enabled = true;
+                    }
+                    else
+                    {
+                        Player1Label.Text = room.Owner?.Name;
+                        Player2Label.Text = room.Guest?.Name;
+                        ViewPanel(RoomLoobyPanel);
+                    }
                 }
             });
         }
 
-        private void OnLeaveReceive()
+        private void OnLeaveClick() 
         {
-            Invoke(() =>
-            {
+            Invoke(() => 
+            { 
                 ViewPanel(LoobyPanel);
+                UpdateRoomList();
             });
         }
 
@@ -367,91 +312,125 @@ namespace Client_Application
         {
             Invoke(() =>
             {
-                ClickedCharacters.Clear();
-                if (turnState == TurnState.Player1)
+                if (room.state == RoomState.Running) 
                 {
-                    turnState = TurnState.Player2;
-                    PlayerTurnLabel.Text = "Player 2's Turn";
-                    foreach(Button btn in Letters)
-                    {
-                        btn.Enabled = false;
-                    }
-                }
-                else
-                {
-                    turnState = TurnState.Player1;
-                    PlayerTurnLabel.Text = "Player 1's Turn";
-                    foreach (Button btn in Letters)
-                    {
-                        btn.Enabled = true;
-                    }
-                }
+                    ClickedCharacters.Clear();
+                    DashLabel.Text = game.Word.CurrentWord;
 
-                ViewPanel(GamePanel);
+                    if (player.State == room.Owner?.State)
+                    {
+                        turnState = TurnState.Player1;
+                        PlayerTurnLabel.Text = $"Your Turn";
+
+                        foreach (Button btn in Letters)
+                        {
+                            btn.Enabled = true;
+                        }
+                    }
+                    else
+                    {
+                        turnState = TurnState.Player2;
+                        PlayerTurnLabel.Text = "Opponent's Turn";
+                        foreach (Button btn in Letters)
+                        {
+                            btn.Enabled = false;
+                        }
+                    }
+
+                    ViewPanel(GamePanel);
+                }
             });
         }
 
         private void OnCharacterClick(Button btn)
         {
-            Invoke(() =>
-            {
-                ClickedCharacters.Add(btn);
-                btn.Enabled = false;
-                ClientController.RequestHandeller<int,string>(stream,Request.ClientToServerSendChar,room.RoomId,btn.Text);
-                //if(game.TurnState.ToString() != turnState.ToString())
-                //{
-                //    turnState = game.TurnState;
-                //    PlayerTurnLabel.Text = $"{turnState}'s Turn";
-                //    foreach (Button btn in Letters)
-                //    {
-
-                //        btn.Enabled = false;
-                //    }
-                //}
-
-            });
+            ClickedCharacters.Add(btn);
+            ClientController.RequestHandeller<int,string>(stream,Request.ClientToServerSendChar,room.RoomId,btn.Text);
         }
 
-        private void OnGameEnd()
+        private void ToggleTurn()
         {
             Invoke(() =>
             {
-                if (WordState.Completed == game.Word.State && game.TurnState == turnState)
-                    MessageBox.Show("Congrats! You Won");
-                else
-                    MessageBox.Show("Better Luck Next Time");
+                DashLabel.Text = game.Word.CurrentWord;
 
-                DialogResult confirmation = MessageBox.Show("Do you want to play again?", "One More Round", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                if (confirmation == DialogResult.Yes)
+                if (game.Word.State == WordState.Completed)
                 {
-                    //send the message to the server 
-                    //if (condition)
-                    //{
-                    //    ClickedCharacters.Clear();
-                    //    if (condition)
-                    //    {
-                    //        foreach (Button button in Letters)
-                    //        {
-                    //            button.Enabled = true;
-                    //        }
+                    if (player.State != PlayerState.Watcher)
+                    {
+                        if (game.TurnState != turnState)
+                        {
+                            MessageBox.Show("You Lost. Better Luck Next Time");
+                        }
+                        else
+                        {
+                            MessageBox.Show("You Win. Congrats on your victory!");
+                        }
 
-                    //    }
-                    //    else
-                    //    {
-                    //        foreach (Button button in Letters)
-                    //        {
-                    //            button.Enabled = false;
-                    //        }
-                    //    }
+                        foreach (Button btn in Letters)
+                        {
+                            btn.Enabled = false;
+                        }
 
-                    //    turnState = game.TurnState;
-                    //    PlayerTurnLabel.Text = $"{turnState}'s Turn";
-                    //}
-                    //else
-                    //{
-                    //    ViewPanel(LoobyPanel);
-                    //}
+                        DialogResult result = MessageBox.Show("Play Again?", "One More Round", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                        if (result == DialogResult.Yes)
+                        {
+                            // Send To Server
+                        }
+                        else
+                        {
+                            // Send To Server
+                            ViewPanel(LoobyPanel);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Game Is Over!");
+                        ViewPanel(LoobyPanel);
+                    }
+                }
+                else
+                {
+                    if (game.TurnState != turnState)
+                    {
+                        if (player.State == PlayerState.Watcher)
+                        {
+                            PlayerTurnLabel.Text = $"{game.TurnState}'s Turn";
+                        }
+                        else
+                        {
+                            PlayerTurnLabel.Text = $"Opponent's Turn";
+
+                            foreach (Button btn in Letters)
+                            {
+                                btn.Enabled = false;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if ( player.State == PlayerState.Watcher )
+                        {
+                            PlayerTurnLabel.Text = $"{game.TurnState}'s Turn";
+                        }
+                        else
+                        {
+                            PlayerTurnLabel.Text = $"Your Turn";
+
+                            foreach (Button btn in Letters)
+                            {
+                                if (ClickedCharacters.Contains(btn))
+                                {
+                                    btn.Enabled = false;
+                                }
+                                else
+                                {
+                                    btn.Enabled = true;
+                                }
+                            }
+                        }
+                    }
                 }
             });
         }
