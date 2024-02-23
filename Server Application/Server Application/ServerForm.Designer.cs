@@ -34,8 +34,6 @@
             listPlayers = new ListView();
             tabRooms = new TabPage();
             listRooms = new ListView();
-            tabResults = new TabPage();
-            listResults = new ListView();
             LogPage = new TabPage();
             LogsListBox = new ListBox();
             ExportBtn = new Button();
@@ -45,7 +43,6 @@
             TabData.SuspendLayout();
             tabPlayers.SuspendLayout();
             tabRooms.SuspendLayout();
-            tabResults.SuspendLayout();
             LogPage.SuspendLayout();
             SuspendLayout();
             // 
@@ -53,7 +50,6 @@
             // 
             TabData.Controls.Add(tabPlayers);
             TabData.Controls.Add(tabRooms);
-            TabData.Controls.Add(tabResults);
             TabData.Controls.Add(LogPage);
             TabData.Font = new Font("Tempus Sans ITC", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             TabData.Location = new Point(31, 24);
@@ -105,34 +101,12 @@
             listRooms.UseCompatibleStateImageBehavior = false;
             listRooms.View = View.List;
             // 
-            // tabResults
-            // 
-            tabResults.BackColor = Color.FromArgb(23, 30, 64);
-            tabResults.Controls.Add(listResults);
-            tabResults.ForeColor = SystemColors.ActiveCaptionText;
-            tabResults.Location = new Point(4, 31);
-            tabResults.Name = "tabResults";
-            tabResults.Padding = new Padding(3);
-            tabResults.Size = new Size(730, 344);
-            tabResults.TabIndex = 2;
-            tabResults.Text = "Game Results";
-            // 
-            // listResults
-            // 
-            listResults.BackColor = SystemColors.InactiveCaption;
-            listResults.Location = new Point(6, 5);
-            listResults.Name = "listResults";
-            listResults.Size = new Size(718, 335);
-            listResults.TabIndex = 0;
-            listResults.UseCompatibleStateImageBehavior = false;
-            listResults.View = View.List;
-            // 
             // LogPage
             // 
+            LogPage.BackColor = SystemColors.InactiveCaption;
             LogPage.Controls.Add(LogsListBox);
             LogPage.Controls.Add(ExportBtn);
             LogPage.Controls.Add(LogsComboBox);
-            LogPage.BackColor = SystemColors.InactiveCaption;
             LogPage.Location = new Point(4, 31);
             LogPage.Margin = new Padding(3, 4, 3, 4);
             LogPage.Name = "LogPage";
@@ -145,9 +119,10 @@
             // 
             LogsListBox.FormattingEnabled = true;
             LogsListBox.HorizontalScrollbar = true;
+            LogsListBox.ItemHeight = 22;
             LogsListBox.Location = new Point(23, 70);
             LogsListBox.Name = "LogsListBox";
-            LogsListBox.Size = new Size(684, 244);
+            LogsListBox.Size = new Size(684, 224);
             LogsListBox.TabIndex = 2;
             // 
             // ExportBtn
@@ -193,9 +168,9 @@
             button1.Font = new Font("Tempus Sans ITC", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             button1.Location = new Point(482, 410);
             button1.Name = "button1";
-            button1.Size = new Size(147, 29);
+            button1.Size = new Size(154, 29);
             button1.TabIndex = 2;
-            button1.Text = "Test";
+            button1.Text = "Upload Category";
             button1.UseVisualStyleBackColor = false;
             button1.Click += Test_Click;
             // 
@@ -215,7 +190,6 @@
             TabData.ResumeLayout(false);
             tabPlayers.ResumeLayout(false);
             tabRooms.ResumeLayout(false);
-            tabResults.ResumeLayout(false);
             LogPage.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -225,11 +199,9 @@
         private TabControl TabData;
         private TabPage tabPlayers;
         private TabPage tabRooms;
-        private TabPage tabResults;
         private Button btnStart;
         private ListView listPlayers;
         private ListView listRooms;
-        private ListView listResults;
         private TabPage LogPage;
         private Button button1;
         private ComboBox LogsComboBox;
