@@ -163,7 +163,7 @@
             string GameChar = jsonStringList[1].GetOriginalData<string>();
             game = jsonStringList[2].GetOriginalData<Game>();
             // update UI here
-            ToggleTurn();
+            ToggleTurn(GameChar);
         }
         private void loadCategories(List<string> jsonStringList)
         {

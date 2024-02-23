@@ -157,7 +157,7 @@ namespace Client_Application
             LoginButton.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             LoginButton.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             LoginButton.FillColor = Color.MediumSeaGreen;
-            LoginButton.Font = new Font("Microsoft Sans Serif", 10.8F);
+            LoginButton.Font = new Font("Ravie", 10.8F);
             LoginButton.ForeColor = Color.White;
             LoginButton.Location = new Point(511, 381);
             LoginButton.Name = "LoginButton";
@@ -170,11 +170,11 @@ namespace Client_Application
             // UserNameLabel
             // 
             UserNameLabel.AutoSize = true;
-            UserNameLabel.Font = new Font("Microsoft Sans Serif", 13.8F);
+            UserNameLabel.Font = new Font("Showcard Gothic", 13.8F);
             UserNameLabel.ForeColor = Color.Orange;
             UserNameLabel.Location = new Point(345, 339);
             UserNameLabel.Name = "UserNameLabel";
-            UserNameLabel.Size = new Size(118, 24);
+            UserNameLabel.Size = new Size(164, 29);
             UserNameLabel.TabIndex = 0;
             UserNameLabel.Text = "Player Name";
             // 
@@ -182,11 +182,11 @@ namespace Client_Application
             // 
             XExitLabel1.AutoSize = true;
             XExitLabel1.Cursor = Cursors.Hand;
-            XExitLabel1.Font = new Font("Microsoft Sans Serif", 18F, FontStyle.Bold);
+            XExitLabel1.Font = new Font("Ravie", 18F, FontStyle.Bold);
             XExitLabel1.ForeColor = SystemColors.ButtonHighlight;
             XExitLabel1.Location = new Point(1107, 9);
             XExitLabel1.Name = "XExitLabel1";
-            XExitLabel1.Size = new Size(31, 29);
+            XExitLabel1.Size = new Size(46, 40);
             XExitLabel1.TabIndex = 6;
             XExitLabel1.Text = "X";
             XExitLabel1.Click += XExitLabel_Click;
@@ -197,11 +197,11 @@ namespace Client_Application
             // 
             XExitLabel2.AutoSize = true;
             XExitLabel2.Cursor = Cursors.Hand;
-            XExitLabel2.Font = new Font("Microsoft Sans Serif", 18F, FontStyle.Bold);
+            XExitLabel2.Font = new Font("Ravie", 18F, FontStyle.Bold);
             XExitLabel2.ForeColor = SystemColors.ButtonHighlight;
             XExitLabel2.Location = new Point(1101, 9);
             XExitLabel2.Name = "XExitLabel2";
-            XExitLabel2.Size = new Size(31, 29);
+            XExitLabel2.Size = new Size(46, 40);
             XExitLabel2.TabIndex = 6;
             XExitLabel2.Text = "X";
             XExitLabel2.Click += XExitLabel_Click;
@@ -212,11 +212,11 @@ namespace Client_Application
             // 
             XExitLabel3.AutoSize = true;
             XExitLabel3.Cursor = Cursors.Hand;
-            XExitLabel3.Font = new Font("Microsoft Sans Serif", 18F, FontStyle.Bold);
+            XExitLabel3.Font = new Font("Ravie", 18F, FontStyle.Bold);
             XExitLabel3.ForeColor = SystemColors.ButtonHighlight;
             XExitLabel3.Location = new Point(1106, 9);
             XExitLabel3.Name = "XExitLabel3";
-            XExitLabel3.Size = new Size(31, 29);
+            XExitLabel3.Size = new Size(46, 40);
             XExitLabel3.TabIndex = 6;
             XExitLabel3.Text = "X";
             XExitLabel3.Click += XExitLabel_Click;
@@ -227,11 +227,11 @@ namespace Client_Application
             // 
             XExitLabel4.AutoSize = true;
             XExitLabel4.Cursor = Cursors.Hand;
-            XExitLabel4.Font = new Font("Microsoft Sans Serif", 18F, FontStyle.Bold);
+            XExitLabel4.Font = new Font("Ravie", 18F, FontStyle.Bold);
             XExitLabel4.ForeColor = SystemColors.ButtonHighlight;
             XExitLabel4.Location = new Point(1104, 9);
             XExitLabel4.Name = "XExitLabel4";
-            XExitLabel4.Size = new Size(31, 29);
+            XExitLabel4.Size = new Size(46, 40);
             XExitLabel4.TabIndex = 6;
             XExitLabel4.Text = "X";
             XExitLabel4.Click += XExitLabel_Click;
@@ -264,7 +264,7 @@ namespace Client_Application
             WatchGameButton.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             WatchGameButton.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             WatchGameButton.FillColor = Color.SaddleBrown;
-            WatchGameButton.Font = new Font("Microsoft Sans Serif", 10.8F);
+            WatchGameButton.Font = new Font("Ravie", 10.8F);
             WatchGameButton.ForeColor = Color.Gold;
             WatchGameButton.Location = new Point(68, 257);
             WatchGameButton.Name = "WatchGameButton";
@@ -284,7 +284,7 @@ namespace Client_Application
             JoinRoomButton.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             JoinRoomButton.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             JoinRoomButton.FillColor = Color.SaddleBrown;
-            JoinRoomButton.Font = new Font("Microsoft Sans Serif", 10.8F);
+            JoinRoomButton.Font = new Font("Ravie", 10.8F);
             JoinRoomButton.ForeColor = Color.Gold;
             JoinRoomButton.Location = new Point(68, 360);
             JoinRoomButton.Name = "JoinRoomButton";
@@ -304,7 +304,7 @@ namespace Client_Application
             CreateRoomButton.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             CreateRoomButton.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             CreateRoomButton.FillColor = Color.SaddleBrown;
-            CreateRoomButton.Font = new Font("Microsoft Sans Serif", 10.8F);
+            CreateRoomButton.Font = new Font("Ravie", 10.8F);
             CreateRoomButton.ForeColor = Color.Gold;
             CreateRoomButton.Location = new Point(68, 145);
             CreateRoomButton.Name = "CreateRoomButton";
@@ -352,7 +352,7 @@ namespace Client_Application
             LeaveButton.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             LeaveButton.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             LeaveButton.FillColor = Color.Red;
-            LeaveButton.Font = new Font("Microsoft Sans Serif", 10.8F);
+            LeaveButton.Font = new Font("Ravie", 10.8F);
             LeaveButton.ForeColor = Color.White;
             LeaveButton.Location = new Point(750, 378);
             LeaveButton.Name = "LeaveButton";
@@ -372,7 +372,7 @@ namespace Client_Application
             StartButton.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             StartButton.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             StartButton.FillColor = Color.LimeGreen;
-            StartButton.Font = new Font("Microsoft Sans Serif", 10.8F);
+            StartButton.Font = new Font("Ravie", 10.8F);
             StartButton.ForeColor = Color.White;
             StartButton.Location = new Point(247, 378);
             StartButton.Name = "StartButton";
@@ -385,33 +385,33 @@ namespace Client_Application
             // Player2Label
             // 
             Player2Label.AutoSize = true;
-            Player2Label.Font = new Font("Microsoft Sans Serif", 24F, FontStyle.Bold);
+            Player2Label.Font = new Font("Ravie", 24F, FontStyle.Bold);
             Player2Label.ForeColor = Color.Khaki;
             Player2Label.Location = new Point(787, 113);
             Player2Label.Name = "Player2Label";
-            Player2Label.Size = new Size(131, 37);
+            Player2Label.Size = new Size(239, 54);
             Player2Label.TabIndex = 5;
             Player2Label.Text = "Player2";
             // 
             // Player1Label
             // 
             Player1Label.AutoSize = true;
-            Player1Label.Font = new Font("Microsoft Sans Serif", 24F, FontStyle.Bold);
+            Player1Label.Font = new Font("Ravie", 24F, FontStyle.Bold);
             Player1Label.ForeColor = Color.Khaki;
             Player1Label.Location = new Point(139, 113);
             Player1Label.Name = "Player1Label";
-            Player1Label.Size = new Size(129, 37);
+            Player1Label.Size = new Size(227, 54);
             Player1Label.TabIndex = 4;
             Player1Label.Text = "Player1";
             // 
             // VSLabel
             // 
             VSLabel.AutoSize = true;
-            VSLabel.Font = new Font("Microsoft Sans Serif", 48F);
+            VSLabel.Font = new Font("Ravie", 48F);
             VSLabel.ForeColor = Color.PapayaWhip;
             VSLabel.Location = new Point(487, 74);
             VSLabel.Name = "VSLabel";
-            VSLabel.Size = new Size(118, 73);
+            VSLabel.Size = new Size(186, 107);
             VSLabel.TabIndex = 3;
             VSLabel.Text = "VS";
             // 
@@ -479,11 +479,11 @@ namespace Client_Application
             // PlayerTurnLabel
             // 
             PlayerTurnLabel.AutoSize = true;
-            PlayerTurnLabel.Font = new Font("Microsoft Sans Serif", 25.8000011F);
+            PlayerTurnLabel.Font = new Font("Ravie", 25.8000011F);
             PlayerTurnLabel.ForeColor = Color.PapayaWhip;
             PlayerTurnLabel.Location = new Point(423, 113);
             PlayerTurnLabel.Name = "PlayerTurnLabel";
-            PlayerTurnLabel.Size = new Size(196, 39);
+            PlayerTurnLabel.Size = new Size(380, 59);
             PlayerTurnLabel.TabIndex = 28;
             PlayerTurnLabel.Text = "Player Turn";
             // 
@@ -494,7 +494,7 @@ namespace Client_Application
             DashLabel.ForeColor = Color.PapayaWhip;
             DashLabel.Location = new Point(546, 186);
             DashLabel.Name = "DashLabel";
-            DashLabel.Size = new Size(111, 45);
+            DashLabel.Size = new Size(135, 54);
             DashLabel.TabIndex = 27;
             DashLabel.Text = "-------";
             // 
@@ -502,7 +502,7 @@ namespace Client_Application
             // 
             QButton.BackColor = Color.PapayaWhip;
             QButton.Cursor = Cursors.Hand;
-            QButton.Font = new Font("Microsoft Sans Serif", 16.2F);
+            QButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
             QButton.ForeColor = Color.Teal;
             QButton.Location = new Point(325, 361);
             QButton.Name = "QButton";
@@ -516,7 +516,7 @@ namespace Client_Application
             // 
             EButton.BackColor = Color.PapayaWhip;
             EButton.Cursor = Cursors.Hand;
-            EButton.Font = new Font("Microsoft Sans Serif", 16.2F);
+            EButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
             EButton.ForeColor = Color.Teal;
             EButton.Location = new Point(441, 361);
             EButton.Name = "EButton";
@@ -530,7 +530,7 @@ namespace Client_Application
             // 
             RButton.BackColor = Color.PapayaWhip;
             RButton.Cursor = Cursors.Hand;
-            RButton.Font = new Font("Microsoft Sans Serif", 16.2F);
+            RButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
             RButton.ForeColor = Color.Teal;
             RButton.Location = new Point(499, 361);
             RButton.Name = "RButton";
@@ -544,7 +544,7 @@ namespace Client_Application
             // 
             TButton.BackColor = Color.PapayaWhip;
             TButton.Cursor = Cursors.Hand;
-            TButton.Font = new Font("Microsoft Sans Serif", 16.2F);
+            TButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
             TButton.ForeColor = Color.Teal;
             TButton.Location = new Point(557, 361);
             TButton.Name = "TButton";
@@ -558,7 +558,7 @@ namespace Client_Application
             // 
             PButton.BackColor = Color.PapayaWhip;
             PButton.Cursor = Cursors.Hand;
-            PButton.Font = new Font("Microsoft Sans Serif", 16.2F);
+            PButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
             PButton.ForeColor = Color.Teal;
             PButton.Location = new Point(847, 361);
             PButton.Name = "PButton";
@@ -572,7 +572,7 @@ namespace Client_Application
             // 
             KButton.BackColor = Color.PapayaWhip;
             KButton.Cursor = Cursors.Hand;
-            KButton.Font = new Font("Microsoft Sans Serif", 16.2F);
+            KButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
             KButton.ForeColor = Color.Teal;
             KButton.Location = new Point(757, 414);
             KButton.Name = "KButton";
@@ -586,7 +586,7 @@ namespace Client_Application
             // 
             AButton.BackColor = Color.PapayaWhip;
             AButton.Cursor = Cursors.Hand;
-            AButton.Font = new Font("Microsoft Sans Serif", 16.2F);
+            AButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
             AButton.ForeColor = Color.Teal;
             AButton.Location = new Point(358, 414);
             AButton.Name = "AButton";
@@ -600,7 +600,7 @@ namespace Client_Application
             // 
             LButton.BackColor = Color.PapayaWhip;
             LButton.Cursor = Cursors.Hand;
-            LButton.Font = new Font("Microsoft Sans Serif", 16.2F);
+            LButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
             LButton.ForeColor = Color.Teal;
             LButton.Location = new Point(814, 414);
             LButton.Name = "LButton";
@@ -614,7 +614,7 @@ namespace Client_Application
             // 
             IButton.BackColor = Color.PapayaWhip;
             IButton.Cursor = Cursors.Hand;
-            IButton.Font = new Font("Microsoft Sans Serif", 16.2F);
+            IButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
             IButton.ForeColor = Color.Teal;
             IButton.Location = new Point(731, 361);
             IButton.Name = "IButton";
@@ -628,7 +628,7 @@ namespace Client_Application
             // 
             OButton.BackColor = Color.PapayaWhip;
             OButton.Cursor = Cursors.Hand;
-            OButton.Font = new Font("Microsoft Sans Serif", 16.2F);
+            OButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
             OButton.ForeColor = Color.Teal;
             OButton.Location = new Point(789, 361);
             OButton.Name = "OButton";
@@ -642,7 +642,7 @@ namespace Client_Application
             // 
             VButton.BackColor = Color.PapayaWhip;
             VButton.Cursor = Cursors.Hand;
-            VButton.Font = new Font("Microsoft Sans Serif", 16.2F);
+            VButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
             VButton.ForeColor = Color.Teal;
             VButton.Location = new Point(586, 467);
             VButton.Name = "VButton";
@@ -656,7 +656,7 @@ namespace Client_Application
             // 
             NButton.BackColor = Color.PapayaWhip;
             NButton.Cursor = Cursors.Hand;
-            NButton.Font = new Font("Microsoft Sans Serif", 16.2F);
+            NButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
             NButton.ForeColor = Color.Teal;
             NButton.Location = new Point(700, 466);
             NButton.Name = "NButton";
@@ -670,7 +670,7 @@ namespace Client_Application
             // 
             BButton.BackColor = Color.PapayaWhip;
             BButton.Cursor = Cursors.Hand;
-            BButton.Font = new Font("Microsoft Sans Serif", 16.2F);
+            BButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
             BButton.ForeColor = Color.Teal;
             BButton.Location = new Point(643, 467);
             BButton.Name = "BButton";
@@ -684,7 +684,7 @@ namespace Client_Application
             // 
             MButton.BackColor = Color.PapayaWhip;
             MButton.Cursor = Cursors.Hand;
-            MButton.Font = new Font("Microsoft Sans Serif", 16.2F);
+            MButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
             MButton.ForeColor = Color.Teal;
             MButton.Location = new Point(757, 467);
             MButton.Name = "MButton";
@@ -698,7 +698,7 @@ namespace Client_Application
             // 
             UButton.BackColor = Color.PapayaWhip;
             UButton.Cursor = Cursors.Hand;
-            UButton.Font = new Font("Microsoft Sans Serif", 16.2F);
+            UButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
             UButton.ForeColor = Color.Teal;
             UButton.Location = new Point(673, 361);
             UButton.Name = "UButton";
@@ -712,7 +712,7 @@ namespace Client_Application
             // 
             DButton.BackColor = Color.PapayaWhip;
             DButton.Cursor = Cursors.Hand;
-            DButton.Font = new Font("Microsoft Sans Serif", 16.2F);
+            DButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
             DButton.ForeColor = Color.Teal;
             DButton.Location = new Point(472, 414);
             DButton.Name = "DButton";
@@ -726,7 +726,7 @@ namespace Client_Application
             // 
             FButton.BackColor = Color.PapayaWhip;
             FButton.Cursor = Cursors.Hand;
-            FButton.Font = new Font("Microsoft Sans Serif", 16.2F);
+            FButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
             FButton.ForeColor = Color.Teal;
             FButton.Location = new Point(529, 414);
             FButton.Name = "FButton";
@@ -740,7 +740,7 @@ namespace Client_Application
             // 
             GButton.BackColor = Color.PapayaWhip;
             GButton.Cursor = Cursors.Hand;
-            GButton.Font = new Font("Microsoft Sans Serif", 16.2F);
+            GButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
             GButton.ForeColor = Color.Teal;
             GButton.Location = new Point(586, 414);
             GButton.Name = "GButton";
@@ -754,7 +754,7 @@ namespace Client_Application
             // 
             HButton.BackColor = Color.PapayaWhip;
             HButton.Cursor = Cursors.Hand;
-            HButton.Font = new Font("Microsoft Sans Serif", 16.2F);
+            HButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
             HButton.ForeColor = Color.Teal;
             HButton.Location = new Point(643, 413);
             HButton.Name = "HButton";
@@ -768,7 +768,7 @@ namespace Client_Application
             // 
             JButton.BackColor = Color.PapayaWhip;
             JButton.Cursor = Cursors.Hand;
-            JButton.Font = new Font("Microsoft Sans Serif", 16.2F);
+            JButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
             JButton.ForeColor = Color.Teal;
             JButton.Location = new Point(700, 414);
             JButton.Name = "JButton";
@@ -782,7 +782,7 @@ namespace Client_Application
             // 
             XButton.BackColor = Color.PapayaWhip;
             XButton.Cursor = Cursors.Hand;
-            XButton.Font = new Font("Microsoft Sans Serif", 16.2F);
+            XButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
             XButton.ForeColor = Color.Teal;
             XButton.Location = new Point(472, 467);
             XButton.Name = "XButton";
@@ -796,7 +796,7 @@ namespace Client_Application
             // 
             CButton.BackColor = Color.PapayaWhip;
             CButton.Cursor = Cursors.Hand;
-            CButton.Font = new Font("Microsoft Sans Serif", 16.2F);
+            CButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
             CButton.ForeColor = Color.Teal;
             CButton.Location = new Point(529, 467);
             CButton.Name = "CButton";
@@ -810,7 +810,7 @@ namespace Client_Application
             // 
             SButton.BackColor = Color.PapayaWhip;
             SButton.Cursor = Cursors.Hand;
-            SButton.Font = new Font("Microsoft Sans Serif", 16.2F);
+            SButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
             SButton.ForeColor = Color.Teal;
             SButton.Location = new Point(415, 414);
             SButton.Name = "SButton";
@@ -824,7 +824,7 @@ namespace Client_Application
             // 
             YButton.BackColor = Color.PapayaWhip;
             YButton.Cursor = Cursors.Hand;
-            YButton.Font = new Font("Microsoft Sans Serif", 16.2F);
+            YButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
             YButton.ForeColor = Color.Teal;
             YButton.Location = new Point(615, 361);
             YButton.Name = "YButton";
@@ -838,7 +838,7 @@ namespace Client_Application
             // 
             WButton.BackColor = Color.PapayaWhip;
             WButton.Cursor = Cursors.Hand;
-            WButton.Font = new Font("Microsoft Sans Serif", 16.2F);
+            WButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
             WButton.ForeColor = Color.Teal;
             WButton.Location = new Point(383, 361);
             WButton.Name = "WButton";
@@ -852,7 +852,7 @@ namespace Client_Application
             // 
             ZButton.BackColor = Color.PapayaWhip;
             ZButton.Cursor = Cursors.Hand;
-            ZButton.Font = new Font("Microsoft Sans Serif", 16.2F);
+            ZButton.Font = new Font("Gill Sans Ultra Bold", 16.2F);
             ZButton.ForeColor = Color.Teal;
             ZButton.Location = new Point(415, 467);
             ZButton.Name = "ZButton";
@@ -881,7 +881,7 @@ namespace Client_Application
             label1.ForeColor = Color.Goldenrod;
             label1.Location = new Point(470, 586);
             label1.Name = "label1";
-            label1.Size = new Size(206, 27);
+            label1.Size = new Size(258, 32);
             label1.TabIndex = 1;
             label1.Text = "Press Here To Start";
             label1.Click += label1_Click;
@@ -899,16 +899,15 @@ namespace Client_Application
             // 
             // ClientForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
             AutoValidate = AutoValidate.EnablePreventFocusChange;
             BackColor = Color.FromArgb(23, 30, 46);
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1018, 768);
+            ClientSize = new Size(1164, 620);
             FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Margin = new Padding(3, 2, 3, 2);
             Name = "ClientForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Guess Word";
