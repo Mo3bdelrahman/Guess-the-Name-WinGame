@@ -55,6 +55,7 @@
             TabData.Controls.Add(tabRooms);
             TabData.Controls.Add(tabResults);
             TabData.Controls.Add(LogPage);
+            TabData.Font = new Font("Tempus Sans ITC", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             TabData.Location = new Point(31, 24);
             TabData.Name = "TabData";
             TabData.SelectedIndex = 0;
@@ -63,17 +64,18 @@
             // 
             // tabPlayers
             // 
+            tabPlayers.BackColor = Color.FromArgb(23, 30, 64);
             tabPlayers.Controls.Add(listPlayers);
-            tabPlayers.Location = new Point(4, 29);
+            tabPlayers.Location = new Point(4, 31);
             tabPlayers.Name = "tabPlayers";
             tabPlayers.Padding = new Padding(3);
-            tabPlayers.Size = new Size(730, 346);
+            tabPlayers.Size = new Size(730, 344);
             tabPlayers.TabIndex = 0;
             tabPlayers.Text = "Active Players";
-            tabPlayers.UseVisualStyleBackColor = true;
             // 
             // listPlayers
             // 
+            listPlayers.BackColor = SystemColors.InactiveCaption;
             listPlayers.Location = new Point(6, 5);
             listPlayers.Name = "listPlayers";
             listPlayers.Size = new Size(718, 335);
@@ -83,18 +85,19 @@
             // 
             // tabRooms
             // 
+            tabRooms.BackColor = Color.FromArgb(23, 30, 64);
             tabRooms.Controls.Add(listRooms);
-            tabRooms.Location = new Point(4, 29);
+            tabRooms.Location = new Point(4, 31);
             tabRooms.Name = "tabRooms";
             tabRooms.Padding = new Padding(3);
             tabRooms.RightToLeft = RightToLeft.Yes;
-            tabRooms.Size = new Size(730, 346);
+            tabRooms.Size = new Size(730, 344);
             tabRooms.TabIndex = 1;
             tabRooms.Text = "All Rooms";
-            tabRooms.UseVisualStyleBackColor = true;
             // 
             // listRooms
             // 
+            listRooms.BackColor = SystemColors.InactiveCaption;
             listRooms.Location = new Point(6, 5);
             listRooms.Name = "listRooms";
             listRooms.Size = new Size(718, 335);
@@ -104,17 +107,19 @@
             // 
             // tabResults
             // 
+            tabResults.BackColor = Color.FromArgb(23, 30, 64);
             tabResults.Controls.Add(listResults);
-            tabResults.Location = new Point(4, 29);
+            tabResults.ForeColor = SystemColors.ActiveCaptionText;
+            tabResults.Location = new Point(4, 31);
             tabResults.Name = "tabResults";
             tabResults.Padding = new Padding(3);
-            tabResults.Size = new Size(730, 346);
+            tabResults.Size = new Size(730, 344);
             tabResults.TabIndex = 2;
             tabResults.Text = "Game Results";
-            tabResults.UseVisualStyleBackColor = true;
             // 
             // listResults
             // 
+            listResults.BackColor = SystemColors.InactiveCaption;
             listResults.Location = new Point(6, 5);
             listResults.Name = "listResults";
             listResults.Size = new Size(718, 335);
@@ -127,14 +132,14 @@
             LogPage.Controls.Add(LogsListBox);
             LogPage.Controls.Add(ExportBtn);
             LogPage.Controls.Add(LogsComboBox);
-            LogPage.Location = new Point(4, 29);
+            LogPage.BackColor = SystemColors.InactiveCaption;
+            LogPage.Location = new Point(4, 31);
             LogPage.Margin = new Padding(3, 4, 3, 4);
             LogPage.Name = "LogPage";
             LogPage.Padding = new Padding(3, 4, 3, 4);
-            LogPage.Size = new Size(730, 346);
+            LogPage.Size = new Size(730, 344);
             LogPage.TabIndex = 3;
             LogPage.Text = "Logs";
-            LogPage.UseVisualStyleBackColor = true;
             // 
             // LogsListBox
             // 
@@ -168,28 +173,37 @@
             // 
             // btnStart
             // 
-            btnStart.Location = new Point(327, 409);
+            btnStart.BackColor = SystemColors.InactiveCaption;
+            btnStart.Cursor = Cursors.Hand;
+            btnStart.FlatStyle = FlatStyle.Popup;
+            btnStart.Font = new Font("Tempus Sans ITC", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnStart.Location = new Point(120, 410);
             btnStart.Name = "btnStart";
             btnStart.Size = new Size(147, 29);
             btnStart.TabIndex = 1;
             btnStart.Text = "Start The Server";
-            btnStart.UseVisualStyleBackColor = true;
+            btnStart.UseVisualStyleBackColor = false;
             btnStart.Click += btnStart_Click;
             // 
             // button1
             // 
-            button1.Location = new Point(611, 410);
+            button1.BackColor = SystemColors.InactiveCaption;
+            button1.Cursor = Cursors.Hand;
+            button1.FlatStyle = FlatStyle.Popup;
+            button1.Font = new Font("Tempus Sans ITC", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button1.Location = new Point(482, 410);
             button1.Name = "button1";
-            button1.Size = new Size(94, 29);
+            button1.Size = new Size(147, 29);
             button1.TabIndex = 2;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
+            button1.Text = "Test";
+            button1.UseVisualStyleBackColor = false;
             button1.Click += Test_Click;
             // 
             // ServerForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(23, 30, 64);
             ClientSize = new Size(800, 451);
             Controls.Add(button1);
             Controls.Add(btnStart);

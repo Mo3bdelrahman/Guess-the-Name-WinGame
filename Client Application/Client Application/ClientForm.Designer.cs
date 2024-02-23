@@ -159,7 +159,7 @@ namespace Client_Application
             LoginButton.FillColor = Color.MediumSeaGreen;
             LoginButton.Font = new Font("Ravie", 10.8F);
             LoginButton.ForeColor = Color.White;
-            LoginButton.Location = new Point(511, 381);
+            LoginButton.Location = new Point(581, 386);
             LoginButton.Name = "LoginButton";
             LoginButton.ShadowDecoration.CustomizableEdges = customizableEdges4;
             LoginButton.Size = new Size(139, 56);
@@ -251,7 +251,7 @@ namespace Client_Application
             LoobyPanel.Dock = DockStyle.Fill;
             LoobyPanel.Location = new Point(0, 0);
             LoobyPanel.Name = "LoobyPanel";
-            LoobyPanel.Size = new Size(1152, 564);
+            LoobyPanel.Size = new Size(1164, 620);
             LoobyPanel.TabIndex = 3;
             // 
             // WatchGameButton
@@ -317,6 +317,8 @@ namespace Client_Application
             // listView1
             // 
             listView1.BackColor = Color.FromArgb(23, 30, 46);
+            listView1.Font = new Font("Ravie", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            listView1.ForeColor = Color.White;
             listView1.Location = new Point(417, 38);
             listView1.Name = "listView1";
             listView1.Size = new Size(673, 489);
@@ -906,6 +908,7 @@ namespace Client_Application
             BackColor = Color.FromArgb(23, 30, 46);
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1164, 620);
+            //Controls.Add(LoobyPanel);
             FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "ClientForm";
