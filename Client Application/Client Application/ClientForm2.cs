@@ -80,7 +80,7 @@ namespace Client_Application
         {
             room = jsonStringList[0].GetOriginalData<Room>();
             player.State = jsonStringList[1].GetOriginalData<PlayerState>();
-            MessageBox.Show($" hi, {room.Owner.Name} you enterd {room.RoomName} Id: {room.RoomId} cat is {room.Category} and player is {player.State}");
+            //MessageBox.Show($" hi, {room.Owner.Name} you enterd {room.RoomName} Id: {room.RoomId} cat is {room.Category} and player is {player.State}");
             //Invoke(() => UpdateRoomList());
             OnCreateResponse();
         }
@@ -141,12 +141,12 @@ namespace Client_Application
                     // here we need to get into the room
                     if (player.State == PlayerState.Player1)
                     {
-                        MessageBox.Show($"{room.Guest?.Name} Enterd your Room the state now is {room.state}");
+                        //MessageBox.Show($"{room.Guest?.Name} Enterd your Room the state now is {room.state}");
                     }
                     else
                     {
                         player.State = room.Guest.State;
-                        MessageBox.Show($"hi{player.Name} you Enterd {room.RoomName} the state now is {room.state}");
+                        //MessageBox.Show($"hi{player.Name} you Enterd {room.RoomName} the state now is {room.state}");
                     }
                 }
                 else

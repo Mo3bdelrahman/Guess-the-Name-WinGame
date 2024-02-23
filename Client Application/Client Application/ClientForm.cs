@@ -403,6 +403,7 @@ namespace Client_Application
                             {
                                 ClientController.RequestHandeller<int>(stream, Request.ClientToServerP2LeaveRoomLobby, room.RoomId);
                             }
+                            Invoke(() => ViewPanel(LoobyPanel));
                         }
                     }
                     else 
