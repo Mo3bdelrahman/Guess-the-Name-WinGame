@@ -7,25 +7,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Client_Application
 {
     public partial class Dialog : Form
     {
         public string cat;
-        public Dialog()
+        private string[] categories;
+        public Dialog(string[] categories)
         {
             InitializeComponent();
+            this.categories = categories;
         }
 
         private void Dialog_Load(object sender, EventArgs e)
         {
-            Dictionary<string, string> test = new Dictionary<string, string>();
-            test.Add("1", "Food");
-            test.Add("2", "Sports");
-            test.Add("3", "Languages");
+            Dictionary<string, string> categoryDictionary = new Dictionary<string, string>();
 
-            CategoryComboBox.DataSource = new BindingSource(test, null);
+            for(int i = 0; i < categories.Length; i++) 
+            {
+                categoryDictionary.Add($"{i}", categories[i]);
+            }
+
+            CategoryComboBox.DataSource = new BindingSource(categoryDictionary, null);
             CategoryComboBox.DisplayMember = "Value";
             CategoryComboBox.ValueMember = "Key";
 
