@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ServerForm));
             TabData = new TabControl();
             tabPlayers = new TabPage();
             listPlayers = new ListView();
@@ -61,7 +62,7 @@
             tabPlayers.Controls.Add(listPlayers);
             tabPlayers.Location = new Point(4, 29);
             tabPlayers.Name = "tabPlayers";
-            tabPlayers.Padding = new Padding(3, 3, 3, 3);
+            tabPlayers.Padding = new Padding(3);
             tabPlayers.Size = new Size(730, 346);
             tabPlayers.TabIndex = 0;
             tabPlayers.Text = "Active Players";
@@ -81,7 +82,7 @@
             tabRooms.Controls.Add(listRooms);
             tabRooms.Location = new Point(4, 29);
             tabRooms.Name = "tabRooms";
-            tabRooms.Padding = new Padding(3, 3, 3, 3);
+            tabRooms.Padding = new Padding(3);
             tabRooms.RightToLeft = RightToLeft.Yes;
             tabRooms.Size = new Size(730, 346);
             tabRooms.TabIndex = 1;
@@ -102,7 +103,7 @@
             tabResults.Controls.Add(listResults);
             tabResults.Location = new Point(4, 29);
             tabResults.Name = "tabResults";
-            tabResults.Padding = new Padding(3, 3, 3, 3);
+            tabResults.Padding = new Padding(3);
             tabResults.Size = new Size(730, 346);
             tabResults.TabIndex = 2;
             tabResults.Text = "Game Results";
@@ -156,6 +157,7 @@
             Controls.Add(button1);
             Controls.Add(btnStart);
             Controls.Add(TabData);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "ServerForm";
             Text = "Server";
             FormClosing += ServerForm_FormClosing;
