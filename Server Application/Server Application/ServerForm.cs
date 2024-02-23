@@ -1,6 +1,7 @@
 using System.Net;
 using System.Net.Sockets;
 
+
 namespace Server_Application
 {
     public partial class ServerForm : Form
@@ -9,7 +10,7 @@ namespace Server_Application
         List<Room> Rooms = new List<Room>();
         TcpListener server;
         Thread clientThread;
-        Thread serverThread;
+        Task serverThread;
         int RoomIdG;
         int PlayerIdG;
 
@@ -43,7 +44,7 @@ namespace Server_Application
             // Rooms.Add(new Room()) ;
         }
 
-        private void ServerThread()
+        private async Task ServerThread()
         {
             server = new TcpListener(new IPAddress(new byte[] { 127, 0, 0, 1 }), 12345);
             server.Start();
@@ -54,10 +55,10 @@ namespace Server_Application
             {
                 while (true)
                 {
-                    TcpClient client = server.AcceptTcpClient();
+                    TcpClient client = await server.AcceptTcpClientAsync();
 
-                    clientThread = new Thread(new ParameterizedThreadStart(ConnectToClient));
-                    clientThread.Start(client);
+                    // Use Task.Run to run ConnectToClient asynchronously
+                    _ = Task.Run(() => ConnectToClient(client));
                 }
             }
             finally
@@ -97,8 +98,7 @@ namespace Server_Application
         public void StartServer()
         {
             btnStart.Enabled = false;
-            serverThread = new Thread(ServerThread);
-            serverThread.Start();
+            serverThread = Task.Run(ServerThread);
         }
         private void btnStart_Click(object sender, EventArgs e)
         {
