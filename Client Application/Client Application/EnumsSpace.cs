@@ -29,6 +29,9 @@ namespace Client_Application
         ClientToServerLoadLobby, //on lobby load
         ServerToClientLoadLobby,
 
+        ClientToServerLoadCategories, //on create categ
+        ServerToClientLoadCategories,
+
         ClientToServerCreateRoom,
         ServerToClientCreateRoom,//on creating confrimed
 
@@ -42,6 +45,7 @@ namespace Client_Application
 
         ClientToServerWatch,//on watching
         ServerToClientWatch,
+        ServerToClientAddWatcher,
 
         ClientToServerP1LeaveRoomLobby,//with player only
         ServerToClientP1LeaveRoomLobby,
@@ -69,7 +73,7 @@ namespace Client_Application
 
     enum TurnState
     {
-        Player1,
+        Player1 = 1,
         Player2
     }
 

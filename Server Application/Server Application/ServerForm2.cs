@@ -22,6 +22,9 @@ namespace Server_Application
                 case Request.ClientToServerResponseToJoin: ClientResponseToJoinRoom(stream, para);break;
                 case Request.ClientToServerStartGame: StartGame(stream, para);  break;
                 case Request.ClientToServerSendChar: CheckChar(stream, para); break;
+                case Request.ClientToServerLoadCategories: SendCategories(stream, para);break;
+                case Request.ClientToServerWatch: Watch(stream, para); break;
+                case Request.ClientToServerLeaveGame: LeaveGame(stream, para);break;
 
                 default: MessageBox.Show($"{req}"); break;
             }
@@ -150,7 +153,6 @@ namespace Server_Application
             catch (Exception e) { MessageBox.Show("From res join"+e.Message); } 
 
         }
-
         private void StartGame(NetworkStream stream, List<string> jsonStringList)
         {
             try
@@ -160,11 +162,11 @@ namespace Server_Application
                 if (room.StartGameFlag)
                 {
                     //Note we need here => get Category
-                    room.Game = new Game(WordCategory.GetRandomWord("Food"));
-                    ServerController.RequestHandeller<Game>([room.Owner!,room.Guest!],Request.ServerToClientStartGame,room.Game);
+                    room.Game = new Game(WordCategory.GetRandomWord(room.Category));
+                    room.state = RoomState.Running;
+                    ServerController.RequestHandeller<Game,RoomState>([room.Owner!,room.Guest!],Request.ServerToClientStartGame,room.Game, RoomState.Running);
                     Invoke(() => UpdateRoomList());
                     Invoke(() => UpdatePlayerList());
-
                 }
                 else
                 {
@@ -174,7 +176,6 @@ namespace Server_Application
             catch (Exception e) { MessageBox.Show(e.Message); }
            
         }
-
         private void CheckChar(NetworkStream stream, List<string> jsonStringList)
         {
             try
@@ -188,9 +189,77 @@ namespace Server_Application
                     room.Game.TurnTogeller();
                 }
                 ServerController.RequestHandeller<bool, Game>([room.Owner! , room.Guest!],Request.ServerToClientSendChar,res,room.Game);
+                if (room.Watchers != null && room.Watchers.Count > 0)
+                {
+                    ServerController.RequestHandeller<bool, Game>(room.Watchers!, Request.ServerToClientSendChar, res, room.Game);
+                }
+                
+
 
             }
             catch (Exception e) { MessageBox.Show("From send at server char "+e.Message); }
+
+        }
+        private void SendCategories(NetworkStream stream, List<string> jsonStringList)
+        {
+            try
+            {
+                Player p = GetPlayer(stream);
+                string[] categories = WordCategory.GetAllCategories();
+                ServerController.RequestHandeller<string[]>([p], Request.ServerToClientLoadCategories, categories);
+            }
+            catch(Exception e) { MessageBox.Show("from send cat"+e.Message); }
+        }
+        private void Watch(NetworkStream stream, List<string> jsonStringList)
+        {
+            try
+            {
+                int id = jsonStringList[0].GetOriginalData<int>();
+                Player watcher = GetPlayer(stream);
+                Room room = GetRoom(id);
+                watcher.State = PlayerState.Watcher;
+                room.Watchers.Add(watcher);
+                ServerController.RequestHandeller<Player,Room,Game>([watcher], Request.ServerToClientWatch,watcher, room,room.Game);
+                ServerController.RequestHandeller([room.Owner!,room.Guest!], Request.ServerToClientAddWatcher);
+            }
+            catch (Exception e) { MessageBox.Show("From Watch" + e.Message); }
+        }
+        private void LeaveGame(NetworkStream stream, List<string> jsonStringList)
+        {
+            try
+            {
+                int id = jsonStringList[0].GetOriginalData<int>();
+                Player player = GetPlayer(stream);
+                Room room = GetRoom(id);
+                //Rooms.Remove(r);
+                //p.State = PlayerState.Available;
+                if (player.State == PlayerState.Watcher)
+                {
+                    player.State = PlayerState.Available;
+                    ServerController.RequestHandeller<PlayerState>([player], Request.ServerToClientLeaveGame, PlayerState.Available);
+                }
+                else
+                {
+                    room.Owner.State = PlayerState.Available;
+                    room.Guest.State = PlayerState.Available;
+                    if (room.Watchers.Count > 0)
+                    {
+                        foreach (Player w in room.Watchers)
+                        {
+                            w.State = PlayerState.Available;
+                        }
+                    }
+                    Rooms.Remove(room);
+                    ServerController.RequestHandeller<PlayerState>([room.Owner, room.Guest], Request.ServerToClientLeaveGame, PlayerState.Available);
+                    ServerController.RequestHandeller<PlayerState>(room.Watchers, Request.ServerToClientLeaveGame, PlayerState.Available);
+
+                }
+                Invoke(() => UpdateRoomList());
+                Invoke(() => UpdatePlayerList());
+
+            }
+            catch(Exception e) { MessageBox.Show("from LeaveGame Server"+e.Message); }
+           
 
         }
 

@@ -42,6 +42,7 @@ namespace Client_Application
             // OkButtonDialog
             // 
             OkButtonDialog.BackColor = Color.Transparent;
+            OkButtonDialog.Cursor = Cursors.Hand;
             OkButtonDialog.DisabledState.BorderColor = Color.DarkGray;
             OkButtonDialog.DisabledState.CustomBorderColor = Color.DarkGray;
             OkButtonDialog.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -62,6 +63,7 @@ namespace Client_Application
             // 
             CategoryComboBox.BackColor = Color.Transparent;
             CategoryComboBox.BorderRadius = 15;
+            CategoryComboBox.Cursor = Cursors.Hand;
             CategoryComboBox.CustomizableEdges = customizableEdges2;
             CategoryComboBox.DrawMode = DrawMode.OwnerDrawFixed;
             CategoryComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -78,12 +80,12 @@ namespace Client_Application
             // 
             // guna2HtmlLabel1
             // 
-            guna2HtmlLabel1.BackColor = Color.SaddleBrown;
-            guna2HtmlLabel1.Font = new Font("Ravie", 10.2F);
+            guna2HtmlLabel1.BackColor = Color.Transparent;
+            guna2HtmlLabel1.Font = new Font("Ravie", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             guna2HtmlLabel1.ForeColor = Color.Gold;
-            guna2HtmlLabel1.Location = new Point(12, 85);
+            guna2HtmlLabel1.Location = new Point(13, 84);
             guna2HtmlLabel1.Name = "guna2HtmlLabel1";
-            guna2HtmlLabel1.Size = new Size(189, 24);
+            guna2HtmlLabel1.Size = new Size(200, 26);
             guna2HtmlLabel1.TabIndex = 3;
             guna2HtmlLabel1.Text = "Choose Category";
             // 
