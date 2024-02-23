@@ -510,6 +510,7 @@ namespace Client_Application
             QButton.TabIndex = 26;
             QButton.Text = "Q";
             QButton.UseVisualStyleBackColor = false;
+            QButton.Click += QButton_Click;
             // 
             // EButton
             // 
@@ -523,6 +524,7 @@ namespace Client_Application
             EButton.TabIndex = 25;
             EButton.Text = "E";
             EButton.UseVisualStyleBackColor = false;
+            EButton.Click += EButton_Click;
             // 
             // RButton
             // 
@@ -536,6 +538,7 @@ namespace Client_Application
             RButton.TabIndex = 24;
             RButton.Text = "R";
             RButton.UseVisualStyleBackColor = false;
+            RButton.Click += RButton_Click;
             // 
             // TButton
             // 
@@ -549,6 +552,7 @@ namespace Client_Application
             TButton.TabIndex = 23;
             TButton.Text = "T";
             TButton.UseVisualStyleBackColor = false;
+            TButton.Click += TButton_Click;
             // 
             // PButton
             // 
@@ -562,6 +566,7 @@ namespace Client_Application
             PButton.TabIndex = 22;
             PButton.Text = "P";
             PButton.UseVisualStyleBackColor = false;
+            PButton.Click += PButton_Click;
             // 
             // KButton
             // 
@@ -575,6 +580,7 @@ namespace Client_Application
             KButton.TabIndex = 21;
             KButton.Text = "K";
             KButton.UseVisualStyleBackColor = false;
+            KButton.Click += KButton_Click;
             // 
             // AButton
             // 
@@ -588,6 +594,7 @@ namespace Client_Application
             AButton.TabIndex = 20;
             AButton.Text = "A";
             AButton.UseVisualStyleBackColor = false;
+            AButton.Click += AButton_Click;
             // 
             // LButton
             // 
@@ -601,6 +608,7 @@ namespace Client_Application
             LButton.TabIndex = 19;
             LButton.Text = "L";
             LButton.UseVisualStyleBackColor = false;
+            LButton.Click += LButton_Click;
             // 
             // IButton
             // 
@@ -614,6 +622,7 @@ namespace Client_Application
             IButton.TabIndex = 18;
             IButton.Text = "I";
             IButton.UseVisualStyleBackColor = false;
+            IButton.Click += IButton_Click;
             // 
             // OButton
             // 
@@ -627,6 +636,7 @@ namespace Client_Application
             OButton.TabIndex = 17;
             OButton.Text = "O";
             OButton.UseVisualStyleBackColor = false;
+            OButton.Click += OButton_Click;
             // 
             // VButton
             // 
@@ -640,6 +650,7 @@ namespace Client_Application
             VButton.TabIndex = 16;
             VButton.Text = "V";
             VButton.UseVisualStyleBackColor = false;
+            VButton.Click += VButton_Click;
             // 
             // NButton
             // 
@@ -653,6 +664,7 @@ namespace Client_Application
             NButton.TabIndex = 15;
             NButton.Text = "N";
             NButton.UseVisualStyleBackColor = false;
+            NButton.Click += NButton_Click;
             // 
             // BButton
             // 
@@ -666,6 +678,7 @@ namespace Client_Application
             BButton.TabIndex = 14;
             BButton.Text = "B";
             BButton.UseVisualStyleBackColor = false;
+            BButton.Click += BButton_Click;
             // 
             // MButton
             // 
@@ -679,6 +692,7 @@ namespace Client_Application
             MButton.TabIndex = 13;
             MButton.Text = "M";
             MButton.UseVisualStyleBackColor = false;
+            MButton.Click += MButton_Click;
             // 
             // UButton
             // 
@@ -692,6 +706,7 @@ namespace Client_Application
             UButton.TabIndex = 12;
             UButton.Text = "U";
             UButton.UseVisualStyleBackColor = false;
+            UButton.Click += UButton_Click;
             // 
             // DButton
             // 
@@ -705,6 +720,7 @@ namespace Client_Application
             DButton.TabIndex = 11;
             DButton.Text = "D";
             DButton.UseVisualStyleBackColor = false;
+            DButton.Click += DButton_Click;
             // 
             // FButton
             // 
@@ -718,6 +734,7 @@ namespace Client_Application
             FButton.TabIndex = 10;
             FButton.Text = "F";
             FButton.UseVisualStyleBackColor = false;
+            FButton.Click += FButton_Click;
             // 
             // GButton
             // 
@@ -731,6 +748,7 @@ namespace Client_Application
             GButton.TabIndex = 9;
             GButton.Text = "G";
             GButton.UseVisualStyleBackColor = false;
+            GButton.Click += GButton_Click;
             // 
             // HButton
             // 
@@ -744,6 +762,7 @@ namespace Client_Application
             HButton.TabIndex = 8;
             HButton.Text = "H";
             HButton.UseVisualStyleBackColor = false;
+            HButton.Click += HButton_Click;
             // 
             // JButton
             // 
@@ -757,6 +776,7 @@ namespace Client_Application
             JButton.TabIndex = 7;
             JButton.Text = "J";
             JButton.UseVisualStyleBackColor = false;
+            JButton.Click += JButton_Click;
             // 
             // XButton
             // 
@@ -770,6 +790,7 @@ namespace Client_Application
             XButton.TabIndex = 6;
             XButton.Text = "X";
             XButton.UseVisualStyleBackColor = false;
+            XButton.Click += XButton_Click;
             // 
             // CButton
             // 
@@ -783,6 +804,7 @@ namespace Client_Application
             CButton.TabIndex = 5;
             CButton.Text = "C";
             CButton.UseVisualStyleBackColor = false;
+            CButton.Click += CButton_Click;
             // 
             // SButton
             // 
@@ -796,6 +818,7 @@ namespace Client_Application
             SButton.TabIndex = 4;
             SButton.Text = "S";
             SButton.UseVisualStyleBackColor = false;
+            SButton.Click += SButton_Click;
             // 
             // YButton
             // 
@@ -809,6 +832,7 @@ namespace Client_Application
             YButton.TabIndex = 3;
             YButton.Text = "Y";
             YButton.UseVisualStyleBackColor = false;
+            YButton.Click += YButton_Click;
             // 
             // WButton
             // 
@@ -822,6 +846,7 @@ namespace Client_Application
             WButton.TabIndex = 2;
             WButton.Text = "W";
             WButton.UseVisualStyleBackColor = false;
+            WButton.Click += WButton_Click;
             // 
             // ZButton
             // 
@@ -835,6 +860,7 @@ namespace Client_Application
             ZButton.TabIndex = 1;
             ZButton.Text = "Z";
             ZButton.UseVisualStyleBackColor = false;
+            ZButton.Click += ZButton_Click;
             // 
             // StartPanel
             // 

@@ -38,9 +38,9 @@
                 if (jsonStringList[0].GetOriginalData<bool>())
                 {
                     player = jsonStringList[1].GetOriginalData<Player>();
-                    //OnLoginClick();
                     MessageBox.Show($"{player.Name}, {player.State}");
                     ClientController.RequestHandeller(stream, Request.ClientToServerLoadLobby);
+                    OnLoginClick();
                 }
                 else
                 {
@@ -56,8 +56,6 @@
         private void LobbyLoad(List<string> jsonStringList)
         {
             roomList = jsonStringList[0].GetOriginalData<List<Room>>();
-            //OnLoadLobby();
-            //MessageBox.Show("Rooms is Here");
             Invoke(() => UpdateRoomList());
         }
 
@@ -65,11 +63,9 @@
         {
             room = jsonStringList[0].GetOriginalData<Room>();
             player.State = jsonStringList[1].GetOriginalData<PlayerState>();
-            // I Also Need A Boolean Value For Confirmation
-            //MessageBox.Show(room.ToString());
-            //OnCreateClick(true);
             MessageBox.Show($" hi, {room.Owner.Name} you enterd {room.RoomName} Id: {room.RoomId} cat is {room.Category} and player is {player.State}");
-            Invoke(() => UpdateRoomList());
+            //Invoke(() => UpdateRoomList());
+            OnCreateResponse();
         }
 
         private void P1leaveRoom(List<string> jsonStringList)
@@ -79,7 +75,6 @@
                 player.State = jsonStringList[0].GetOriginalData<PlayerState>();
                 room = null;
                 ClientController.RequestHandeller(stream, Request.ClientToServerLoadLobby);
-                //OnLeaveClick();
             }
             else
             {
@@ -87,9 +82,9 @@
                 room = null;
                 ClientController.RequestHandeller(stream, Request.ClientToServerLoadLobby);
                 MessageBox.Show("Player1 Leave, The room was closed");
-                //OnLeaveReceive();
             }
-            Invoke(() => UpdateRoomList());
+
+            OnLeaveClick();
         }
 
         private void P2leaveRoom(List<string> jsonStringList)
@@ -99,13 +94,12 @@
                 player.State = jsonStringList[0].GetOriginalData<PlayerState>();
                 room = null;
                 ClientController.RequestHandeller(stream, Request.ClientToServerLoadLobby);
-                //OnLeaveClick();
+                OnLeaveClick();
             }
             else
             {
                 room = jsonStringList[0].GetOriginalData<Room>();
                 MessageBox.Show("Player2 Leave, Wait for Other Player");
-                //OnLeaveReceive();
             }
         }
 
@@ -135,13 +129,14 @@
                     {
                         player.State = room.Guest.State;
                         MessageBox.Show($"hi{player.Name} you Enterd {room.RoomName} the state now is {room.state}");
-                        Invoke(() => ViewPanel(RoomLoobyPanel));
                     }
                 }
                 else
                 {
                     MessageBox.Show($"Sorry, {player.Name} the Owner refused ");
                 }
+
+                OnJoinClick(response);
 
             }
             catch (Exception e) { MessageBox.Show("from res to join" + e.Message); }
@@ -154,7 +149,8 @@
             {
                 game = jsonStringList[0].GetOriginalData<Game>();
                 room.state = jsonStringList[1].GetOriginalData<RoomState>();
-                Invoke(() => ViewPanel(GamePanel));
+                //Invoke(() => ViewPanel(GamePanel));
+                OnStartClick();
                 MessageBox.Show($"the Game started {game.TurnState} turn and the word is {game.Word.CurrentWord}");
             }
             catch (Exception e) { MessageBox.Show("From start game" + e.Message); }
@@ -165,11 +161,9 @@
         {
             bool res = jsonStringList[0].GetOriginalData<bool>();
             game = jsonStringList[1].GetOriginalData<Game>();
-
             // update UI here
-            Invoke(() => MessageBox.Show("Game updated turn of " + game.TurnState + "the Word now is" + game.Word.CurrentWord));
-
-
+            Invoke(() => MessageBox.Show("Game updated turn of " + game.TurnState + "the Word now is" + game.Word.CurrentWord + "boolean value" + res));
+            ToggleTurn();
         }
         private void loadCategories(List<string> jsonStringList)
         {
@@ -177,6 +171,8 @@
             {
                 Categories = jsonStringList[0].GetOriginalData<string[]>();
                 MessageBox.Show("Categories : " + String.Join(",", Categories));
+
+                OnCreateClick();
             }
             catch (Exception e) { MessageBox.Show("Load Categories" + e.Message); }
         }
@@ -188,7 +184,8 @@
                 room = jsonStringList[1].GetOriginalData<Room>();
                 game = jsonStringList[2].GetOriginalData<Game>();
                 //update game Panal
-                Invoke(() => ViewPanel(GamePanel));
+                //Invoke(() => ViewPanel(GamePanel));
+                OnWatchClick();
                 MessageBox.Show($"Wellcome {player?.Name}, Have fun in {room?.RoomName} now turn of {game?.TurnState} the word is {game?.Word?.CurrentWord}");
             }
             catch (Exception e) { MessageBox.Show("From watch game" + e.Message); }
