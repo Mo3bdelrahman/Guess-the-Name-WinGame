@@ -5,6 +5,7 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading.Tasks;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace Client_Application
@@ -13,7 +14,7 @@ namespace Client_Application
     {
         Player player;
         NetworkStream stream;
-        Thread receiveThread;
+        Task receiveTask;
         List<Panel> Panels;
         List<Button> Letters = new List<Button>();
         List<Button> ClickedCharacters = new List<Button>();
@@ -21,6 +22,7 @@ namespace Client_Application
         Panel ActivePanel;
         Button ClickedButton;
         string ActiveRoom;
+
         public ClientForm()
         {
             InitializeComponent();
@@ -30,10 +32,12 @@ namespace Client_Application
             AddLetters();
             ActivePanel = StartPanel;
             this.Controls.Add(StartPanel);
-            receiveThread = new Thread(new ThreadStart(ReceiveData));
             ClientController.DistributerD += Distributer;
             player = new Player();
+            InitializeTimer();
         }
+
+
 
         public bool Connect()
         {
@@ -41,7 +45,7 @@ namespace Client_Application
             {
                 player.TcpClient = new TcpClient("127.0.0.1", 12345);
                 stream = player.TcpClient.GetStream();
-                receiveThread.Start();
+                receiveTask = Task.Run((Action)ReceiveData);
 
                 return true;
             }
@@ -64,14 +68,15 @@ namespace Client_Application
             }
         }
 
-        private void ReceiveData()
+        private async void ReceiveData()
         {
             while (true)
             {
-                bool IsConnected = ClientController.ResponseHandeller(stream);
+                bool isConnected = await Task.Run(() => ClientController.ResponseHandeller(stream));
 
-                if (!IsConnected)
+                if (!isConnected)
                 {
+                    timer.Dispose();
                     break;
                 }
             }
@@ -114,6 +119,7 @@ namespace Client_Application
                     ClientController.RequestHandeller<string>(stream, Request.ClientToServerLogin, textBox1.Text);
                 }
             }
+            timer.Start(); // Start the timer
         }
 
         private void CreateRoomButton_Click(object sender, EventArgs e)
@@ -167,7 +173,6 @@ namespace Client_Application
         private void XExitLabel_Click(object sender, EventArgs e)
         {
             stream?.Close();
-            Application.ExitThread();
             Environment.Exit(Environment.ExitCode);
             Application.Exit();
         }
@@ -386,14 +391,21 @@ namespace Client_Application
                         if (result == DialogResult.Yes)
                         {
                             // Send To Server
+                            ClientController.RequestHandeller<int>(stream, Request.ClientToServerStartGame, room.RoomId);
                         }
                         else
                         {
-                            // Send To Server
-                            ViewPanel(LoobyPanel);
+                            if (player.State == PlayerState.Player1 && room != null)
+                            {
+                                ClientController.RequestHandeller<int>(stream, Request.ClientToServerP1LeaveRoomLobby, room.RoomId);
+                            }
+                            else if (player.State == PlayerState.Player2 && room != null)
+                            {
+                                ClientController.RequestHandeller<int>(stream, Request.ClientToServerP2LeaveRoomLobby, room.RoomId);
+                            }
                         }
                     }
-                    else
+                    else 
                     {
                         MessageBox.Show("Game Is Over!");
                         ViewPanel(LoobyPanel);
@@ -587,7 +599,6 @@ namespace Client_Application
         private void ClientForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             stream?.Close();
-            Application.ExitThread();
             Environment.Exit(Environment.ExitCode);
             Application.Exit();
         }
