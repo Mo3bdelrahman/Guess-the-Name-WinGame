@@ -348,11 +348,18 @@ namespace Client_Application
             ClientController.RequestHandeller<int,string>(stream,Request.ClientToServerSendChar,room.RoomId,btn.Text);
         }
 
-        private void ToggleTurn()
+        private void ToggleTurn(string gChar)
         {
             Invoke(() =>
             {
-                DashLabel.Text = game.Word.CurrentWord;
+                foreach(var i in Letters)
+                {
+                    if(gChar == i.Text)
+                    {
+                        ClickedCharacters.Add(i);
+                    }
+                }
+               DashLabel.Text = game.Word.CurrentWord;
 
                 if (game.Word.State == WordState.Completed)
                 {
