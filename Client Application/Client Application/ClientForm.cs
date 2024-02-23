@@ -309,6 +309,7 @@ namespace Client_Application
             Invoke(() => 
             { 
                 ViewPanel(LoobyPanel);
+                StartButton.Enabled = true;
                 UpdateRoomList();
             });
         }
@@ -317,6 +318,7 @@ namespace Client_Application
         {
             Invoke(() =>
             {
+                StartButton.Enabled = true;
                 if (room.state == RoomState.Running) 
                 {
                     ClickedCharacters.Clear();

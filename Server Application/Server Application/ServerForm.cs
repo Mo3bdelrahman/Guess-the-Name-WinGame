@@ -12,6 +12,7 @@ namespace Server_Application
         Thread serverThread;
         int RoomIdG;
         int PlayerIdG;
+
         public ServerForm()
         {
             InitializeComponent();
@@ -25,6 +26,20 @@ namespace Server_Application
             listPlayers.View = View.Details;
             listPlayers.Columns.Add("Player Name", 100);
             listPlayers.Columns.Add("Player State", 100);
+            //for test
+            Logger.Write(Log.General, "Hello from general log1");
+            Logger.Write(Log.General, "Hello from general log2");
+            Logger.Write(Log.ServerError, "Hello from server error log1");
+            Logger.Write(Log.ClientError, "Hello from client error log1");
+            Logger.Write(Log.GameResult, "Moahmed wins ");
+            Logger.Write(Log.GameResult, "Zeyad winssssssss");
+
+
+            LogsComboBox.Items.AddRange([Log.All, Log.General, Log.GameResult, Log.ServerError, Log.ClientError]);
+            LogsComboBox.SelectedIndex = 0;
+            //LogsListBox.Items.AddRange(Logger.Read(Log.All).ToArray());
+
+
             // Rooms.Add(new Room()) ;
         }
 
@@ -53,8 +68,8 @@ namespace Server_Application
 
         private void ConnectToClient(object client)
         {
-            TcpClient Client =client as TcpClient;
-            Player player = new Player(Client,++PlayerIdG);
+            TcpClient Client = client as TcpClient;
+            Player player = new Player(Client, ++PlayerIdG);
             try
             {
                 Players.Add(player);
@@ -98,14 +113,14 @@ namespace Server_Application
                 using (OpenFileDialog openFileDialog = new OpenFileDialog())
                 {
                     openFileDialog.InitialDirectory = "c:\\";
-                    openFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*"; 
+                    openFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
                     openFileDialog.FilterIndex = 1;
 
-                    if (openFileDialog.ShowDialog() == DialogResult.OK) 
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
                     {
-                        string selectedFilePath = openFileDialog.FileName; 
+                        string selectedFilePath = openFileDialog.FileName;
                         WordCategory.AddCategory("team", selectedFilePath);
-                        string str = String.Join(", ",WordCategory.GetAllCategories());
+                        string str = String.Join(", ", WordCategory.GetAllCategories());
                         MessageBox.Show(str);
                     }
                 }
@@ -118,6 +133,30 @@ namespace Server_Application
         {
             Application.ExitThread();
             Environment.Exit(Environment.ExitCode);
+        }
+
+        private void LogsComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Log selectedValue = (Log)LogsComboBox.SelectedItem!;
+            LogsListBox.Items.Clear();
+            LogsListBox.Items.AddRange(Logger.Read(selectedValue).ToArray());
+        }
+
+        private void ExportBtn_Click(object sender, EventArgs e)
+        {
+            Log selectedValue = (Log)LogsComboBox.SelectedItem!;
+
+            bool res = Logger.ExportLogs(selectedValue);
+            if (res)
+            {
+                MessageBox.Show("Congrats, Successfull Exportation");
+                Logger.Write(Log.General, "Congrats, Successfull Exportation");
+            }
+            else
+            {
+                MessageBox.Show("Sorry, Unsuccessfull Exportation");
+                Logger.Write(Log.ServerError, "Sorry, Unsuccessfull Exportation");
+            }
         }
     }
 }

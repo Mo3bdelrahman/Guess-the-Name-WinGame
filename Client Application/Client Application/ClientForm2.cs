@@ -117,6 +117,7 @@ namespace Client_Application
             {
                 room = jsonStringList[0].GetOriginalData<Room>();
                 MessageBox.Show("Player2 Leave, Wait for Other Player");
+                OnCreateResponse();
             }
         }
 
