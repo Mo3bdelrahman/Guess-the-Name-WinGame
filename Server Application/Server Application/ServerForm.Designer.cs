@@ -55,7 +55,7 @@
             TabData.Location = new Point(31, 24);
             TabData.Name = "TabData";
             TabData.SelectedIndex = 0;
-            TabData.Size = new Size(738, 379);
+            TabData.Size = new Size(745, 380);
             TabData.TabIndex = 0;
             // 
             // tabPlayers
@@ -87,7 +87,7 @@
             tabRooms.Name = "tabRooms";
             tabRooms.Padding = new Padding(3);
             tabRooms.RightToLeft = RightToLeft.Yes;
-            tabRooms.Size = new Size(730, 344);
+            tabRooms.Size = new Size(737, 345);
             tabRooms.TabIndex = 1;
             tabRooms.Text = "All Rooms";
             // 
@@ -103,7 +103,7 @@
             // 
             // LogPage
             // 
-            LogPage.BackColor = SystemColors.InactiveCaption;
+            LogPage.BackColor = Color.FromArgb(23, 30, 64);
             LogPage.Controls.Add(LogsListBox);
             LogPage.Controls.Add(ExportBtn);
             LogPage.Controls.Add(LogsComboBox);
@@ -111,38 +111,42 @@
             LogPage.Margin = new Padding(3, 4, 3, 4);
             LogPage.Name = "LogPage";
             LogPage.Padding = new Padding(3, 4, 3, 4);
-            LogPage.Size = new Size(730, 344);
+            LogPage.Size = new Size(737, 345);
             LogPage.TabIndex = 3;
             LogPage.Text = "Logs";
             // 
             // LogsListBox
             // 
+            LogsListBox.BackColor = SystemColors.InactiveCaption;
             LogsListBox.FormattingEnabled = true;
             LogsListBox.HorizontalScrollbar = true;
             LogsListBox.ItemHeight = 22;
-            LogsListBox.Location = new Point(23, 70);
+            LogsListBox.Location = new Point(4, 48);
             LogsListBox.Name = "LogsListBox";
-            LogsListBox.Size = new Size(684, 224);
+            LogsListBox.Size = new Size(728, 290);
             LogsListBox.TabIndex = 2;
             // 
             // ExportBtn
             // 
-            ExportBtn.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            ExportBtn.Location = new Point(244, 19);
+            ExportBtn.BackColor = SystemColors.InactiveCaption;
+            ExportBtn.FlatStyle = FlatStyle.Popup;
+            ExportBtn.Font = new Font("Tempus Sans ITC", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            ExportBtn.Location = new Point(446, 8);
             ExportBtn.Name = "ExportBtn";
             ExportBtn.Size = new Size(161, 36);
             ExportBtn.TabIndex = 1;
             ExportBtn.Text = "Export";
-            ExportBtn.UseVisualStyleBackColor = true;
+            ExportBtn.UseVisualStyleBackColor = false;
             ExportBtn.Click += ExportBtn_Click;
             // 
             // LogsComboBox
             // 
-            LogsComboBox.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LogsComboBox.BackColor = SystemColors.InactiveCaption;
+            LogsComboBox.Font = new Font("Tempus Sans ITC", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             LogsComboBox.FormattingEnabled = true;
-            LogsComboBox.Location = new Point(23, 19);
+            LogsComboBox.Location = new Point(71, 8);
             LogsComboBox.Name = "LogsComboBox";
-            LogsComboBox.Size = new Size(172, 36);
+            LogsComboBox.Size = new Size(161, 34);
             LogsComboBox.TabIndex = 0;
             LogsComboBox.SelectedIndexChanged += LogsComboBox_SelectedIndexChanged;
             // 
@@ -152,9 +156,9 @@
             btnStart.Cursor = Cursors.Hand;
             btnStart.FlatStyle = FlatStyle.Popup;
             btnStart.Font = new Font("Tempus Sans ITC", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnStart.Location = new Point(120, 410);
+            btnStart.Location = new Point(115, 409);
             btnStart.Name = "btnStart";
-            btnStart.Size = new Size(147, 29);
+            btnStart.Size = new Size(161, 36);
             btnStart.TabIndex = 1;
             btnStart.Text = "Start The Server";
             btnStart.UseVisualStyleBackColor = false;
@@ -166,9 +170,9 @@
             button1.Cursor = Cursors.Hand;
             button1.FlatStyle = FlatStyle.Popup;
             button1.Font = new Font("Tempus Sans ITC", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button1.Location = new Point(482, 410);
+            button1.Location = new Point(481, 409);
             button1.Name = "button1";
-            button1.Size = new Size(154, 29);
+            button1.Size = new Size(161, 36);
             button1.TabIndex = 2;
             button1.Text = "Upload Category";
             button1.UseVisualStyleBackColor = false;

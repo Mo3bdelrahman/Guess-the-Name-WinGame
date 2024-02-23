@@ -117,9 +117,9 @@ namespace Client_Application
                 if (IsConnected)
                 {
                     ClientController.RequestHandeller<string>(stream, Request.ClientToServerLogin, textBox1.Text);
+                    timer.Start();
                 }
             }
-            timer.Start(); // Start the timer
         }
 
         private void CreateRoomButton_Click(object sender, EventArgs e)
@@ -467,6 +467,43 @@ namespace Client_Application
             }
         }
 
+
+        private void ClientForm_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyValue == 13)
+            {
+                if (ActivePanel == StartPanel)
+                {
+                    ViewPanel(LoginPanel);
+                }
+                else if (ActivePanel == LoginPanel && !string.IsNullOrWhiteSpace(textBox1.Text))
+                {
+                    ViewPanel(LoobyPanel);
+                }
+
+            }
+        }
+
+        private void textBox1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyValue == 13)
+            {
+                if (string.IsNullOrWhiteSpace(textBox1.Text))
+                {
+                    MessageBox.Show("Please Enter Your Name", "Empty Name", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                else
+                {
+                    bool IsConnected = Connect();
+
+                    if (IsConnected)
+                    {
+                        ClientController.RequestHandeller<string>(stream, Request.ClientToServerLogin, textBox1.Text);
+                        timer.Start();
+                    }
+                }
+            }
+        }
         private void QButton_Click(object sender, EventArgs e)
         {
             OnCharacterClick(QButton);

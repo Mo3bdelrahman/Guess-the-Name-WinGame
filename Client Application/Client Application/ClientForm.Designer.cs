@@ -146,6 +146,7 @@ namespace Client_Application
             textBox1.ShadowDecoration.CustomizableEdges = customizableEdges2;
             textBox1.Size = new Size(293, 39);
             textBox1.TabIndex = 7;
+            textBox1.PreviewKeyDown += textBox1_PreviewKeyDown;
             // 
             // LoginButton
             // 
@@ -908,12 +909,12 @@ namespace Client_Application
             BackColor = Color.FromArgb(23, 30, 46);
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1164, 620);
-            //Controls.Add(LoobyPanel);
             FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "ClientForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Guess Word";
+            PreviewKeyDown += ClientForm_PreviewKeyDown;
             LoginPanel.ResumeLayout(false);
             LoginPanel.PerformLayout();
             LoobyPanel.ResumeLayout(false);
