@@ -188,10 +188,10 @@ namespace Server_Application
                 {
                     room.Game.TurnTogeller();
                 }
-                ServerController.RequestHandeller<bool, Game>([room.Owner! , room.Guest!],Request.ServerToClientSendChar,res,room.Game);
+                ServerController.RequestHandeller<bool,string, Game>([room.Owner! , room.Guest!],Request.ServerToClientSendChar,res, GameChar, room.Game);
                 if (room.Watchers != null && room.Watchers.Count > 0)
                 {
-                    ServerController.RequestHandeller<bool, Game>(room.Watchers!, Request.ServerToClientSendChar, res, room.Game);
+                    ServerController.RequestHandeller<bool,string, Game>(room.Watchers!, Request.ServerToClientSendChar, res, GameChar, room.Game);
                 }
                 
 
