@@ -352,7 +352,7 @@ namespace Client_Application
         {
             Invoke(() =>
             {
-                DashLabel.Text = game.Word.CurrentWord;
+               DashLabel.Text = game.Word.CurrentWord;
 
                 if (game.Word.State == WordState.Completed)
                 {

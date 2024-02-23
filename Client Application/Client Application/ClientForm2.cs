@@ -152,7 +152,6 @@
                 room.state = jsonStringList[1].GetOriginalData<RoomState>();
                 //Invoke(() => ViewPanel(GamePanel));
                 OnStartClick();
-                MessageBox.Show($"the Game started {game.TurnState} turn and the word is {game.Word.CurrentWord}");
             }
             catch (Exception e) { MessageBox.Show("From start game" + e.Message); }
 
@@ -163,7 +162,6 @@
             bool res = jsonStringList[0].GetOriginalData<bool>();
             game = jsonStringList[1].GetOriginalData<Game>();
             // update UI here
-            Invoke(() => MessageBox.Show("Game updated turn of " + game.TurnState + "the Word now is" + game.Word.CurrentWord + "boolean value" + res));
             ToggleTurn();
         }
         private void loadCategories(List<string> jsonStringList)
@@ -171,7 +169,6 @@
             try
             {
                 Categories = jsonStringList[0].GetOriginalData<string[]>();
-                MessageBox.Show("Categories : " + String.Join(",", Categories));
 
                 OnCreateClick();
             }
@@ -187,7 +184,6 @@
                 //update game Panal
                 //Invoke(() => ViewPanel(GamePanel));
                 OnWatchClick();
-                MessageBox.Show($"Wellcome {player?.Name}, Have fun in {room?.RoomName} now turn of {game?.TurnState} the word is {game?.Word?.CurrentWord}");
             }
             catch (Exception e) { MessageBox.Show("From watch game" + e.Message); }
 
