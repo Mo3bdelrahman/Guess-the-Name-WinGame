@@ -167,6 +167,7 @@ namespace Server_Application
                     ServerController.RequestHandeller<Game,RoomState>([room.Owner!,room.Guest!],Request.ServerToClientStartGame,room.Game, RoomState.Running);
                     Invoke(() => UpdateRoomList());
                     Invoke(() => UpdatePlayerList());
+                    room.StartGameFlag = false;
                 }
                 else
                 {
@@ -231,8 +232,8 @@ namespace Server_Application
                 int id = jsonStringList[0].GetOriginalData<int>();
                 Player player = GetPlayer(stream);
                 Room room = GetRoom(id);
-                //Rooms.Remove(r);
-                //p.State = PlayerState.Available;
+                Rooms.Remove(room);
+                player.State = PlayerState.Available;
                 if (player.State == PlayerState.Watcher)
                 {
                     player.State = PlayerState.Available;

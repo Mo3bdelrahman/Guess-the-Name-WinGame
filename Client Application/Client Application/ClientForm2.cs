@@ -1,4 +1,6 @@
-﻿namespace Client_Application
+﻿using Timer = System.Windows.Forms.Timer;
+
+namespace Client_Application
 {
     internal partial class ClientForm
     {
@@ -6,6 +8,7 @@
         List<Room> roomList;
         Game game;
         string[] Categories;
+        Timer timer;
 
 
         private void Distributer(Request req, List<string> para)
@@ -58,6 +61,19 @@
         {
             roomList = jsonStringList[0].GetOriginalData<List<Room>>();
             Invoke(() => UpdateRoomList());
+        }
+
+        private void InitializeTimer()
+        {
+            timer = new Timer();
+            timer.Interval = 5000; // Set the interval in milliseconds (e.g., refresh every 5 seconds)
+            timer.Tick += Timer_Tick; // Set the event handler for the timer tick
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            ClientController.RequestHandeller(stream, Request.ClientToServerLoadLobby);
+            Invoke(() => UpdateRoomList());// Call the method to refresh the ListView
         }
 
         private void RoomLobbyLoad(List<string> jsonStringList)
@@ -205,8 +221,9 @@
             try
             {
                 player.State = jsonStringList[0].GetOriginalData<PlayerState>();
-                room = null;
+                ClientController.RequestHandeller<int>(stream, Request.ClientToServerLeaveGame, room.RoomId);
                 ClientController.RequestHandeller(stream, Request.ClientToServerLoadLobby);
+                room = null;
                 MessageBox.Show("Player Leaved,Game Finished and The room was closed");
                 Invoke(() => ViewPanel(LoobyPanel));
                 //OnLeaveClick();
