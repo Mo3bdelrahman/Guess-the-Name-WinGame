@@ -62,19 +62,26 @@ namespace Client_Application
         {
             roomList.Clear();
             roomList = jsonStringList[0].GetOriginalData<List<Room>>();
+            List<RoomState> roomStates = jsonStringList[1].GetOriginalData<List<RoomState>>();
+
+            for ( int i = 0; i < roomStates.Count; i++)
+            {
+                roomList[i].State = roomStates[i];
+            }
+
             Invoke(() => UpdateRoomList());
         }
 
         private void InitializeTimer()
         {
             timer = new Timer();
-            timer.Interval = 5000; // Set the interval in milliseconds (e.g., refresh every 5 seconds)
-            timer.Tick += Timer_Tick; // Set the event handler for the timer tick
+            timer.Interval = 1000;
+            timer.Tick += Timer_Tick;
         }
         private void Timer_Tick(object sender, EventArgs e)
         {
             ClientController.RequestHandeller(stream, Request.ClientToServerLoadLobby);
-            Invoke(() => UpdateRoomList());// Call the method to refresh the ListView
+            Invoke(() => UpdateRoomList());
         }
         private void RoomLobbyLoad(List<string> jsonStringList)
         {
