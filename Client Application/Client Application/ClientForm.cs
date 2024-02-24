@@ -440,7 +440,12 @@ namespace Client_Application
                     else 
                     {
                         string winner = game.TurnState == TurnState.Player1 ? room.Owner.Name : room.Guest.Name;
-
+                        foreach(var i in Letters)
+                        {
+                            i.Visible = true;
+                        }
+                        WatchGameButton.Enabled = false;
+                        JoinRoomButton.Enabled = false;
                         Messageform gameOver = new Messageform();
                         gameOver.Message = $"Game Over\nWinner is {winner}";
                         gameOver.Show();
