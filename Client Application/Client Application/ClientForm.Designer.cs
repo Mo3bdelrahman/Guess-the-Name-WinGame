@@ -101,6 +101,8 @@ namespace Client_Application
             StartPanel = new Panel();
             label1 = new Label();
             pictureBox1 = new PictureBox();
+            label2 = new Label();
+            WatchersCountLabel = new Label();
             LoginPanel.SuspendLayout();
             LoobyPanel.SuspendLayout();
             RoomLoobyPanel.SuspendLayout();
@@ -425,6 +427,8 @@ namespace Client_Application
             GamePanel.BackColor = Color.Transparent;
             GamePanel.BackgroundImage = (Image)resources.GetObject("GamePanel.BackgroundImage");
             GamePanel.BackgroundImageLayout = ImageLayout.Stretch;
+            GamePanel.Controls.Add(WatchersCountLabel);
+            GamePanel.Controls.Add(label2);
             GamePanel.Controls.Add(LeaveGameButton);
             GamePanel.Controls.Add(XExitLabel4);
             GamePanel.Controls.Add(PlayerTurnLabel);
@@ -458,7 +462,7 @@ namespace Client_Application
             GamePanel.Dock = DockStyle.Fill;
             GamePanel.Location = new Point(0, 0);
             GamePanel.Name = "GamePanel";
-            GamePanel.Size = new Size(1159, 573);
+            GamePanel.Size = new Size(1164, 620);
             GamePanel.TabIndex = 6;
             // 
             // LeaveGameButton
@@ -902,6 +906,27 @@ namespace Client_Application
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Ravie", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.ForeColor = SystemColors.ButtonFace;
+            label2.Location = new Point(24, 22);
+            label2.Name = "label2";
+            label2.Size = new Size(153, 27);
+            label2.TabIndex = 30;
+            label2.Text = "Watchers";
+            // 
+            // WatchersCountLabel
+            // 
+            WatchersCountLabel.AutoSize = true;
+            WatchersCountLabel.Font = new Font("Ravie", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            WatchersCountLabel.ForeColor = SystemColors.ButtonFace;
+            WatchersCountLabel.Location = new Point(24, 73);
+            WatchersCountLabel.Name = "WatchersCountLabel";
+            WatchersCountLabel.Size = new Size(0, 27);
+            WatchersCountLabel.TabIndex = 31;
+            // 
             // ClientForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -911,6 +936,7 @@ namespace Client_Application
             BackColor = Color.FromArgb(23, 30, 46);
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1164, 620);
+
             FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "ClientForm";
@@ -985,5 +1011,7 @@ namespace Client_Application
         private Panel StartPanel;
         private PictureBox pictureBox1;
         private Label label1;
+        private Label WatchersCountLabel;
+        private Label label2;
     }
 }

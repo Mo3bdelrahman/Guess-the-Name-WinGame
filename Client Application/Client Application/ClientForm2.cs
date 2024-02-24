@@ -29,6 +29,7 @@ namespace Client_Application
                 case Request.ServerToClientWatch: WatchGame(para); break;
                 case Request.ServerToClientAddWatcher: AddWatcher(para); break;
                 case Request.ServerToClientLeaveGame: LeaveGame(para); break;
+                case Request.ServerToClientEndGame: EndGame(para); break;
 
 
                 default: MessageBox.Show($"Not Handelled  req : {req}"); break;
@@ -42,7 +43,7 @@ namespace Client_Application
                 if (jsonStringList[0].GetOriginalData<bool>())
                 {
                     player = jsonStringList[1].GetOriginalData<Player>();
-                    MessageBox.Show($"{player.Name}, {player.State}");
+                   // MessageBox.Show($"{player.Name}, {player.State}");
                     ClientController.RequestHandeller(stream, Request.ClientToServerLoadLobby);
                     OnLoginClick();
                 }
@@ -59,6 +60,7 @@ namespace Client_Application
 
         private void LobbyLoad(List<string> jsonStringList)
         {
+            roomList.Clear();
             roomList = jsonStringList[0].GetOriginalData<List<Room>>();
             Invoke(() => UpdateRoomList());
         }
@@ -69,13 +71,11 @@ namespace Client_Application
             timer.Interval = 5000; // Set the interval in milliseconds (e.g., refresh every 5 seconds)
             timer.Tick += Timer_Tick; // Set the event handler for the timer tick
         }
-
         private void Timer_Tick(object sender, EventArgs e)
         {
             ClientController.RequestHandeller(stream, Request.ClientToServerLoadLobby);
             Invoke(() => UpdateRoomList());// Call the method to refresh the ListView
         }
-
         private void RoomLobbyLoad(List<string> jsonStringList)
         {
             room = jsonStringList[0].GetOriginalData<Room>();
@@ -84,7 +84,6 @@ namespace Client_Application
             //Invoke(() => UpdateRoomList());
             OnCreateResponse();
         }
-
         private void P1leaveRoom(List<string> jsonStringList)
         {
             if (player.State == PlayerState.Player1)
@@ -103,7 +102,6 @@ namespace Client_Application
 
             OnLeaveClick();
         }
-
         private void P2leaveRoom(List<string> jsonStringList)
         {
             if (player.State == PlayerState.Player2)
@@ -120,16 +118,16 @@ namespace Client_Application
                 OnCreateResponse();
             }
         }
-
         private void GuestAskToJoin(List<string> jsonStringList)
         {
             Player guest = jsonStringList[0].GetOriginalData<Player>();
             Room room = jsonStringList[1].GetOriginalData<Room>();
-            MessageBox.Show($"Player: {guest.Name} Ask To Join");
-            // here we need check if owner accept or not
-            ClientController.RequestHandeller<bool, int, int>(stream, Request.ClientToServerResponseToJoin, true, guest.Id, room.RoomId);
-        }
 
+            DialogResult result= MessageBox.Show($"Player: {guest.Name} Ask To Join", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            bool res = result == DialogResult.Yes ? true : false;
+                // here we need check if owner accept or not
+            ClientController.RequestHandeller<bool, int, int>(stream, Request.ClientToServerResponseToJoin, res, guest.Id, room.RoomId);
+        }
         private void PlayerResponseToJoin(List<string> jsonStringList)
         {
             try
@@ -160,20 +158,18 @@ namespace Client_Application
             catch (Exception e) { MessageBox.Show("from res to join" + e.Message); }
 
         }
-
         private void StartGame(List<string> jsonStringList)
         {
             try
             {
                 game = jsonStringList[0].GetOriginalData<Game>();
-                room.state = jsonStringList[1].GetOriginalData<RoomState>();
+                room.State = jsonStringList[1].GetOriginalData<RoomState>();
                 //Invoke(() => ViewPanel(GamePanel));
                 OnStartClick();
             }
             catch (Exception e) { MessageBox.Show("From start game" + e.Message); }
 
         }
-
         private void Play(List<string> jsonStringList)
         {
             bool res = jsonStringList[0].GetOriginalData<bool>();
@@ -211,8 +207,8 @@ namespace Client_Application
             try
             {
                 room.WatchersCount++;
+                Invoke(()=>WatchersCountLabel.Text = room.WatchersCount.ToString());
                 // update Counter in game panal
-                MessageBox.Show($"the Watcher count is {room.WatchersCount} ");
             }
             catch (Exception e) { MessageBox.Show("From add watcher " + e.Message); }
 
@@ -222,16 +218,29 @@ namespace Client_Application
             try
             {
                 player.State = jsonStringList[0].GetOriginalData<PlayerState>();
-                ClientController.RequestHandeller<int>(stream, Request.ClientToServerLeaveGame, room.RoomId);
+                //ClientController.RequestHandeller<int>(stream, Request.ClientToServerLeaveGame, room.RoomId);
                 ClientController.RequestHandeller(stream, Request.ClientToServerLoadLobby);
                 room = null;
-                MessageBox.Show("Player Leaved,Game Finished and The room was closed");
+                Messageform LeaveMessage = new Messageform();
+                LeaveMessage.Message = "Sorry, Player Leaved The was Game Finished and The room was closed..";
+                LeaveMessage.Show();
                 Invoke(() => ViewPanel(LoobyPanel));
                 //OnLeaveClick();
             }
             catch(Exception e) { MessageBox.Show("Leave Game Error"+e.Message); }
             Invoke(() => UpdateRoomList());
         }
+
+        private void EndGame(List<string> jsonStringList)
+        {
+            try
+            {
+                player.State = jsonStringList[0].GetOriginalData<PlayerState>();
+            }
+            catch (Exception e) { MessageBox.Show("Leave Game Error" + e.Message); }
+            Invoke(() => UpdateRoomList());
+        }
+
 
         private void UpdateRoomList()
         {

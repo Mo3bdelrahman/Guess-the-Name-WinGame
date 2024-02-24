@@ -30,6 +30,7 @@ namespace Server_Application
 
         ClientToServerLoadCategories, //on create categ
         ServerToClientLoadCategories,
+        ServerToClientUpdateCategories,
 
         ClientToServerCreateRoom,
         ServerToClientCreateRoom,//on creating confrimed
@@ -61,7 +62,9 @@ namespace Server_Application
         ClientToServerSendChar,// Game
         ServerToClientSendChar,
 
-        SendCharC,
+        ClientToServerEndGame,// Game
+        ServerToClientEndGame,
+
     }
     enum WordState
     {

@@ -27,7 +27,7 @@ namespace Client_Application
     {
         public Player? Owner { get; set; }
         public Player? Guest { get; set; }
-        public RoomState state { get; set; }
+        public RoomState State { get; set; }
         public int WatchersCount { get; set; }
         public string Category { get; set; }
         public string RoomName { get; set; }
@@ -36,7 +36,7 @@ namespace Client_Application
 
         public override string ToString()
         {
-            return $"Id: {RoomId} \t Name: {RoomName} \t state: {state}";
+            return $"Id: {RoomId} \t Name: {RoomName} \t state: {State}";
         }
     }
     internal class Word
