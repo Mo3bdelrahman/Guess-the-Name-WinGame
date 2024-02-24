@@ -12,14 +12,17 @@ namespace Client_Application
 {
     public partial class Winner : Form
     {
+        public DialogResult Result { get; set; }
         public Winner()
         {
             InitializeComponent();
+            Show();
+            Result = MessageBox.Show("Do You Want To Play Again ?", " ", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
         }
 
         private void ExitWinnerButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Do You Want To Play Again ?"," ", MessageBoxButtons.YesNo, MessageBoxIcon.Question);                     
+            this.Close();
         }
     }
 }
