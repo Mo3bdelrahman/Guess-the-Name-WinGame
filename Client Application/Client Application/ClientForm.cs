@@ -51,12 +51,9 @@ namespace Client_Application
             }
             catch (SocketException ex)
             {
-                DialogResult result = MessageBox.Show("Server Is Down...\nPlease Try Again Later", "Server Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
-
-                if (result == DialogResult.Retry)
-                {
-                    Connect();
-                }
+                Messageform serverDownMessage = new Messageform();
+                serverDownMessage.Message = "Server Is Down...";
+                serverDownMessage.Show();
 
                 return false;
             }
@@ -153,6 +150,8 @@ namespace Client_Application
 
         private void LeaveButton_Click(object sender, EventArgs e)
         {
+            WatchGameButton.Enabled = false;
+            JoinRoomButton.Enabled = false;
 
             if (player.State == PlayerState.Player1)
             {
@@ -199,7 +198,9 @@ namespace Client_Application
 
             if (result == DialogResult.Yes)
             {
-                //ViewPanel(LoobyPanel);
+                WatchGameButton.Enabled = false;
+                JoinRoomButton.Enabled = false;
+
                 ClientController.RequestHandeller<int>(stream,Request.ClientToServerLeaveGame,room.RoomId);
             }
         }
@@ -253,8 +254,11 @@ namespace Client_Application
 
                 if (result == DialogResult.OK)
                 {
+
                     ClientController.RequestHandeller<string>(stream, Request.ClientToServerCreateRoom, dialog.cat);
                     ViewPanel(RoomLoobyPanel);
+                    WatchGameButton.Enabled = false;
+                    JoinRoomButton.Enabled = false;
                 }
             });
         }
@@ -310,6 +314,8 @@ namespace Client_Application
             { 
                 ViewPanel(LoobyPanel);
                 StartButton.Enabled = true;
+                WatchGameButton.Enabled = false;
+                JoinRoomButton.Enabled = false;
                 UpdateRoomList();
             });
         }
@@ -372,21 +378,31 @@ namespace Client_Application
                 {
                     if (player.State != PlayerState.Watcher)
                     {
+                        DialogResult result;
+
                         if (game.TurnState != turnState)
                         {
-                            MessageBox.Show("You Lost. Better Luck Next Time");
+                            //Messageform lostGame = new Messageform();
+                            //lostGame.Message = "You Lost. Better Luck Next Time";
+                            //lostGame.Show();
+                            Loser loser = new Loser();
+                            result = loser.Result;
+                            //MessageBox.Show("You Lost. Better Luck Next Time");
                         }
                         else
                         {
-                            MessageBox.Show("You Win. Congrats on your victory!");
+                            //Messageform wonGame = new Messageform();
+                            //wonGame.Message = "You Win. Congrats on your victory!";
+                            //wonGame.Show();
+                            Winner winner = new Winner();
+                            result = winner.Result;
+                            //MessageBox.Show("You Win. Congrats on your victory!");
                         }
 
                         foreach (Button btn in Letters)
                         {
                             btn.Enabled = false;
                         }
-
-                        DialogResult result = MessageBox.Show("Play Again?", "One More Round", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                         if (result == DialogResult.Yes)
                         {
@@ -408,7 +424,10 @@ namespace Client_Application
                     }
                     else 
                     {
-                        MessageBox.Show("Game Is Over!");
+                        Messageform gameOver = new Messageform();
+                        gameOver.Message = "The Game Is Over";
+                        gameOver.Show();
+
                         ViewPanel(LoobyPanel);
                     }
                 }

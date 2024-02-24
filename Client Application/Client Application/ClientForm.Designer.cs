@@ -264,6 +264,7 @@ namespace Client_Application
             WatchGameButton.DisabledState.CustomBorderColor = Color.DarkGray;
             WatchGameButton.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             WatchGameButton.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            WatchGameButton.Enabled = false;
             WatchGameButton.FillColor = Color.SaddleBrown;
             WatchGameButton.Font = new Font("Ravie", 10.8F);
             WatchGameButton.ForeColor = Color.Gold;
@@ -284,6 +285,7 @@ namespace Client_Application
             JoinRoomButton.DisabledState.CustomBorderColor = Color.DarkGray;
             JoinRoomButton.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             JoinRoomButton.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            JoinRoomButton.Enabled = false;
             JoinRoomButton.FillColor = Color.SaddleBrown;
             JoinRoomButton.Font = new Font("Ravie", 10.8F);
             JoinRoomButton.ForeColor = Color.Gold;
