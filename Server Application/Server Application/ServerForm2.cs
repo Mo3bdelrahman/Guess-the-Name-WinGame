@@ -204,9 +204,17 @@ namespace Server_Application
                 if (room.Game.Word.State == WordState.Completed)
                 {
                     if(room.Owner.State.ToString() == room.Game.TurnState.ToString())
-                        Logger.Write(Log.GameResult, $"Game Ended in {room.RoomName} winner is {room.Owner.Name}");
+                        Logger.Write(Log.GameResult, $"Game Ended in {room.RoomName} winner is {room.Owner.Name}");    
                     else
                         Logger.Write(Log.GameResult, $"Game Ended in {room.RoomName} winner is {room.Guest.Name}");
+                    //if (room.Watchers.Count > 0)
+                    //{
+                    //    foreach (var i in room.Watchers)
+                    //    {
+                    //        i.State = PlayerState.Available;
+                    //    }
+                    //    room.Watchers.Clear();
+                    //}
                 }
                 ServerController.RequestHandeller<bool,string, Game>([room.Owner! , room.Guest!],Request.ServerToClientSendChar,res, GameChar, room.Game);
                 if (room.Watchers != null && room.Watchers.Count > 0)
