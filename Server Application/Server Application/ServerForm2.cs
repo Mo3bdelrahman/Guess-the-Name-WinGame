@@ -25,6 +25,8 @@ namespace Server_Application
                 case Request.ClientToServerLoadCategories: SendCategories(stream, para);break;
                 case Request.ClientToServerWatch: Watch(stream, para); break;
                 case Request.ClientToServerLeaveGame: LeaveGame(stream, para);break;
+                case Request.ClientToServerEndGame: EndGame(stream, para); break;
+
 
                 default: MessageBox.Show($"{req}"); break;
             }
@@ -53,6 +55,7 @@ namespace Server_Application
             {
                 p.Name = jsonStringList[0].GetOriginalData<string>();
                 ServerController.RequestHandeller<bool, Player>([p], Request.ServerToClientLogin, true, p);
+                Logger.Write(Log.General, $"Player {p.Name} id = {p.Id} Connected");
             }
             catch
             {
@@ -76,7 +79,7 @@ namespace Server_Application
             p.State = PlayerState.Player1;
             ServerController.RequestHandeller<Room,PlayerState>([p], Request.ServerToClientCreateRoom, room,p.State);
             ServerController.RequestHandeller(Players, Request.ServerToClientUpdateRooms);
-            Logger.Write(Log.General,$"{p.Name} create room ");
+            Logger.Write(Log.General,$"{p.Name} create room with id = {room.RoomId}");
             Invoke(() => UpdateRoomList());
             Invoke(() => UpdatePlayerList());
         }
@@ -107,7 +110,7 @@ namespace Server_Application
             if(r != null)
             {
                 r.Guest = null;
-                r.state = RoomState.Waiting;
+                r.State = RoomState.Waiting;
                 ServerController.RequestHandeller<PlayerState>([p], Request.ServerToClientP2LeaveRoomLobby, p.State);
                 ServerController.RequestHandeller<Room>([r.Owner!], Request.ServerToClientP2LeaveRoomLobby, r);
             }
@@ -142,7 +145,7 @@ namespace Server_Application
                 {
                     guest.State = PlayerState.Player2;
                     room.Guest = guest;
-                    room.state = RoomState.StandBy;
+                    room.State = RoomState.StandBy;
                     ServerController.RequestHandeller<bool, Room>([owner, guest], Request.ServerToClientResponseToJoin, response, room);
                 }
                 else
@@ -166,10 +169,11 @@ namespace Server_Application
                 {
                     //Note we need here => get Category
                     room.Game = new Game(WordCategory.GetRandomWord(room.Category));
-                    room.state = RoomState.Running;
+                    room.State = RoomState.Running;
                     ServerController.RequestHandeller<Game,RoomState>([room.Owner!,room.Guest!],Request.ServerToClientStartGame,room.Game, RoomState.Running);
                     Invoke(() => UpdateRoomList());
                     Invoke(() => UpdatePlayerList());
+                    Logger.Write(Log.General,$"Game Started in {room.RoomName} with word {room.Game.Word} ( {room.Owner.Name} VS {room.Guest.Name} )");
                     room.StartGameFlag = false;
                 }
                 else
@@ -177,7 +181,7 @@ namespace Server_Application
                     room.StartGameFlag = true;
                 }
             }
-            catch (Exception e) { MessageBox.Show(e.Message); }
+            catch (Exception e) { Logger.Write(Log.ServerError, e.Message); }
            
         }
         private void CheckChar(NetworkStream stream, List<string> jsonStringList)
@@ -225,6 +229,7 @@ namespace Server_Application
                 room.Watchers.Add(watcher);
                 ServerController.RequestHandeller<Player,Room,Game>([watcher], Request.ServerToClientWatch,watcher, room,room.Game);
                 ServerController.RequestHandeller([room.Owner!,room.Guest!], Request.ServerToClientAddWatcher);
+                Logger.Write(Log.General,$"Player {watcher.Name} watchs Game in Room {room.RoomName}");
             }
             catch (Exception e) { MessageBox.Show("From Watch" + e.Message); }
         }
@@ -268,13 +273,35 @@ namespace Server_Application
 
         }
 
+        private void EndGame(NetworkStream stream, List<string> jsonStringList)
+        {
+            try
+            {
+                int rId = jsonStringList[0].GetOriginalData<int>();
+                string winerName = jsonStringList[0].GetOriginalData<string>();
+                Room room = GetRoom(rId);
+                Logger.Write(Log.GameResult,$"Game Ended in {room.RoomName} ( {room.Owner.Name} Vs {room.Guest.Name} ) and the winner is *** {winerName} ***");
+                if ( room.Watchers.Count > 0)
+                {
+                    ServerController.RequestHandeller<PlayerState>(room.Watchers, Request.ServerToClientEndGame, PlayerState.Available);
+                    room.Watchers.Clear();
+                }
+
+                Invoke(() => UpdateRoomList());
+                Invoke(() => UpdatePlayerList());
+            }
+            catch (Exception e) { MessageBox.Show("from LeaveGame Server" + e.Message); }
+
+
+        }
+
         //UI
         private void UpdateRoomList()
         {
             listRooms.Items.Clear();
             foreach (var r in Rooms)
             {
-                string[] s = { $"{r.RoomId}", r.RoomName, r.Owner.Name};
+                string[] s = { $"{r.RoomId}", r.RoomName, r.Owner.Name,r.State.ToString()};
                 listRooms.Items.Add(new ListViewItem(s));
             }
 

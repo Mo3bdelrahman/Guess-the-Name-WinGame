@@ -10,17 +10,20 @@ using System.Windows.Forms;
 
 namespace Client_Application
 {
+    
     public partial class Loser : Form
     {
+        public DialogResult Result { get; set; }
         public Loser()
         {
             InitializeComponent();
+            Show();
+            //Result = MessageBox.Show("Do You Want To Play Again ?", " ", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
         }
 
         private void ExitWinnerButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Do You Want To Play Again ?", " ", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            //this.Close();
+            this.Close();
         }
     }
 }

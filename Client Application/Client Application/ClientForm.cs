@@ -34,6 +34,7 @@ namespace Client_Application
             this.Controls.Add(StartPanel);
             ClientController.DistributerD += Distributer;
             player = new Player();
+            roomList = new List<Room>();
             InitializeTimer();
         }
 
@@ -51,12 +52,9 @@ namespace Client_Application
             }
             catch (SocketException ex)
             {
-                DialogResult result = MessageBox.Show("Server Is Down...\nPlease Try Again Later", "Server Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
-
-                if (result == DialogResult.Retry)
-                {
-                    Connect();
-                }
+                Messageform serverDownMessage = new Messageform();
+                serverDownMessage.Message = "Server Is Down...";
+                serverDownMessage.Show();
 
                 return false;
             }
@@ -117,9 +115,9 @@ namespace Client_Application
                 if (IsConnected)
                 {
                     ClientController.RequestHandeller<string>(stream, Request.ClientToServerLogin, textBox1.Text);
+                    timer.Start();
                 }
             }
-            timer.Start(); // Start the timer
         }
 
         private void CreateRoomButton_Click(object sender, EventArgs e)
@@ -153,6 +151,8 @@ namespace Client_Application
 
         private void LeaveButton_Click(object sender, EventArgs e)
         {
+            WatchGameButton.Enabled = false;
+            JoinRoomButton.Enabled = false;
 
             if (player.State == PlayerState.Player1)
             {
@@ -199,7 +199,9 @@ namespace Client_Application
 
             if (result == DialogResult.Yes)
             {
-                //ViewPanel(LoobyPanel);
+                WatchGameButton.Enabled = false;
+                JoinRoomButton.Enabled = false;
+
                 ClientController.RequestHandeller<int>(stream,Request.ClientToServerLeaveGame,room.RoomId);
             }
         }
@@ -253,8 +255,11 @@ namespace Client_Application
 
                 if (result == DialogResult.OK)
                 {
+
                     ClientController.RequestHandeller<string>(stream, Request.ClientToServerCreateRoom, dialog.cat);
                     ViewPanel(RoomLoobyPanel);
+                    WatchGameButton.Enabled = false;
+                    JoinRoomButton.Enabled = false;
                 }
             });
         }
@@ -310,6 +315,8 @@ namespace Client_Application
             { 
                 ViewPanel(LoobyPanel);
                 StartButton.Enabled = true;
+                WatchGameButton.Enabled = false;
+                JoinRoomButton.Enabled = false;
                 UpdateRoomList();
             });
         }
@@ -319,7 +326,7 @@ namespace Client_Application
             Invoke(() =>
             {
                 StartButton.Enabled = true;
-                if (room.state == RoomState.Running) 
+                if (room.State == RoomState.Running) 
                 {
                     ClickedCharacters.Clear();
                     DashLabel.Text = game.Word.CurrentWord;
@@ -343,7 +350,7 @@ namespace Client_Application
                             btn.Enabled = false;
                         }
                     }
-
+                    WatchersCountLabel.Text = room.WatchersCount.ToString();
                     ViewPanel(GamePanel);
                 }
             });
@@ -370,47 +377,77 @@ namespace Client_Application
 
                 if (game.Word.State == WordState.Completed)
                 {
+                    room.WatchersCount = 0;
+
                     if (player.State != PlayerState.Watcher)
                     {
+                        DialogResult result;
+
                         if (game.TurnState != turnState)
                         {
-                            MessageBox.Show("You Lost. Better Luck Next Time");
+                            //Messageform lostGame = new Messageform();
+                            //lostGame.Message = "You Lost. Better Luck Next Time";
+                            //lostGame.Show();
+                            Loser loser = new Loser();
+                            //result = loser.Result;
+
+                            //game = null;
+                            //MessageBox.Show("You Lost. Better Luck Next Time");
                         }
                         else
                         {
-                            MessageBox.Show("You Win. Congrats on your victory!");
+                            //Messageform wonGame = new Messageform();
+                            //wonGame.Message = "You Win. Congrats on your victory!";
+                            //wonGame.Show();
+                            Winner winner = new Winner();
+                            //result = winner.Result;
+                            //game = null;
+
+                            //notify server to end game to kick watchers 
+                            //string winerName = game.TurnState == TurnState.Player1 ? room.Owner.Name : room.Guest.Name;
+
+                            //ClientController.RequestHandeller<int, string>(stream, Request.ClientToServerEndGame, room.RoomId, winerName);
                         }
 
-                        foreach (Button btn in Letters)
-                        {
-                            btn.Enabled = false;
-                        }
+                        Invoke(() => {
+                            ViewPanel(RoomLoobyPanel);
 
-                        DialogResult result = MessageBox.Show("Play Again?", "One More Round", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                        if (result == DialogResult.Yes)
-                        {
-                            // Send To Server
-                            ClientController.RequestHandeller<int>(stream, Request.ClientToServerStartGame, room.RoomId);
-                        }
-                        else
-                        {
-                            if (player.State == PlayerState.Player1 && room != null)
+                            foreach (Button btn in Letters)
                             {
-                                ClientController.RequestHandeller<int>(stream, Request.ClientToServerP1LeaveRoomLobby, room.RoomId);
+                                btn.Enabled = false;
                             }
-                            else if (player.State == PlayerState.Player2 && room != null)
-                            {
-                                ClientController.RequestHandeller<int>(stream, Request.ClientToServerP2LeaveRoomLobby, room.RoomId);
-                            }
-                            Invoke(() => ViewPanel(LoobyPanel));
-                        }
+                        });
+
+                        //if (result == DialogResult.Yes)
+                        //{
+                        //    // Send To Server
+                        //    ClientController.RequestHandeller<int>(stream, Request.ClientToServerStartGame, room.RoomId);
+                        //}
+                        //else
+                        //{
+                        //    if (player.State == PlayerState.Player1 && room != null)
+                        //    {
+                        //        ClientController.RequestHandeller<int>(stream, Request.ClientToServerP1LeaveRoomLobby, room.RoomId);
+                        //    }
+                        //    else if (player.State == PlayerState.Player2 && room != null)
+                        //    {
+                        //        ClientController.RequestHandeller<int>(stream, Request.ClientToServerP2LeaveRoomLobby, room.RoomId);
+                        //    }
+                        //    //note here you send leave req so let leave handellers change the UI
+                        //    //Invoke(() => ViewPanel(LoobyPanel));
+                        //}
                     }
                     else 
                     {
-                        MessageBox.Show("Game Is Over!");
+                        string winer = game.TurnState == TurnState.Player1 ? room.Owner.Name : room.Guest.Name;
+
+                        Messageform gameOver = new Messageform();
+                        gameOver.Message = $"Winer is {winer} , The Game Is Over";
+                        gameOver.Show();
+                        game = null;
                         ViewPanel(LoobyPanel);
                     }
+                    
                 }
                 else
                 {
@@ -462,11 +499,63 @@ namespace Client_Application
             if (listView1.SelectedItems.Count > 0)
             {
                 ActiveRoom = listView1.SelectedItems[0].Text;
-                WatchGameButton.Enabled = true;
-                JoinRoomButton.Enabled = true;
+                int i = listView1.SelectedIndices[0];
+                if (roomList[i].State == RoomState.Running)
+                {
+                    WatchGameButton.Enabled = true;
+                    JoinRoomButton.Enabled = false;
+                }
+                else if (roomList[i].State == RoomState.StandBy)
+                {
+                    WatchGameButton.Enabled = false;
+                    JoinRoomButton.Enabled = false;
+                }
+                else
+                {
+                    WatchGameButton.Enabled = false;
+                    JoinRoomButton.Enabled = true;
+                }
+                
             }
         }
 
+
+        private void ClientForm_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyValue == 13)
+            {
+                if (ActivePanel == StartPanel)
+                {
+                    ViewPanel(LoginPanel);
+                }
+                else if (ActivePanel == LoginPanel && !string.IsNullOrWhiteSpace(textBox1.Text))
+                {
+                    ViewPanel(LoobyPanel);
+                }
+
+            }
+        }
+
+        private void textBox1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyValue == 13)
+            {
+                if (string.IsNullOrWhiteSpace(textBox1.Text))
+                {
+                    MessageBox.Show("Please Enter Your Name", "Empty Name", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                else
+                {
+                    bool IsConnected = Connect();
+
+                    if (IsConnected)
+                    {
+                        ClientController.RequestHandeller<string>(stream, Request.ClientToServerLogin, textBox1.Text);
+                        timer.Start();
+                    }
+                }
+            }
+        }
         private void QButton_Click(object sender, EventArgs e)
         {
             OnCharacterClick(QButton);
