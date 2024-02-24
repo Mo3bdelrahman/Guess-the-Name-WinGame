@@ -13,7 +13,7 @@ namespace Server_Application
         public Player? Guest { get; set; }
         [JsonIgnore]
         public Game? Game { get; set; }
-        public RoomState state;
+        public RoomState State;
         [JsonIgnore]
         public bool playAgain;
         [JsonIgnore]
@@ -30,12 +30,12 @@ namespace Server_Application
             Watchers = new List<Player>();
             this.RoomName = $"{owner.Name}'s room";
             this.RoomId = id;
-            state = RoomState.Waiting;
+            State = RoomState.Waiting;
             StartGameFlag = false;
         }
         public override string ToString()
         {
-            return $"Id: {RoomId} \t Name: {RoomName} \t state: {state}";
+            return $"Id: {RoomId} \t Name: {RoomName} \t state: {State}";
         }
       
 

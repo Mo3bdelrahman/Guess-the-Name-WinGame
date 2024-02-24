@@ -30,6 +30,16 @@ namespace Server_Application
             catch { return false; }
             
         }
+        public static bool ReomveCategory(string catName)
+        {
+            try
+            {
+                filePaths.Remove(catName);
+                return true;
+            }
+            catch { return false; }
+
+        }
 
         public static string[] GetAllCategories()
         {
