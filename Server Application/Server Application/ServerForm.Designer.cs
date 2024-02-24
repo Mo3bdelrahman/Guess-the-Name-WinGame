@@ -34,8 +34,6 @@
             listPlayers = new ListView();
             tabRooms = new TabPage();
             listRooms = new ListView();
-            tabResults = new TabPage();
-            listResults = new ListView();
             LogPage = new TabPage();
             LogsListBox = new ListBox();
             ExportBtn = new Button();
@@ -45,7 +43,6 @@
             TabData.SuspendLayout();
             tabPlayers.SuspendLayout();
             tabRooms.SuspendLayout();
-            tabResults.SuspendLayout();
             LogPage.SuspendLayout();
             SuspendLayout();
             // 
@@ -53,27 +50,28 @@
             // 
             TabData.Controls.Add(tabPlayers);
             TabData.Controls.Add(tabRooms);
-            TabData.Controls.Add(tabResults);
             TabData.Controls.Add(LogPage);
+            TabData.Font = new Font("Tempus Sans ITC", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             TabData.Location = new Point(31, 24);
             TabData.Name = "TabData";
             TabData.SelectedIndex = 0;
-            TabData.Size = new Size(738, 379);
+            TabData.Size = new Size(745, 380);
             TabData.TabIndex = 0;
             // 
             // tabPlayers
             // 
+            tabPlayers.BackColor = Color.FromArgb(23, 30, 64);
             tabPlayers.Controls.Add(listPlayers);
-            tabPlayers.Location = new Point(4, 29);
+            tabPlayers.Location = new Point(4, 31);
             tabPlayers.Name = "tabPlayers";
             tabPlayers.Padding = new Padding(3);
-            tabPlayers.Size = new Size(730, 346);
+            tabPlayers.Size = new Size(730, 344);
             tabPlayers.TabIndex = 0;
             tabPlayers.Text = "Active Players";
-            tabPlayers.UseVisualStyleBackColor = true;
             // 
             // listPlayers
             // 
+            listPlayers.BackColor = SystemColors.InactiveCaption;
             listPlayers.Location = new Point(6, 5);
             listPlayers.Name = "listPlayers";
             listPlayers.Size = new Size(718, 335);
@@ -83,18 +81,19 @@
             // 
             // tabRooms
             // 
+            tabRooms.BackColor = Color.FromArgb(23, 30, 64);
             tabRooms.Controls.Add(listRooms);
-            tabRooms.Location = new Point(4, 29);
+            tabRooms.Location = new Point(4, 31);
             tabRooms.Name = "tabRooms";
             tabRooms.Padding = new Padding(3);
             tabRooms.RightToLeft = RightToLeft.Yes;
-            tabRooms.Size = new Size(730, 346);
+            tabRooms.Size = new Size(737, 345);
             tabRooms.TabIndex = 1;
             tabRooms.Text = "All Rooms";
-            tabRooms.UseVisualStyleBackColor = true;
             // 
             // listRooms
             // 
+            listRooms.BackColor = SystemColors.InactiveCaption;
             listRooms.Location = new Point(6, 5);
             listRooms.Name = "listRooms";
             listRooms.Size = new Size(718, 335);
@@ -102,94 +101,88 @@
             listRooms.UseCompatibleStateImageBehavior = false;
             listRooms.View = View.List;
             // 
-            // tabResults
-            // 
-            tabResults.Controls.Add(listResults);
-            tabResults.Location = new Point(4, 29);
-            tabResults.Name = "tabResults";
-            tabResults.Padding = new Padding(3);
-            tabResults.Size = new Size(730, 346);
-            tabResults.TabIndex = 2;
-            tabResults.Text = "Game Results";
-            tabResults.UseVisualStyleBackColor = true;
-            // 
-            // listResults
-            // 
-            listResults.Location = new Point(6, 5);
-            listResults.Name = "listResults";
-            listResults.Size = new Size(718, 335);
-            listResults.TabIndex = 0;
-            listResults.UseCompatibleStateImageBehavior = false;
-            listResults.View = View.List;
-            // 
             // LogPage
             // 
+            LogPage.BackColor = Color.FromArgb(23, 30, 64);
             LogPage.Controls.Add(LogsListBox);
             LogPage.Controls.Add(ExportBtn);
             LogPage.Controls.Add(LogsComboBox);
-            LogPage.Location = new Point(4, 29);
+            LogPage.Location = new Point(4, 31);
             LogPage.Margin = new Padding(3, 4, 3, 4);
             LogPage.Name = "LogPage";
             LogPage.Padding = new Padding(3, 4, 3, 4);
-            LogPage.Size = new Size(730, 346);
+            LogPage.Size = new Size(737, 345);
             LogPage.TabIndex = 3;
             LogPage.Text = "Logs";
-            LogPage.UseVisualStyleBackColor = true;
             // 
             // LogsListBox
             // 
+            LogsListBox.BackColor = SystemColors.InactiveCaption;
             LogsListBox.FormattingEnabled = true;
             LogsListBox.HorizontalScrollbar = true;
-            LogsListBox.Location = new Point(23, 70);
+            LogsListBox.ItemHeight = 22;
+            LogsListBox.Location = new Point(4, 48);
             LogsListBox.Name = "LogsListBox";
-            LogsListBox.Size = new Size(684, 244);
+            LogsListBox.Size = new Size(728, 290);
             LogsListBox.TabIndex = 2;
             // 
             // ExportBtn
             // 
-            ExportBtn.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            ExportBtn.Location = new Point(244, 19);
+            ExportBtn.BackColor = SystemColors.InactiveCaption;
+            ExportBtn.FlatStyle = FlatStyle.Popup;
+            ExportBtn.Font = new Font("Tempus Sans ITC", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            ExportBtn.Location = new Point(446, 8);
             ExportBtn.Name = "ExportBtn";
             ExportBtn.Size = new Size(161, 36);
             ExportBtn.TabIndex = 1;
             ExportBtn.Text = "Export";
-            ExportBtn.UseVisualStyleBackColor = true;
+            ExportBtn.UseVisualStyleBackColor = false;
             ExportBtn.Click += ExportBtn_Click;
             // 
             // LogsComboBox
             // 
-            LogsComboBox.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LogsComboBox.BackColor = SystemColors.InactiveCaption;
+            LogsComboBox.Font = new Font("Tempus Sans ITC", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             LogsComboBox.FormattingEnabled = true;
-            LogsComboBox.Location = new Point(23, 19);
+            LogsComboBox.Location = new Point(71, 8);
             LogsComboBox.Name = "LogsComboBox";
-            LogsComboBox.Size = new Size(172, 36);
+            LogsComboBox.Size = new Size(161, 34);
             LogsComboBox.TabIndex = 0;
             LogsComboBox.SelectedIndexChanged += LogsComboBox_SelectedIndexChanged;
             // 
             // btnStart
             // 
-            btnStart.Location = new Point(327, 409);
+            btnStart.BackColor = SystemColors.InactiveCaption;
+            btnStart.Cursor = Cursors.Hand;
+            btnStart.FlatStyle = FlatStyle.Popup;
+            btnStart.Font = new Font("Tempus Sans ITC", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnStart.Location = new Point(115, 409);
             btnStart.Name = "btnStart";
-            btnStart.Size = new Size(147, 29);
+            btnStart.Size = new Size(161, 36);
             btnStart.TabIndex = 1;
             btnStart.Text = "Start The Server";
-            btnStart.UseVisualStyleBackColor = true;
+            btnStart.UseVisualStyleBackColor = false;
             btnStart.Click += btnStart_Click;
             // 
             // button1
             // 
-            button1.Location = new Point(611, 410);
+            button1.BackColor = SystemColors.InactiveCaption;
+            button1.Cursor = Cursors.Hand;
+            button1.FlatStyle = FlatStyle.Popup;
+            button1.Font = new Font("Tempus Sans ITC", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button1.Location = new Point(481, 409);
             button1.Name = "button1";
-            button1.Size = new Size(94, 29);
+            button1.Size = new Size(161, 36);
             button1.TabIndex = 2;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
+            button1.Text = "Upload Category";
+            button1.UseVisualStyleBackColor = false;
             button1.Click += Test_Click;
             // 
             // ServerForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(23, 30, 64);
             ClientSize = new Size(800, 451);
             Controls.Add(button1);
             Controls.Add(btnStart);
@@ -201,7 +194,6 @@
             TabData.ResumeLayout(false);
             tabPlayers.ResumeLayout(false);
             tabRooms.ResumeLayout(false);
-            tabResults.ResumeLayout(false);
             LogPage.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -211,11 +203,9 @@
         private TabControl TabData;
         private TabPage tabPlayers;
         private TabPage tabRooms;
-        private TabPage tabResults;
         private Button btnStart;
         private ListView listPlayers;
         private ListView listRooms;
-        private ListView listResults;
         private TabPage LogPage;
         private Button button1;
         private ComboBox LogsComboBox;

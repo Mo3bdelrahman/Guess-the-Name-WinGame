@@ -1,4 +1,6 @@
-﻿namespace Client_Application
+﻿using Timer = System.Windows.Forms.Timer;
+
+namespace Client_Application
 {
     internal partial class ClientForm
     {
@@ -6,6 +8,7 @@
         List<Room> roomList;
         Game game;
         string[] Categories;
+        Timer timer;
 
 
         private void Distributer(Request req, List<string> para)
@@ -60,11 +63,24 @@
             Invoke(() => UpdateRoomList());
         }
 
+        private void InitializeTimer()
+        {
+            timer = new Timer();
+            timer.Interval = 5000; // Set the interval in milliseconds (e.g., refresh every 5 seconds)
+            timer.Tick += Timer_Tick; // Set the event handler for the timer tick
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            ClientController.RequestHandeller(stream, Request.ClientToServerLoadLobby);
+            Invoke(() => UpdateRoomList());// Call the method to refresh the ListView
+        }
+
         private void RoomLobbyLoad(List<string> jsonStringList)
         {
             room = jsonStringList[0].GetOriginalData<Room>();
             player.State = jsonStringList[1].GetOriginalData<PlayerState>();
-            MessageBox.Show($" hi, {room.Owner.Name} you enterd {room.RoomName} Id: {room.RoomId} cat is {room.Category} and player is {player.State}");
+            //MessageBox.Show($" hi, {room.Owner.Name} you enterd {room.RoomName} Id: {room.RoomId} cat is {room.Category} and player is {player.State}");
             //Invoke(() => UpdateRoomList());
             OnCreateResponse();
         }
@@ -101,6 +117,7 @@
             {
                 room = jsonStringList[0].GetOriginalData<Room>();
                 MessageBox.Show("Player2 Leave, Wait for Other Player");
+                OnCreateResponse();
             }
         }
 
@@ -124,12 +141,12 @@
                     // here we need to get into the room
                     if (player.State == PlayerState.Player1)
                     {
-                        MessageBox.Show($"{room.Guest?.Name} Enterd your Room the state now is {room.state}");
+                        //MessageBox.Show($"{room.Guest?.Name} Enterd your Room the state now is {room.state}");
                     }
                     else
                     {
                         player.State = room.Guest.State;
-                        MessageBox.Show($"hi{player.Name} you Enterd {room.RoomName} the state now is {room.state}");
+                        //MessageBox.Show($"hi{player.Name} you Enterd {room.RoomName} the state now is {room.state}");
                     }
                 }
                 else
@@ -205,8 +222,9 @@
             try
             {
                 player.State = jsonStringList[0].GetOriginalData<PlayerState>();
-                room = null;
+                ClientController.RequestHandeller<int>(stream, Request.ClientToServerLeaveGame, room.RoomId);
                 ClientController.RequestHandeller(stream, Request.ClientToServerLoadLobby);
+                room = null;
                 MessageBox.Show("Player Leaved,Game Finished and The room was closed");
                 Invoke(() => ViewPanel(LoobyPanel));
                 //OnLeaveClick();

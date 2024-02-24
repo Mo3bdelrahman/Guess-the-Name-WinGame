@@ -33,54 +33,11 @@ namespace Server_Application
             state = RoomState.Waiting;
             StartGameFlag = false;
         }
-
-        //private void CreateGame()
-        //{
-        //    Game = new Game(Owner!, Guest!);
-        //    state = RoomState.Running;
-        //}
-        //private void guestHasJoined(Player guest)
-        //{
-        //    this.Guest = guest;
-        //    CreateGame();
-        //}
-        //private void PlayAgain()
-        //{
-        //    if (playAgain)
-        //    {
-        //        CreateGame();
-        //    }
-        //}
-
         public override string ToString()
         {
             return $"Id: {RoomId} \t Name: {RoomName} \t state: {state}";
         }
       
-        //private void CreateGame()
-        //{
-        //    Game = new Game();
-        //    state = RoomState.Running;
-        //}
-        //private void guestHasJoined(Player guest)
-        //{
-        //    this.Guest = guest;
-        //    CreateGame();
-        //}
-        //private void PlayAgain()
-        //{
-        //    if (playAgain)
-        //    {
-        //        CreateGame();
-        //    }
-        //}
-        //public bool IsRoomCompleted()
-        //{
-        //    if (game.IsGameCompleted())
-        //    {
-        //        PlayAgain();
-        //    }
-        //}
 
     }
 }
