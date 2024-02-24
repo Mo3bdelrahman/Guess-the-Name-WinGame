@@ -27,7 +27,6 @@ namespace Server_Application
                 case Request.ClientToServerLeaveGame: LeaveGame(stream, para);break;
                 case Request.ClientToServerEndGame: EndGame(stream, para); break;
 
-
                 default: MessageBox.Show($"{req}"); break;
             }
         }
@@ -66,9 +65,14 @@ namespace Server_Application
         private void GetListOfRooms(NetworkStream stream, List<string> jsonStringList)
         {
             Player p = GetPlayer(stream);
-            ServerController.RequestHandeller<List<Room>>([p],Request.ServerToClientLoadLobby,Rooms);
-           
-            
+            List<RoomState> states = new List<RoomState>();
+
+            foreach( Room room in Rooms )
+            {
+                states.Add(room.State);
+            }
+
+            ServerController.RequestHandeller<List<Room>, List<RoomState>>([p],Request.ServerToClientLoadLobby,Rooms, states);
         }
         private void CreateRoom(NetworkStream stream, List<string> jsonStringList)
         {
