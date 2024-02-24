@@ -201,6 +201,9 @@ namespace Server_Application
                 {
                     room.Game.TurnTogeller();
                 }
+<<<<<<< HEAD
+                
+=======
                 if (room.Game.Word.State == WordState.Completed)
                 {
                     if(room.Owner.State.ToString() == room.Game.TurnState.ToString())
@@ -216,13 +219,28 @@ namespace Server_Application
                     //    room.Watchers.Clear();
                     //}
                 }
+>>>>>>> dd92a079b91c2cfcc110d17b7ec26ab22da2b301
                 ServerController.RequestHandeller<bool,string, Game>([room.Owner! , room.Guest!],Request.ServerToClientSendChar,res, GameChar, room.Game);
                 if (room.Watchers != null && room.Watchers.Count > 0)
                 {
                     ServerController.RequestHandeller<bool,string, Game>(room.Watchers!, Request.ServerToClientSendChar, res, GameChar, room.Game);
                 }
-                
 
+                if (room.Game.Word.State == WordState.Completed)
+                {
+                    if (room.Owner.State.ToString() == room.Game.TurnState.ToString())
+                        Logger.Write(Log.GameResult, $"Game Ended in {room.RoomName} winner is {room.Owner.Name}");
+                    else
+                        Logger.Write(Log.GameResult, $"Game Ended in {room.RoomName} winner is {room.Guest.Name}");
+
+                    foreach (Player watcher in room.Watchers)
+                    {
+                        watcher.State = PlayerState.Available;
+                    }
+
+                    room.State = RoomState.StandBy;
+                    room.Watchers.Clear();
+                }
 
             }
             catch (Exception e) { Logger.Write(Log.ServerError, e.Message); }
