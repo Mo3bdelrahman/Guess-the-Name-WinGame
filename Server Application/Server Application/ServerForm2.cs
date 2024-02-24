@@ -96,6 +96,7 @@ namespace Server_Application
             p.State = PlayerState.Available;
             if (r.Guest != null)
             {
+                r.Guest.State = PlayerState.Available;
                 ServerController.RequestHandeller<PlayerState>([p,r.Guest], Request.ServerToClientP1LeaveRoomLobby, p.State);
             }
             else
@@ -200,6 +201,13 @@ namespace Server_Application
                 {
                     room.Game.TurnTogeller();
                 }
+                if (room.Game.Word.State == WordState.Completed)
+                {
+                    if(room.Owner.State.ToString() == room.Game.TurnState.ToString())
+                        Logger.Write(Log.GameResult, $"Game Ended in {room.RoomName} winner is {room.Owner.Name}");
+                    else
+                        Logger.Write(Log.GameResult, $"Game Ended in {room.RoomName} winner is {room.Guest.Name}");
+                }
                 ServerController.RequestHandeller<bool,string, Game>([room.Owner! , room.Guest!],Request.ServerToClientSendChar,res, GameChar, room.Game);
                 if (room.Watchers != null && room.Watchers.Count > 0)
                 {
@@ -282,7 +290,7 @@ namespace Server_Application
             try
             {
                 int rId = jsonStringList[0].GetOriginalData<int>();
-                string winerName = jsonStringList[0].GetOriginalData<string>();
+                string winerName = jsonStringList[1].GetOriginalData<string>();
                 Room room = GetRoom(rId);
                 Logger.Write(Log.GameResult,$"Game Ended in {room.RoomName} ( {room.Owner.Name} Vs {room.Guest.Name} ) and the winner is *** {winerName} ***");
                 if ( room.Watchers.Count > 0)

@@ -439,10 +439,10 @@ namespace Client_Application
                     }
                     else 
                     {
-                        string winer = game.TurnState == TurnState.Player1 ? room.Owner.Name : room.Guest.Name;
+                        string winner = game.TurnState == TurnState.Player1 ? room.Owner.Name : room.Guest.Name;
 
                         Messageform gameOver = new Messageform();
-                        gameOver.Message = $"Winer is {winer} , The Game Is Over";
+                        gameOver.Message = $"Game Over\nWinner is {winner}";
                         gameOver.Show();
                         game = null;
                         ViewPanel(LoobyPanel);
