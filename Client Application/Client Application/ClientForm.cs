@@ -389,8 +389,9 @@ namespace Client_Application
                             //lostGame.Message = "You Lost. Better Luck Next Time";
                             //lostGame.Show();
                             Loser loser = new Loser();
-                            result = loser.Result;
-                            game = null;
+                            //result = loser.Result;
+
+                            //game = null;
                             //MessageBox.Show("You Lost. Better Luck Next Time");
                         }
                         else
@@ -399,38 +400,42 @@ namespace Client_Application
                             //wonGame.Message = "You Win. Congrats on your victory!";
                             //wonGame.Show();
                             Winner winner = new Winner();
-                            result = winner.Result;
-                            game = null;
+                            //result = winner.Result;
+                            //game = null;
 
                             //notify server to end game to kick watchers 
-                            string winerName = game.TurnState == TurnState.Player1 ? room.Owner.Name : room.Guest.Name;
+                            //string winerName = game.TurnState == TurnState.Player1 ? room.Owner.Name : room.Guest.Name;
 
-                            ClientController.RequestHandeller<int, string>(stream, Request.ClientToServerEndGame, room.RoomId, winerName);
+                            //ClientController.RequestHandeller<int, string>(stream, Request.ClientToServerEndGame, room.RoomId, winerName);
                         }
 
-                        foreach (Button btn in Letters)
-                        {
-                            btn.Enabled = false;
-                        }
+                        Invoke(() => {
+                            ViewPanel(RoomLoobyPanel);
 
-                        if (result == DialogResult.Yes)
-                        {
-                            // Send To Server
-                            ClientController.RequestHandeller<int>(stream, Request.ClientToServerStartGame, room.RoomId);
-                        }
-                        else
-                        {
-                            if (player.State == PlayerState.Player1 && room != null)
+                            foreach (Button btn in Letters)
                             {
-                                ClientController.RequestHandeller<int>(stream, Request.ClientToServerP1LeaveRoomLobby, room.RoomId);
+                                btn.Enabled = false;
                             }
-                            else if (player.State == PlayerState.Player2 && room != null)
-                            {
-                                ClientController.RequestHandeller<int>(stream, Request.ClientToServerP2LeaveRoomLobby, room.RoomId);
-                            }
-                            //note here you send leave req so let leave handellers change the UI
-                            //Invoke(() => ViewPanel(LoobyPanel));
-                        }
+                        });
+
+                        //if (result == DialogResult.Yes)
+                        //{
+                        //    // Send To Server
+                        //    ClientController.RequestHandeller<int>(stream, Request.ClientToServerStartGame, room.RoomId);
+                        //}
+                        //else
+                        //{
+                        //    if (player.State == PlayerState.Player1 && room != null)
+                        //    {
+                        //        ClientController.RequestHandeller<int>(stream, Request.ClientToServerP1LeaveRoomLobby, room.RoomId);
+                        //    }
+                        //    else if (player.State == PlayerState.Player2 && room != null)
+                        //    {
+                        //        ClientController.RequestHandeller<int>(stream, Request.ClientToServerP2LeaveRoomLobby, room.RoomId);
+                        //    }
+                        //    //note here you send leave req so let leave handellers change the UI
+                        //    //Invoke(() => ViewPanel(LoobyPanel));
+                        //}
                     }
                     else 
                     {
