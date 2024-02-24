@@ -1,5 +1,7 @@
+using Microsoft.VisualBasic.Logging;
 using System.Net;
 using System.Net.Sockets;
+using System.Xml.Linq;
 
 
 namespace Server_Application
@@ -22,23 +24,25 @@ namespace Server_Application
             PlayerIdG = 0;
             listRooms.View = View.Details;
             listRooms.Columns.Add("Room ID", 100);
-            listRooms.Columns.Add("Room Name", 100);
+            listRooms.Columns.Add("Room Name", 200);
             listRooms.Columns.Add("Room Owner", 100);
+            listRooms.Columns.Add("Room State", 100);
             listPlayers.View = View.Details;
-            listPlayers.Columns.Add("Player Name", 100);
-            listPlayers.Columns.Add("Player State", 100);
+            listPlayers.Columns.Add("Player Name", 200);
+            listPlayers.Columns.Add("Player State", 200);
             //for test
-            Logger.Write(Log.General, "Hello from general log1");
-            Logger.Write(Log.General, "Hello from general log2");
-            Logger.Write(Log.ServerError, "Hello from server error log1");
-            Logger.Write(Log.ClientError, "Hello from client error log1");
-            Logger.Write(Log.GameResult, "Moahmed wins ");
-            Logger.Write(Log.GameResult, "Zeyad winssssssss");
+            //Logger.Write(Log.General, "Hello from general log1");
+            //Logger.Write(Log.General, "Hello from general log2");
+            //Logger.Write(Log.ServerError, "Hello from server error log1");
+            //Logger.Write(Log.ClientError, "Hello from client error log1");
+            //Logger.Write(Log.GameResult, "Moahmed wins ");
+            //Logger.Write(Log.GameResult, "Zeyad winssssssss");
 
 
             LogsComboBox.Items.AddRange([Log.All, Log.General, Log.GameResult, Log.ServerError, Log.ClientError]);
             LogsComboBox.SelectedIndex = 0;
-            //LogsListBox.Items.AddRange(Logger.Read(Log.All).ToArray());
+
+            CategorieslistBox.Items.AddRange(WordCategory.GetAllCategories());
 
 
             // Rooms.Add(new Room()) ;
@@ -86,13 +90,13 @@ namespace Server_Application
             }
             catch (Exception ex)
             {
-                MessageBox.Show("An error occurred with a client connection: " + ex.Message);
+                Logger.Write(Log.ServerError, "An error occurred with a client connection: " + ex.Message);
             }
             finally
             {
                 player.Client.Close();
                 Players.Remove(player);
-                MessageBox.Show($"{player.Name} disconnected.");
+                Logger.Write(Log.General, $"{player.Name} disconnected and removed");
             }
         }
         public void StartServer()
@@ -109,7 +113,6 @@ namespace Server_Application
         {
             try
             {
-
                 using (OpenFileDialog openFileDialog = new OpenFileDialog())
                 {
                     openFileDialog.InitialDirectory = "c:\\";
@@ -118,15 +121,22 @@ namespace Server_Application
 
                     if (openFileDialog.ShowDialog() == DialogResult.OK)
                     {
+                        string name = CatNameTextBox.Text == "" ? "Default" : CatNameTextBox.Text;
+                        CatNameTextBox.Text = "";
                         string selectedFilePath = openFileDialog.FileName;
-                        WordCategory.AddCategory("team", selectedFilePath);
-                        string str = String.Join(", ", WordCategory.GetAllCategories());
-                        MessageBox.Show(str);
+                        WordCategory.AddCategory(name, selectedFilePath);
+
+                        //update UI
+                        CategorieslistBox.Items.Add(name);
+                        ActionStatelabel.Text = "New Category Added";
+                        
+                        //log
+                        Logger.Write(Log.General, "Server Admin Add new Category : " + name);
                     }
                 }
             }
             catch (Exception ex)
-            { MessageBox.Show("Category Doesn't Exist", "Wrong Category", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            { Logger.Write(Log.ServerError, ex.Message); }
         }
 
         private void ServerForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -157,6 +167,24 @@ namespace Server_Application
                 MessageBox.Show("Sorry, Unsuccessfull Exportation");
                 Logger.Write(Log.ServerError, "Sorry, Unsuccessfull Exportation");
             }
+        }
+
+        private void RemoveBtn_Click(object sender, EventArgs e)
+        {
+            string cat = CategorieslistBox.SelectedItem as string;
+            if (cat != null)
+            {
+                if (WordCategory.ReomveCategory(cat))
+                {
+                    Logger.Write(Log.General,$"Admin Remove {cat} Category");
+                    CategorieslistBox.Items.Remove(cat);
+                    ActionStatelabel.Text = $"Category {cat} Removed";
+                    string[] categories = WordCategory.GetAllCategories();
+                    ServerController.RequestHandeller<string[]>(Players, Request.ServerToClientUpdateCategories, categories);
+                }
+            }
+            
+
         }
     }
 }

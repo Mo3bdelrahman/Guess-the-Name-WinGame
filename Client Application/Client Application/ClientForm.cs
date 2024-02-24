@@ -34,6 +34,7 @@ namespace Client_Application
             this.Controls.Add(StartPanel);
             ClientController.DistributerD += Distributer;
             player = new Player();
+            roomList = new List<Room>();
             InitializeTimer();
         }
 
@@ -325,7 +326,7 @@ namespace Client_Application
             Invoke(() =>
             {
                 StartButton.Enabled = true;
-                if (room.state == RoomState.Running) 
+                if (room.State == RoomState.Running) 
                 {
                     ClickedCharacters.Clear();
                     DashLabel.Text = game.Word.CurrentWord;
@@ -349,7 +350,7 @@ namespace Client_Application
                             btn.Enabled = false;
                         }
                     }
-
+                    WatchersCountLabel.Text = room.WatchersCount.ToString();
                     ViewPanel(GamePanel);
                 }
             });
@@ -376,6 +377,8 @@ namespace Client_Application
 
                 if (game.Word.State == WordState.Completed)
                 {
+                    room.WatchersCount = 0;
+
                     if (player.State != PlayerState.Watcher)
                     {
                         DialogResult result;
@@ -387,6 +390,7 @@ namespace Client_Application
                             //lostGame.Show();
                             Loser loser = new Loser();
                             result = loser.Result;
+                            game = null;
                             //MessageBox.Show("You Lost. Better Luck Next Time");
                         }
                         else
@@ -396,7 +400,12 @@ namespace Client_Application
                             //wonGame.Show();
                             Winner winner = new Winner();
                             result = winner.Result;
-                            //MessageBox.Show("You Win. Congrats on your victory!");
+                            game = null;
+
+                            //notify server to end game to kick watchers 
+                            string winerName = game.TurnState == TurnState.Player1 ? room.Owner.Name : room.Guest.Name;
+
+                            ClientController.RequestHandeller<int, string>(stream, Request.ClientToServerEndGame, room.RoomId, winerName);
                         }
 
                         foreach (Button btn in Letters)
@@ -419,17 +428,21 @@ namespace Client_Application
                             {
                                 ClientController.RequestHandeller<int>(stream, Request.ClientToServerP2LeaveRoomLobby, room.RoomId);
                             }
-                            Invoke(() => ViewPanel(LoobyPanel));
+                            //note here you send leave req so let leave handellers change the UI
+                            //Invoke(() => ViewPanel(LoobyPanel));
                         }
                     }
                     else 
                     {
-                        Messageform gameOver = new Messageform();
-                        gameOver.Message = "The Game Is Over";
-                        gameOver.Show();
+                        string winer = game.TurnState == TurnState.Player1 ? room.Owner.Name : room.Guest.Name;
 
+                        Messageform gameOver = new Messageform();
+                        gameOver.Message = $"Winer is {winer} , The Game Is Over";
+                        gameOver.Show();
+                        game = null;
                         ViewPanel(LoobyPanel);
                     }
+                    
                 }
                 else
                 {
@@ -481,8 +494,23 @@ namespace Client_Application
             if (listView1.SelectedItems.Count > 0)
             {
                 ActiveRoom = listView1.SelectedItems[0].Text;
-                WatchGameButton.Enabled = true;
-                JoinRoomButton.Enabled = true;
+                int i = listView1.SelectedIndices[0];
+                if (roomList[i].State == RoomState.Running)
+                {
+                    WatchGameButton.Enabled = true;
+                    JoinRoomButton.Enabled = false;
+                }
+                else if (roomList[i].State == RoomState.StandBy)
+                {
+                    WatchGameButton.Enabled = false;
+                    JoinRoomButton.Enabled = false;
+                }
+                else
+                {
+                    WatchGameButton.Enabled = false;
+                    JoinRoomButton.Enabled = true;
+                }
+                
             }
         }
 
