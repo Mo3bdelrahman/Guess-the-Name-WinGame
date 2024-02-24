@@ -5,7 +5,7 @@ namespace Client_Application
     internal partial class ClientForm
     {
         Room room;
-        List<Room> roomList;
+        List<Room> roomList = new List<Room>();
         Game game;
         string[] Categories;
         Timer timer;
@@ -245,10 +245,14 @@ namespace Client_Application
         private void UpdateRoomList()
         {
             listView1.Items.Clear();
-            foreach (var r in roomList)
+
+            if ( roomList.Count > 0 ) 
             {
-                string s = r.ToString();
-                listView1.Items.Add(new ListViewItem(s));
+                foreach (var r in roomList.ToList<Room>())
+                {
+                    string? s = r?.ToString();
+                    listView1.Items.Add(new ListViewItem(s));
+                }
             }
         }
     }
