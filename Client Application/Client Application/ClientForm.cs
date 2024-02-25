@@ -138,8 +138,6 @@ namespace Client_Application
 
         private void WatchGameButton_Click(object sender, EventArgs e)
         {
-            //OnWatchClick();
-            //ViewPanel(GamePanel);
             try
             {
                 int id = int.Parse(ActiveRoom.Split(' ')[1]);
@@ -284,6 +282,18 @@ namespace Client_Application
                 {
                     btn.Visible = false;
                 }
+
+                if ( game.TurnState.ToString() == room.Owner.State.ToString() ) 
+                {
+                    PlayerTurnLabel.Text = $"{room.Owner.Name}'s Turn";
+                }
+                else
+                {
+                    PlayerTurnLabel.Text = $"{room.Guest.Name}'s Turn";
+                }
+
+                DashLabel.Text = game.Word.CurrentWord;
+
                 ViewPanel(GamePanel);
             });
         }
@@ -377,6 +387,11 @@ namespace Client_Application
 
                 if (game.Word.State == WordState.Completed)
                 {
+                    foreach (Button btn in Letters)
+                    {
+                        btn.Visible = true;
+                    }
+
                     room.WatchersCount = 0;
 
                     if (player.State != PlayerState.Watcher)
@@ -385,61 +400,44 @@ namespace Client_Application
 
                         if (game.TurnState != turnState)
                         {
-                            //Messageform lostGame = new Messageform();
-                            //lostGame.Message = "You Lost. Better Luck Next Time";
-                            //lostGame.Show();
                             Loser loser = new Loser();
-                            result = loser.Result;
-                            game = null;
-                            //MessageBox.Show("You Lost. Better Luck Next Time");
                         }
                         else
                         {
-                            //Messageform wonGame = new Messageform();
-                            //wonGame.Message = "You Win. Congrats on your victory!";
-                            //wonGame.Show();
                             Winner winner = new Winner();
-                            result = winner.Result;
-                            game = null;
-
-                            //notify server to end game to kick watchers 
-                            string winerName = game.TurnState == TurnState.Player1 ? room.Owner.Name : room.Guest.Name;
-
-                            ClientController.RequestHandeller<int, string>(stream, Request.ClientToServerEndGame, room.RoomId, winerName);
                         }
 
-                        foreach (Button btn in Letters)
-                        {
-                            btn.Enabled = false;
-                        }
+                        Invoke(() => {
+                            ViewPanel(RoomLoobyPanel);
 
-                        if (result == DialogResult.Yes)
-                        {
-                            // Send To Server
-                            ClientController.RequestHandeller<int>(stream, Request.ClientToServerStartGame, room.RoomId);
-                        }
-                        else
-                        {
-                            if (player.State == PlayerState.Player1 && room != null)
+                            foreach (Button btn in Letters)
                             {
-                                ClientController.RequestHandeller<int>(stream, Request.ClientToServerP1LeaveRoomLobby, room.RoomId);
+                                btn.Enabled = false;
                             }
-                            else if (player.State == PlayerState.Player2 && room != null)
-                            {
-                                ClientController.RequestHandeller<int>(stream, Request.ClientToServerP2LeaveRoomLobby, room.RoomId);
-                            }
-                            //note here you send leave req so let leave handellers change the UI
-                            //Invoke(() => ViewPanel(LoobyPanel));
-                        }
+                        });
                     }
                     else 
                     {
-                        string winer = game.TurnState == TurnState.Player1 ? room.Owner.Name : room.Guest.Name;
-
+                        string winner = game.TurnState == TurnState.Player1 ? room.Owner.Name : room.Guest.Name;
+                        foreach(var i in Letters)
+                        {
+                            i.Visible = true;
+                        }
+                        WatchGameButton.Enabled = false;
+                        JoinRoomButton.Enabled = false;
                         Messageform gameOver = new Messageform();
-                        gameOver.Message = $"Winer is {winer} , The Game Is Over";
+                        gameOver.Message = $"Winner is {winner}";
                         gameOver.Show();
                         game = null;
+
+                        foreach( Button btn in Letters )
+                        {
+                            btn.Enabled = true;
+                        }
+
+                        WatchGameButton.Enabled = false;
+                        JoinRoomButton.Enabled = false;
+
                         ViewPanel(LoobyPanel);
                     }
                     
@@ -450,7 +448,10 @@ namespace Client_Application
                     {
                         if (player.State == PlayerState.Watcher)
                         {
-                            PlayerTurnLabel.Text = $"{game.TurnState}'s Turn";
+                            if ( game.TurnState == TurnState.Player1 )
+                                PlayerTurnLabel.Text = $"{room.Owner.Name}'s Turn";
+                            else
+                                PlayerTurnLabel.Text = $"{room.Guest.Name}'s Turn";
                         }
                         else
                         {
@@ -466,7 +467,10 @@ namespace Client_Application
                     {
                         if ( player.State == PlayerState.Watcher )
                         {
-                            PlayerTurnLabel.Text = $"{game.TurnState}'s Turn";
+                            if (game.TurnState == TurnState.Player1)
+                                PlayerTurnLabel.Text = $"{room.Owner.Name}'s Turn";
+                            else
+                                PlayerTurnLabel.Text = $"{room.Guest.Name}'s Turn";
                         }
                         else
                         {

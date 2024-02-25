@@ -483,6 +483,7 @@ namespace Client_Application
             LeaveGameButton.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             LeaveGameButton.Size = new Size(101, 97);
             LeaveGameButton.TabIndex = 29;
+            LeaveGameButton.Visible = false;
             LeaveGameButton.Click += LeaveGameButton_Click;
             // 
             // PlayerTurnLabel

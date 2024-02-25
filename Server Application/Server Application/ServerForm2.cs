@@ -27,7 +27,6 @@ namespace Server_Application
                 case Request.ClientToServerLeaveGame: LeaveGame(stream, para);break;
                 case Request.ClientToServerEndGame: EndGame(stream, para); break;
 
-
                 default: MessageBox.Show($"{req}"); break;
             }
         }
@@ -66,9 +65,14 @@ namespace Server_Application
         private void GetListOfRooms(NetworkStream stream, List<string> jsonStringList)
         {
             Player p = GetPlayer(stream);
-            ServerController.RequestHandeller<List<Room>>([p],Request.ServerToClientLoadLobby,Rooms);
-           
-            
+            List<RoomState> states = new List<RoomState>();
+
+            foreach( Room room in Rooms )
+            {
+                states.Add(room.State);
+            }
+
+            ServerController.RequestHandeller<List<Room>, List<RoomState>>([p],Request.ServerToClientLoadLobby,Rooms, states);
         }
         private void CreateRoom(NetworkStream stream, List<string> jsonStringList)
         {
@@ -92,6 +96,7 @@ namespace Server_Application
             p.State = PlayerState.Available;
             if (r.Guest != null)
             {
+                r.Guest.State = PlayerState.Available;
                 ServerController.RequestHandeller<PlayerState>([p,r.Guest], Request.ServerToClientP1LeaveRoomLobby, p.State);
             }
             else
@@ -196,13 +201,46 @@ namespace Server_Application
                 {
                     room.Game.TurnTogeller();
                 }
+<<<<<<< HEAD
+                
+=======
+                if (room.Game.Word.State == WordState.Completed)
+                {
+                    if(room.Owner.State.ToString() == room.Game.TurnState.ToString())
+                        Logger.Write(Log.GameResult, $"Game Ended in {room.RoomName} winner is {room.Owner.Name}");    
+                    else
+                        Logger.Write(Log.GameResult, $"Game Ended in {room.RoomName} winner is {room.Guest.Name}");
+                    //if (room.Watchers.Count > 0)
+                    //{
+                    //    foreach (var i in room.Watchers)
+                    //    {
+                    //        i.State = PlayerState.Available;
+                    //    }
+                    //    room.Watchers.Clear();
+                    //}
+                }
+>>>>>>> dd92a079b91c2cfcc110d17b7ec26ab22da2b301
                 ServerController.RequestHandeller<bool,string, Game>([room.Owner! , room.Guest!],Request.ServerToClientSendChar,res, GameChar, room.Game);
                 if (room.Watchers != null && room.Watchers.Count > 0)
                 {
                     ServerController.RequestHandeller<bool,string, Game>(room.Watchers!, Request.ServerToClientSendChar, res, GameChar, room.Game);
                 }
-                
 
+                if (room.Game.Word.State == WordState.Completed)
+                {
+                    if (room.Owner.State.ToString() == room.Game.TurnState.ToString())
+                        Logger.Write(Log.GameResult, $"Game Ended in {room.RoomName} winner is {room.Owner.Name}");
+                    else
+                        Logger.Write(Log.GameResult, $"Game Ended in {room.RoomName} winner is {room.Guest.Name}");
+
+                    foreach (Player watcher in room.Watchers)
+                    {
+                        watcher.State = PlayerState.Available;
+                    }
+
+                    room.State = RoomState.StandBy;
+                    room.Watchers.Clear();
+                }
 
             }
             catch (Exception e) { Logger.Write(Log.ServerError, e.Message); }
@@ -278,7 +316,7 @@ namespace Server_Application
             try
             {
                 int rId = jsonStringList[0].GetOriginalData<int>();
-                string winerName = jsonStringList[0].GetOriginalData<string>();
+                string winerName = jsonStringList[1].GetOriginalData<string>();
                 Room room = GetRoom(rId);
                 Logger.Write(Log.GameResult,$"Game Ended in {room.RoomName} ( {room.Owner.Name} Vs {room.Guest.Name} ) and the winner is *** {winerName} ***");
                 if ( room.Watchers.Count > 0)

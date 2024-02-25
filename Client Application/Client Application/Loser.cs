@@ -18,7 +18,7 @@ namespace Client_Application
         {
             InitializeComponent();
             Show();
-            Result = MessageBox.Show("Do You Want To Play Again ?", " ", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            //Result = MessageBox.Show("Do You Want To Play Again ?", " ", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
         }
 
         private void ExitWinnerButton_Click(object sender, EventArgs e)
