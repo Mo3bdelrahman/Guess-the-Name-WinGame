@@ -7,11 +7,14 @@ Guess the Name is an interactive word guessing game where players connect to a c
 ## Features
 - **Client/Server Architecture**: Utilizes a client/server model for multiplayer gameplay.
 - **Player Management**: Maintain a list of connected players and available game rooms on the server.
-- **Game Room Creation/Joining**: Players can create new game rooms or join existing ones.
+- **Game Room Creation/Joining**: Players can create new game rooms with custom settings or join existing rooms with available slots.
 - **Game Configuration**: Customize game settings such as word categories and room size.
 - **Real-time Gameplay**: Players take turns guessing letters, with the game state updated in real-time for all participants.
 - **Game Watching**: Allow players to watch ongoing games in rooms they have joined.
 - **Game Results**: Store game results in a text file on the server PC, including player names and game outcomes.
+- **Full Logging Class**: Added a full logging class to log events and errors during gameplay.
+- **Log Export**: Logs can now be exported to a text file categorized into four levels: Info, Warning, Error, and Debug.
+- **Game Category Management**: Added features to add and remove game categories for customizing game settings.
 
 ## How to Play
 1. **Connect to the Server**: Run the server application to start hosting games. Players can connect to the server using the client application.
